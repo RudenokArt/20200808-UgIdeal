@@ -1,0 +1,93 @@
+*{
+  font-family: Arial, Helvetica, sans-serif;
+}
+body{
+  background-color: rgba(0,0,0,0.1);
+}
+button{
+  transition-duration: 0.5s;
+  padding: 10px;
+  border:2px solid mediumaquamarine;
+  background-color: mediumaquamarine;
+  color:white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+button:hover{
+  transition-duration: 0.5s;
+  border-style: outset;
+  color:mediumaquamarine;
+  background-color: white;
+}
+button:active{
+  transition-duration: 0.001s;
+  border-style: inset;
+  color: red;
+}
+input[type="text"],textarea{
+  transition-duration: 0.5s;
+  padding: 10px;
+  border:2px solid mediumaquamarine;
+}
+input[type="text"]:hover,textarea:hover{
+  transition-duration: 0.5s;
+  box-shadow: 0px 0px 2px 2px mediumaquamarine;
+}
+input[type="text"]:focus,,textarea:focus{
+  transition-duration: 0.5s;
+  box-shadow: 0px 0px 2px 2px mediumaquamarine;
+}
+.file-upload{
+  position: relative;
+  display: block;
+  border:2px solid mediumaquamarine;
+  height: 100px;
+  width: 200px;
+}
+.file-upload i{
+  display: block;
+  font-size: 75px;
+  color: mediumaquamarine;
+}
+input[type="file"]{
+  position: absolute;
+  height: 100px;
+  width: 200px;
+  top:0;
+  left: 0;
+  opacity: 0;
+  border:1px solid red;
+}
+.header-info{
+  width: 500px;
+}
+.container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.section{
+  text-align: center;
+  margin:20px;
+}
+.section div{
+  margin-top: 20px;
+}
+.color-picker{
+  width: 100px;
+}
+.footerAdres,.mainMenu{
+  width: 225px;
+}
+.socialLink{
+  width: 450px;
+}
+span[class="socialIcon"]{
+  font-size: 20px;
+  margin-right: 10px;
+  color: mediumaquamarine;
+}
+input[class="socialIcon"]{
+  display: none;
+}

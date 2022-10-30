@@ -1,0 +1,268 @@
+table{}
+td{
+  border:1px solid rgba(0,0,0,0.1);
+  padding-left:  10px;
+  padding-right: 10px;
+}
+.flex-wrapper{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.flex-wrapper div{
+  margin:0;
+  padding: 5px;
+}
+.interiorOrder{
+  width: 50px;
+  height: 30px;
+  padding: 0 !important;
+  font-size: 12px !important;
+  text-align: center;
+}
+.post-popup_wrapper,
+.edit-popup_wrapper,
+.popup-wrapper{
+  display: none;
+  background-color: rgba(0,0,0,0.5);
+  position: fixed;
+  margin:0 !important;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.post-popup,
+.edit-popup,
+.popup{
+  position: relative;
+  background-color: white;
+  display: inline-block;
+  margin:auto;
+  padding: 20px;
+  vertical-align: middle;
+}
+.post-popup input,
+.edit-popup input,
+.popup input {
+  width: 250px;
+}
+.post-popup div,
+.edit-popup div,
+.popup div{
+  padding: 0;
+  margin-top:10px;
+}
+.post-popup_button-hide,
+.edit_popup-button_hide,
+.popup-button_hide{
+  margin-right: -1px;
+  position: absolute;
+  top:0;
+  right: 0;
+}
+select,
+.search-select,
+select[name="subcategory-manager_select"],
+.edit-popup select,
+.popup select{
+  height: 40px;
+   width: 250px;
+  border:2px solid mediumaquamarine;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.select-wrapper{
+  width:250px;
+  position: relative;
+  background-color: transparent;
+}
+.select-wrapper select{
+  background-color: transparent;
+  position: relative;
+  top:0;
+  left: 0;
+}
+.select-wrapper::before{
+  content: "\203A";
+  font-size:24px;
+  font-weight: bold;
+  transform:rotate(90deg);
+  position: absolute;
+  right: 20px;
+  top: 5px;
+  color: mediumaquamarine;
+}
+.wallpaper-admin_galery{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  max-width: 900px;
+
+}
+.wallpaper-galery_item{
+  padding: 0;
+  position: relative;
+  height: 400px;
+  width: 400px;
+  border:1px solid rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+.wallpaper-galery_item:hover{
+  box-shadow: 0px 0px 10px 10px rgba(0,0,0,0.2);
+}
+.wallpaper-galery_image,
+.wallpaper-galery_interior{
+  margin:0 !important;
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 400px;
+  height:300px;
+  background-image: url(../../wallpaper/img/wallpaper/02864.jpg);
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.wallpaper-galery_interior{
+  background-image: url(../../wallpaper/img/interior/interior-image.png);
+  background-position: bottom;
+}
+.wallpaper-gallery_info{
+  position: absolute;
+  height: 100px;
+  width: 400px;
+  bottom:0;
+}
+.icon-upload{
+  background-color: mediumaquamarine;
+  position: relative;
+  height: 40px;
+  width: 175px;
+  margin:0 !important;
+  color:white;
+  font-size: 16px;
+  line-height: 40px;
+  text-align: center;
+}
+.icon-upload input{
+  position: absolute;
+  height: 40px;
+  width: 175px;
+  top:0;
+  left: 0;
+  /*opacity: 0.5;*/
+  color:red;
+}
+.category-icon{
+  background-color: mediumaquamarine;
+  padding: 0;
+}
+.category-icon img{
+  height:40px;
+  margin:0;
+}
+.post-image_upload{
+  color: white;
+  background-color: mediumaquamarine;
+  position: relative;
+  margin:auto !important;
+  height: 100px;
+  width:150px;
+}
+.post-image_upload i{
+  display:block;
+  font-size: 36px;
+  line-height: 50px;
+}
+.post-image_upload input{
+  top:0;
+  left: 0;
+  position: absolute;
+  height: 100px;
+  width:150px;
+}
+.post-image_upload span{
+  display:block;
+  margin:auto;
+  line-height: 25px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.post-image_picture img {
+  width:100px;
+}
+.post-item_edit{
+  display: none;
+}
+.texture-popup_wrapper{
+  position:fixed;
+  top:0;
+  left: 0;
+  width:100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  overflow: auto;
+  display: none;
+}
+.texture-popup{
+  padding: 20px;
+  background-color: white;
+  margin:auto !important;
+  max-height: 80vh;
+  max-width: 80vw;
+}
+.texture-popup input{
+  width:250px;
+
+}
+.texture-popup div{
+  padding: 5px;
+}
+#accordion form,
+.texture-popup form{
+  display: flex;
+  flex-wrap: wrap;
+}
+.texture-popup input[type="file"]{
+  /*opacity: 0.5;*/
+}
+#accordion div{
+  margin:0;
+  padding: 0;
+}
+.accordion_tab{
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 50vh;
+  overflow: auto;
+}
+.accordion_tab-item{
+  padding: 20px !important;
+}
+
+.wallpaper-admin-preloader {
+  position: absolute;
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+  top: 0;
+  left: 0;
+}
+.wallpaper-admin-preloader div {
+  margin: auto;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.modular_category_interior_selector_wrapper {
+  height: 250px !important;
+  display: flex;
+}
+.modular_category_interior_selector_inner {
+  margin: auto!important;
+  text-align: right;
+}

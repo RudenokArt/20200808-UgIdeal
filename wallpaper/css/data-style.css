@@ -1,0 +1,29 @@
+
+.wallpaper-galery_item-button{
+  color:#FFFFFF;
+}
+.hover_color:hover,
+.wallpaper_constructor-button:hover,
+.sidebar-category:hover,.wallpaper-galery_item-button:hover,
+.sidebar-subcategory:hover{
+  background-color: #0EA6E5;
+  transition-duration:1s;
+}
+.text_color{
+  color:#FFFFFF;
+}
+
+.wallpaper-galery_item-icon,.wallpaper-galery_image-name,
+.wallpaper-navigation,.constractor-navigation{
+  color:#3CB2E4;
+}
+.layout_color,
+.wallpaper_constructor-calc, .wallpaper_constructor-button,
+.category-icon,.wallpaper-galery_item-button,
+.radio-label_actve,.checkbox-label_active{
+  background-color: #3CB2E4;
+  transition-duration:1s;
+}
+.radio-label,.checkbox-label,.border_color{
+ border-color:#3CB2E4;
+}

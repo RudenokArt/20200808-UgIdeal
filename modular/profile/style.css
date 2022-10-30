@@ -1,0 +1,13 @@
+div{
+  margin:auto;
+}
+input{
+  margin-bottom: 20px;
+  width:200px;
+}
+.wrapper{
+  display: flex;
+}
+.message{
+  color: red;
+}

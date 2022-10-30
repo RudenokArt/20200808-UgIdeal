@@ -1,0 +1,641 @@
+table{
+}
+input[type="range"]{
+  opacity: 0;
+  padding: 0;
+}
+label{
+  padding: 0 !important;
+  line-height: 0 !important;
+}
+
+input[type="checkbox"],
+input[type="radio"]{
+  padding: 0;
+  height: 0;
+  width: 0;
+  margin:0;
+  opacity: 0;
+  line-height: 0;
+}
+td{
+  line-height: 1em;
+  border-bottom: 2px solid rgba(0,0,0,0.1);
+  height: 40px;
+  padding: 0;
+  min-width:30px;
+}
+th{
+  /*vertical-align: bottom;*/
+  line-height: 1em;
+  color:grey;
+  height: 40px !important;
+  /*border-bottom: 2px solid rgba(0,0,0,0.5);*/
+}
+button{
+  color:white;
+}
+button[name="size_resset"]{
+  padding: 5px;
+  font-weight: bold;
+  border-radius: 5px;
+  line-height: 1em;
+  margin:10px;
+}
+.flex_wrapper{
+  display: flex;
+}
+.wallpaper_constructor-container{
+  display: flex;
+  padding: 5px;
+  position: relative;
+}
+.option_button{
+ position: absolute;
+ z-index: 10;
+ top:0;
+ right: 0;
+ padding: 10px;
+ display: none;
+}
+.option_button button{
+ font-size: 36px;
+ padding: 10px;
+}
+
+/*========= CONTENT ==========*/
+.wallpaper_constructor-content{
+  /*border:1px solid lime;*/
+  padding: 10px;
+}
+.constractor-navigation_wrapper{
+
+  padding: 10px;
+}
+.constractor-navigation span{
+  cursor: pointer;
+}
+.constractor-navigation span:hover{
+  text-decoration: underline;
+}
+
+.constructor_wall{
+  /*border:2px solid rgba(0,0,0,0.1);*/
+  position: relative;
+  height: 500px;
+  width: 750px;
+  /*overflow: hidden;*/
+}
+
+
+.constructor_wallpaper-size_sensor,
+.wallpaper_roll-wrapper{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top:0;
+  left: 0;
+  overflow: hidden;
+}
+.constructor_wallpaper-size_sensor{
+  border:2px solid rgba(0,0,0,0.1);
+  box-sizing: border-box;
+}
+
+.wallpaper_roll{
+  position: absolute;
+  height: 100%;
+  top:0;
+  left: 0;
+  display: flex;
+}
+.wallpaper_roll-item{
+  border-right: 2px dashed white;
+  display: none;
+}
+.wall-vertical_section{
+  height: 33.33%;
+  display: flex;
+}
+.wall-horizontal_section{
+  position: relative;
+}
+.constructor_curtain{
+  position: relative;
+  display: none;
+  background:rgba(250,250,250,0.5);
+}
+.constructor_wallpaper{
+  position: absolute;
+  top:0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+}
+.constructor_wallpaper img{
+  height: 100%;
+  margin:auto;
+  /*width: 100%;*/
+}
+.constructor_wallpaper-interior_wrapper{
+  position: absolute;
+  top:12%;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+.constructor_wallpaper-interior{
+  height: 100%;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom;
+}
+.constructor_wallpaper-texture{
+  position: absolute;
+  top:0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0.2;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.range_vertical-wrapper{
+  /*border:1px solid red;*/
+  position: absolute;
+  top:0;
+  left: 50%;
+  height: 100%;
+}
+.range_size{
+  display: none;
+}
+#range_vertical{
+  height: 100% !important;
+}
+#range_vertical span::after{
+  content:'\21D5';
+  font-size: 36px;
+  position: absolute;
+  top:10px;
+  left: 0px;
+  color:orange;
+}
+.range_horisontal-wrapper{
+ /*border:1px solid blue;*/
+ position: absolute;
+ top:50%;
+ left: 0;
+ width: 100%;
+}
+#range_horisontal{
+  width: 100% !important;
+  height: 10px !important;
+}
+#range_horisontal span::after{
+  content:'\21D4';
+  font-size: 36px;
+  position: absolute;
+  top:10px;
+  right: 0px;
+  color:orange;
+  background: red;
+}
+.ui-slider{
+  border:none !important;
+  background: transparent !important;
+}
+.ui-slider-range{
+  background: transparent !important;
+}
+.ui-slider-handle{
+  height: 20px !important;
+  width:  20px !important;
+  border:none !important;
+  background: transparent !important;
+  cursor: pointer !important;
+  outline: none !important;
+  /*border:1px solid red !important;*/
+}
+.wallpaper_constructor-footer{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 5px;
+}
+.wallpaper_interior-tape_wrapper{
+  background-color: rgba(0,0,0,0.4);
+  display: flex;
+  width: 750px;
+  /*border:2px solid rgba(0,0,0,0.1);*/
+}
+.wallpaper_interior-tape{
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+  margin:auto;
+  width: 80%;
+  height: 100px;
+}
+.wallpaper_interior-tape_item{
+  color:rgba(0,0,0,0.1);
+  width: 100px;
+  height: 100px !important;
+  border-left:1px solid white;
+  line-height: 1em;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom;
+}
+
+
+/*========= SIDEBAR ==========*/
+
+#tabs{
+  min-height: 600px;
+}
+.ui-tabs-tab{
+  background: rgba(0,0,0,0.1) !important;
+  border-color:rgba(0,0,0,0.2) !important;
+}
+.ui-tabs-tab a{
+  color: grey !important;
+}
+.ui-tabs-active{
+  background: white !important;
+  color:black !important;
+}
+.ui-tabs-active a{
+  color: black !important;
+}
+.wallpaper_constructor-sidebar{
+  /*border:1px solid yellow;*/
+  padding: 10px;
+  /*width: 300px;*/
+  background-color: white;
+}
+.wallpaper_constructor-sidebar_options{
+  display: flex;
+  /*flex-wrap: wrap;*/
+}
+.wallpaper_constructor-sidebar_options div{
+  padding: 5px;
+}
+input[name="input_size"]{
+  width: 50px;
+  height: 20px;
+  padding: 0;
+  text-align: center;
+  background: rgba(0,0,0,0.1);
+}
+input[name="input_size"]:focus{
+  background: rgba(0,0,0,0);
+}
+.checkbox-label,
+.radio-label{
+  transition-duration: 1s;
+  border: 5px solid grey;
+  border-radius: 50%;
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+}
+.checkbox-label{
+  border-radius: 0;
+  display: inline-block;
+}
+.checkbox-label_active,
+.radio-label_active{
+  transition-duration: 1s;
+}
+.wallpaper_constructor-select{
+  position: relative;
+  display: inline-block;
+}
+.wallpaper_constructor-select select{
+  width: 150px;
+  background-color: rgba(0,0,0,0.1);
+}
+.wallpaper_constructor-select option{
+  padding: 5px;
+  line-height: 0;
+  margin:0;
+}
+.wallpaper_constructor-select::after{
+  position: absolute;
+  line-height: 0;
+  content: "\203A";
+  font-size: 36px;
+  transform: rotate(90deg);
+  top:25px;
+  right: 20px;
+  z-index: -1;
+  color: grey;
+}
+.wallpaper_constructor-calc{
+  color:white;
+  border-radius: 10px;
+  padding: 10px;
+  width: 250px;
+  margin: 10px;
+}
+.wallpaper_constructor-calc div{
+  line-height: 1em;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+}
+.wallpaper_constructor-calc button{
+  transition-duration: 1s;
+  border:1px solid white;
+  border-radius: 5px;
+  margin:auto;
+  padding: 5px;
+  font-weight: bold;
+  font-size: 18px;
+}
+.wallpaper_constructor-calc button:hover{
+  transition-duration: 1s;
+}
+input[name="texture_radio"]{
+  opacity: 0;
+}
+
+.wallpaper_texture-block_wrapper{
+  background: rgba(0,0,0,0.3);
+  width: 750px;
+  display: flex;
+  position: relative;
+}
+.wallpaper_texture-block_arrow{
+  cursor: pointer;
+  color:white;
+  font-size: 20px;
+  margin:auto;
+  width: 50px;
+  display: flex;
+}
+.wallpaper_texture-block_arrow i{
+  margin:auto;
+}
+.wallpaper_texture-block{
+  overflow: hidden;
+}
+.wallpaper_texture-block_tape{
+  display: flex;
+  flex-wrap: nowrap;
+  margin-right: -100px;
+  margin-left: -100px;
+}
+.wallpaper_texture-block_item{
+  position: relative;
+  width: 100px;
+  height: 100px;
+  display: block;
+  line-height: 1em !important;
+  border:2px solid white;
+  cursor: pointer;
+}
+.wallpaper_texture-block_item i{
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 20px;
+  color:grey;
+  cursor: help;
+}
+.wallpaper_texture-block span{
+  position: absolute;
+  top:10px;
+  left:10px;
+  z-index: 1;
+}
+.wallpaper_constructor-button{
+  transition-duration: 1s;
+}
+.wallpaper_constructor-button:hover{
+  transition-duration: 1s;
+}
+
+.wallpaper_constructor-button_block{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top:200px;
+  line-height: 1em;
+}
+
+.wallpaper_constructor-button_block a{
+  padding: 15px;
+}
+.wallpaper_constructor-button_block button{
+  padding: 10px;
+  font-weight: bold;
+  line-height: 1em;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+@keyframes rotation {
+   0% {
+        transform:rotate(0deg);
+    }
+    100% {
+        transform:rotate(360deg);
+    }
+}
+.download_image-loader{
+  display: inline-block;
+  display: none;
+  font-size: 30px;
+  color:grey;
+  animation-name: rotation;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}.download_image-link{
+  display: none;
+}
+
+/*========= POPUP ==========*/
+
+.wallpaper_constructor-popup_wrapper{
+  position: fixed;
+  top:0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: none;
+  z-index: 2;
+}
+.wallpaper_constructor-popup{
+  position: relative;
+  margin:auto;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: white;
+  padding: 0;
+}
+.wallpaper_constructor-popup_title{
+  padding: 10px !important;
+  font-weight: bold;
+  font-size: 20px;
+  color: grey;
+}
+.wallpaper_constructor-popup div{
+  padding: 0;
+  margin:0;
+  width: 300px;
+  line-height: 1em;
+  text-align: center;
+  position: relative;
+  background-color:transparent;
+}
+.wallpaper_constructor-popup table{
+  margin:auto;
+}
+.wallpaper_constructor-popup td,
+.wallpaper_constructor-popup th{
+  padding: 5px;
+  height: 0 !important;
+  text-align: left;
+}
+.wallpaper_constructor-popup button{
+  font-weight: bold;
+  margin:auto;
+}
+.wallpaper_constructor-popup_img{
+  margin:0;
+  width: 300px;
+  height: 300px;
+  /*background-image: url(../img/wallpaper/04185.jpg);*/
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.wallpaper_constructor-popup_info{
+  position: absolute !important;
+  top:0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+.wallpaper_constructor-popup_textute{
+  position: absolute !important;
+  top:0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-image: url(../img/texture/antico.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.2;
+}
+.wallpaper_constructor-video_block{
+  position: absolute !important;
+  top:0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color:grey !important;
+  display: none;
+}
+.size_texture{
+  display: none;
+}
+.user_upload_popup_wrapper{
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,0.5);
+  display: none;
+}
+.user_upload_popup{
+  padding: 20px;
+  background: white;
+  margin:auto;
+  position: relative;
+}
+.user_upload_popup i{
+  line-height: 100%;
+  font-size: 200px;
+  color:grey;
+}
+.user_upload_popup input{
+  position: absolute;
+  top:0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border:1px solid red;
+  opacity: 0;
+}
+.user_upload_popup button {
+  padding: 5px;
+  border:none;
+  position: absolute;
+  top:0;
+  right: 0;
+}
+.user_upload_popup button i{
+  font-size: 24px;
+  color:white;
+}
+
+
+@media screen and (max-width: 1100px){
+  .option_button{
+    display: block;
+  }
+  .wallpaper_constructor-sidebar{
+    position: absolute;
+    top:0;
+    right: 0;
+    display: none;
+  }
+}
+@media screen and (max-width: 750px){
+.constructor_wall{
+    width: 600px;
+    height: 400px;
+  }
+  .wallpaper_texture-block_wrapper,
+  .wallpaper_interior-tape_wrapper{
+    width: 600px;
+  }
+   #range_vertical span::after{
+    content: '';
+  }
+  #range_horisontal span::after{
+    content: '';
+  }
+}
+@media screen and (max-width: 600px){
+.constructor_wall{
+    width: 450px;
+    height: 300px;
+  }
+  .wallpaper_texture-block_wrapper,
+  .wallpaper_interior-tape_wrapper{
+    width: 450px;
+  }
+}
+@media screen and (max-width: 450px){
+.constructor_wall{
+    width: 300px;
+    height: 200px;
+  }
+  .wallpaper_texture-block_wrapper,
+  .wallpaper_interior-tape_wrapper{
+    width: 300px;
+  }
+}

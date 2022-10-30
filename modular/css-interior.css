@@ -1,0 +1,112 @@
+iframe{
+	/*border: 1px solid red;*/
+	height:225px;
+	width: 335px;
+}
+#interior{
+  position: relative;
+	margin-top: 0;
+  max-width: 100vw;
+  background-color: white;
+}
+#interior-background{
+	height: 400px;
+	width: 600px;
+	/*border: 1px solid red;*/
+	background-repeat:no-repeat;
+	background-position: bottom;
+	background-size:contain;
+	display: flex;
+}
+.wrapper-interior-field{
+  padding: 0;
+  margin:0;
+  box-sizing: border-box;
+  border:none;
+	display: flex;
+	position: relative;
+	margin:auto;
+	margin-top:0;
+	height:250px;
+	width:250px;
+	overflow:hidden;
+}
+#interior-field{
+	position: relative;
+ padding: 0;
+  margin:0;
+  box-sizing: border-box;
+  border:none;
+  margin-top: 0;
+  margin-bottom: 0;
+	height:250px;
+	width:250px;overflow:hidden;
+  outline: 50px solid white;
+}
+#interior-image{
+	position: absolute;
+  padding: 0;
+  margin:0;
+  box-sizing: border-box;
+  border:none;
+  left:0;
+  top:0;
+	background-repeat:no-repeat;
+	background-position: center;
+	background-size:contain;
+}
+#interior-template{
+  padding: 0;
+  margin:0;
+  box-sizing: border-box;
+  border:none;
+	position: absolute;
+  left:0;
+  top:0;
+	height:250px;
+	width:250px;
+  border:10px solid white;
+	background-repeat:no-repeat;
+	background-position: center;
+	background-size:cover;
+  outline: 50px solid white;
+}
+
+#interior-foreground{
+  position: absolute;
+  left:10px;
+  top:65px;
+  height: 400px;
+  width: 600px;
+  box-sizing: border-box;
+  background-repeat:no-repeat;
+  background-position: bottom;
+  background-size:contain;
+  display: flex;
+}
+.interior-tape_wrapper{
+  /*background-color:  #3cb2e4;*/
+  background-color:  grey;
+}
+#interior-tape{
+  height:100px;
+  width: 500px;
+  margin-left: 50px;
+  margin-right: 50px;
+  background-color: white;
+  display: flex;
+  flex-wrap: nowrap;
+}
+#interior-tape img{
+  box-sizing: border-box;
+  height: 100px;
+  border:2px solid grey;
+}
+#interior-download{
+	position: absolute;
+	top:0;
+	left:50px;
+}
+#svg_3{
+	background-color: blue;
+}

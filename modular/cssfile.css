@@ -1,0 +1,255 @@
+body
+{
+	margin:0px;
+	padding: 0px;
+	box-sizing:border-box;
+}
+div
+{
+	/*border:1px solid rgba(255,0,0,0.1);*/
+	box-sizing:border-box;
+}
+button
+{
+	cursor: pointer;
+	background-color: rgba(0,0,0,0.1);
+	border-radius: 0.5em;
+	padding: 0.5em;
+	border:1px solid black;
+}
+button:hover
+{
+	background-color: rgba(0,0,0,0.2);
+	color: red;
+}
+table
+{
+	margin:auto;
+}
+.heder
+{
+	display: flex;
+  	justify-content: space-around;
+  	padding: 1em;
+}
+.wraperPage
+{
+	display: flex;
+}
+.sidebar
+{
+	width: 25%;
+}
+.filter
+{
+	text-align: center;
+}
+.content
+{
+	/*width: 100%;*/
+	display: flex;
+	flex-wrap: wrap;
+	padding: 0em;
+}
+.content-category
+{
+	display: flex;
+	justify-content: space-around;
+}
+.galeryItem
+{
+  position: relative;
+	width: 20vw;
+	/*height: 250px;*/
+	margin:10px;
+	display: flex;
+  	flex-wrap: wrap;
+  	align-content: space-between;
+  	cursor: pointer;
+}
+
+.galery-image-wrapper {
+  width: 300px;
+  height: 225px;
+  position: relative;
+  overflow: hidden;
+}
+
+.galery-image
+{
+	line-height: 0;
+	/*width: 100%;*/
+  width: 300px;
+  height: 300px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+}
+
+.gallery_image_position {
+  position: absolute;
+  bottom: 10px;
+  right: 0;
+  font-size: 24px;
+  color: lightblue;
+}
+
+.admin_galary_template {
+   width: 300px;
+  height: 225px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.galary-template
+{
+	
+	width: 100%
+}
+
+.discount
+{
+	background-color: rgba(200,200,0,0.5);
+	position: absolute;
+	margin: 1em;
+	color: red;
+	border-radius: 1em;
+}
+.pageNavigation
+{
+	display: flex;
+	justify-content: center;
+	cursor: pointer;
+}
+.pages
+{
+	padding: 0.5em;
+}
+.icon
+{
+	width: 3em;
+	height: 2em;
+	margin:0px;
+}
+/*=========adminPanel only*===============*/
+.dropInput 
+{
+	border:1px solid black;
+	width: 26em;
+	height: 10em;
+	opacity: 0; 
+}
+.dropZone
+{
+	background-image: url("images/dropzone.png"); 
+	background-repeat: no-repeat; 
+	background-size: contain;
+	padding: 1px;
+	width: 26em;
+	margin:0 auto;
+}
+.wrapPopUp
+{
+	display: none;
+	position: fixed;
+	top:0px;
+	left:0px;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.5);
+	overflow:scroll;
+}
+.popUp
+{
+	background-color: white;
+	margin:0 auto;
+	padding: 1em;
+	text-align: center;
+	width: 30em;
+}
+.closePopUp
+{
+	display: flex;
+	justify-content:space-around; 
+}
+.templateIcon
+{
+	width: 100px;
+}
+.templateItem
+{
+	margin:1em;
+}
+.tempalatesTab
+{
+	display: flex;
+	flex-wrap: wrap;
+	padding: 0em;
+	justify-content: center;
+	background-color: grey;
+	margin-bottom: 1em;
+}
+#interior-tape{
+	padding: 0em;
+	justify-content: center;
+	background-color: grey;
+	margin-bottom: 1em;
+}
+.interior-tape-item{
+	width: 80px;
+	margin:1em;
+}
+#templates{
+  width:50%;
+}
+.template-size_block{
+  margin:auto;
+}
+.category-icon_image{
+  background-color: grey;
+}
+.category-icon_image img{
+  width:25px;
+}
+
+.imagePositionPopUp-wrapper {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: none;
+}
+
+.imagePositionPopUp-inner {
+  position: relative;
+  margin: auto;
+  width: 90%;
+  height: 90%;
+  background-color: white;
+}
+.imagePositionPopUp-closeButton {
+  position: absolute;
+  top: 4%;
+  right: 5%;
+  font-size: 36px;
+  cursor: pointer;
+  color:  red;
+}
+
+.imagePositionPopUp-preloader_wrapper {
+  position: absolute;
+  display: flex;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.imagePositionPopUp-preloader_inner {
+  margin: auto;
+  color: grey;
+}

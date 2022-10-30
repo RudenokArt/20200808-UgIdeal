@@ -1,0 +1,42 @@
+.wallpaper_order_wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 50vh;
+}
+.wallpaper_order_wrapper input[type="text"]{
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  display: block;
+  margin:10px;
+  width: 250px;
+}
+.wallpaper_order_wrapper form {
+  display: block;
+  margin:auto;
+}
+.wallpaper_order_wrapper button{
+  border-radius: 5px;
+  display: block;
+  font-size: 16px;
+  margin:auto;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.wallpaper_order_wrapper a{
+  text-decoration: none;
+}
+
+.order_prewiew_image,
+.order_prewiew_buttons{
+  margin:auto;
+}
+
+.order_prewiew_image img {
+  max-width: 100vw;
+}
+
+.order_prewiew_buttons button {
+  padding:10px;
+}
