@@ -19,3 +19,17 @@
 	width: 300px;
 	height: 225px;
 }
+.modular_galery-image_options {
+	display: flex;
+	justify-content: space-around;
+}
+.admin_modular_pagination {
+	text-decoration: none;
+}
+
+#image_file {
+	opacity: 1;
+	position: relative;
+	border: none;
+	height: auto;
+}

@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Хост: localhost
--- Время создания: Окт 30 2022 г., 08:38
--- Версия сервера: 5.7.35-38
--- Версия PHP: 7.4.26
+-- Хост: 127.0.0.1:3306
+-- Время создания: Окт 31 2022 г., 00:33
+-- Версия сервера: 5.7.29
+-- Версия PHP: 7.4.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -26,13 +27,12 @@ SET time_zone = "+00:00";
 -- Структура таблицы `constractor_templates`
 --
 
-CREATE TABLE IF NOT EXISTS `constractor_templates` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `constractor_templates` (
+  `id` int(10) NOT NULL,
   `template` varchar(200) NOT NULL,
   `size` varchar(200) NOT NULL,
-  `price` int(10) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=161 DEFAULT CHARSET=utf8;
+  `price` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `constractor_templates`
@@ -61,13 +61,11 @@ INSERT INTO `constractor_templates` (`id`, `template`, `size`, `price`) VALUES
 -- Структура таблицы `constructor_category`
 --
 
-CREATE TABLE IF NOT EXISTS `constructor_category` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `constructor_category` (
+  `id` int(10) NOT NULL,
   `category` varchar(200) NOT NULL,
-  `interior` varchar(250) NOT NULL DEFAULT 'empty',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
+  `interior` varchar(250) NOT NULL DEFAULT 'empty'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `constructor_category`
@@ -101,8 +99,8 @@ INSERT INTO `constructor_category` (`id`, `category`, `interior`) VALUES
 -- Структура таблицы `constructor_galеry`
 --
 
-CREATE TABLE IF NOT EXISTS `constructor_galеry` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `constructor_galеry` (
+  `id` int(10) NOT NULL,
   `image` varchar(200) NOT NULL,
   `category` varchar(200) NOT NULL,
   `subcategory` varchar(200) NOT NULL,
@@ -121,11 +119,8 @@ CREATE TABLE IF NOT EXISTS `constructor_galеry` (
   `63x110` int(10) NOT NULL,
   `68x120` int(10) NOT NULL,
   `74x130` int(10) NOT NULL,
-  `80x140` int(10) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`),
-  UNIQUE KEY `id_2` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=605 DEFAULT CHARSET=utf8;
+  `80x140` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `constructor_galеry`
@@ -188,7 +183,7 @@ INSERT INTO `constructor_galеry` (`id`, `image`, `category`, `subcategory`, `te
 (324, '250905553.jpg', 'Африка', 'Саванна', 'хит-3.png', 0, 92, 18, 50, 0, 0, 'rotate(0deg)', 100, '0', 0, 0, 0, 0, 0, 0),
 (325, '253322002.jpg', 'Африка', 'Саванна', 'шик.png', 0, 147, 28, 75, 0, 0, 'rotate(0deg)', 100, '0', 0, 0, 0, 0, 0, 0),
 (326, '269210579.jpg', 'Африка', 'Мистика', 'хит-1.png', 0, 99, 16, 50, 0, 0, 'rotate(0deg)', 100, '0', 0, 0, 0, 0, 0, 0),
-(327, '271307636.jpg', 'Африка', 'Саванна', 'хит-1.png', 0, 94, 12, 100, 0, 0, 'rotate(0deg)', 100, '0', 0, 0, 0, 0, 0, 0),
+(327, '271307636.jpg', 'Африка', 'Саванна', 'ХИТ-5.png', 11, 94, 12, 100, 0, 0, 'rotate(0deg)', 100, '0', 0, 0, 0, 0, 0, 0),
 (328, '394574002.jpg', 'Африка', 'Люди', 'хит-3.png', 0, 92, 29, 34, 0, 0, 'rotate(0deg)', 100, '0', 0, 0, 0, 0, 0, 0),
 (329, '400017166.jpg', 'Африка', 'Мистика', 'хит-3.png', 0, 99, 30, 100, 0, 0, 'rotate(0deg)', 100, '0', 0, 0, 0, 0, 0, 0),
 (330, '685216864.jpg', 'Африка', 'Саванна', 'Фантазия-3.png', 0, 129, 23, 17, 0, 0, 'rotate(0deg)', 100, '0', 0, 0, 0, 0, 0, 0),
@@ -392,7 +387,8 @@ INSERT INTO `constructor_galеry` (`id`, `image`, `category`, `subcategory`, `te
 (601, '136447223.jpg', 'Искусство', 'Арт', 'хит-3.png', 0, 96, 20, 50, 0, 0, 'rotate(0deg)', 0, '', 0, 0, 0, 0, 0, 0),
 (602, '169983446.jpg', 'Искусство', 'Пейзажи', 'ХИТ-5.png', 0, 95, 9, 50, 0, 0, 'rotate(0deg)', 0, '', 0, 0, 0, 0, 0, 0),
 (603, '169985060.jpg', 'Искусство', 'Люди', 'хит-3.png', 0, 95, 15, 50, 0, 0, 'rotate(0deg)', 0, '', 0, 0, 0, 0, 0, 0),
-(604, '184238750.jpg', 'Искусство', 'Осень', 'ХИТ-5.png', 0, 95, 8, 89, 0, 0, 'rotate(0deg)', 0, '', 0, 0, 0, 0, 0, 0);
+(604, '184238750.jpg', 'Искусство', 'Осень', 'ХИТ-5.png', 0, 95, 8, 89, 0, 0, 'rotate(0deg)', 0, '', 0, 0, 0, 0, 0, 0),
+(608, 'testimage.jpg', 'Абстракция', '', 'Картина прямоугольная.png', 0, 0, 0, 0, 0, 0, 'rotate(0deg)', 0, '0', 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -400,12 +396,10 @@ INSERT INTO `constructor_galеry` (`id`, `image`, `category`, `subcategory`, `te
 -- Структура таблицы `constructor_interiors`
 --
 
-CREATE TABLE IF NOT EXISTS `constructor_interiors` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `interior` varchar(200) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+CREATE TABLE `constructor_interiors` (
+  `id` int(10) NOT NULL,
+  `interior` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `constructor_interiors`
@@ -425,12 +419,11 @@ INSERT INTO `constructor_interiors` (`id`, `interior`) VALUES
 -- Структура таблицы `constructor_mat`
 --
 
-CREATE TABLE IF NOT EXISTS `constructor_mat` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `constructor_mat` (
+  `id` int(10) NOT NULL,
   `material` varchar(200) NOT NULL,
-  `kof` varchar(10) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+  `kof` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `constructor_mat`
@@ -446,13 +439,11 @@ INSERT INTO `constructor_mat` (`id`, `material`, `kof`) VALUES
 -- Структура таблицы `constructor_post`
 --
 
-CREATE TABLE IF NOT EXISTS `constructor_post` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `constructor_post` (
+  `id` int(10) NOT NULL,
   `image_name` varchar(200) NOT NULL,
-  `post_text` text NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+  `post_text` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `constructor_post`
@@ -469,14 +460,12 @@ INSERT INTO `constructor_post` (`id`, `image_name`, `post_text`) VALUES
 -- Структура таблицы `constructor_size`
 --
 
-CREATE TABLE IF NOT EXISTS `constructor_size` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `constructor_size` (
+  `id` int(10) NOT NULL,
   `size` varchar(200) NOT NULL,
   `kof` varchar(10) NOT NULL,
-  `template` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8;
+  `template` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `constructor_size`
@@ -527,14 +516,12 @@ INSERT INTO `constructor_size` (`id`, `size`, `kof`, `template`) VALUES
 -- Структура таблицы `constructor_subcategory`
 --
 
-CREATE TABLE IF NOT EXISTS `constructor_subcategory` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `constructor_subcategory` (
+  `id` int(10) NOT NULL,
   `category` varchar(200) NOT NULL,
   `subcategory` varchar(200) NOT NULL,
-  `interior` varchar(250) NOT NULL DEFAULT 'empty',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
+  `interior` varchar(250) NOT NULL DEFAULT 'empty'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `constructor_subcategory`
@@ -579,11 +566,10 @@ INSERT INTO `constructor_subcategory` (`id`, `category`, `subcategory`, `interio
 -- Структура таблицы `wallpaper_category`
 --
 
-CREATE TABLE IF NOT EXISTS `wallpaper_category` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `category` varchar(200) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
+CREATE TABLE `wallpaper_category` (
+  `id` int(10) NOT NULL,
+  `category` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `wallpaper_category`
@@ -617,12 +603,11 @@ INSERT INTO `wallpaper_category` (`id`, `category`) VALUES
 -- Структура таблицы `wallpaper_interior`
 --
 
-CREATE TABLE IF NOT EXISTS `wallpaper_interior` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `wallpaper_interior` (
+  `id` int(11) NOT NULL,
   `interior` varchar(200) NOT NULL,
-  `order_number` int(11) NOT NULL DEFAULT '999',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+  `order_number` int(11) NOT NULL DEFAULT '999'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `wallpaper_interior`
@@ -643,13 +628,12 @@ INSERT INTO `wallpaper_interior` (`id`, `interior`, `order_number`) VALUES
 -- Структура таблицы `wallpaper_post`
 --
 
-CREATE TABLE IF NOT EXISTS `wallpaper_post` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `wallpaper_post` (
+  `id` int(10) NOT NULL,
   `title` varchar(250) NOT NULL,
   `text` text NOT NULL,
-  `image` varchar(250) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+  `image` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `wallpaper_post`
@@ -667,13 +651,12 @@ INSERT INTO `wallpaper_post` (`id`, `title`, `text`, `image`) VALUES
 -- Структура таблицы `wallpaper_price`
 --
 
-CREATE TABLE IF NOT EXISTS `wallpaper_price` (
-  `id` int(8) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `wallpaper_price` (
+  `id` int(8) NOT NULL,
   `texture_id` int(8) NOT NULL,
   `size_id` int(8) NOT NULL,
-  `price` int(8) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+  `price` int(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `wallpaper_price`
@@ -695,11 +678,10 @@ INSERT INTO `wallpaper_price` (`id`, `texture_id`, `size_id`, `price`) VALUES
 -- Структура таблицы `wallpaper_roll`
 --
 
-CREATE TABLE IF NOT EXISTS `wallpaper_roll` (
-  `id` int(8) NOT NULL AUTO_INCREMENT,
-  `roll` int(8) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+CREATE TABLE `wallpaper_roll` (
+  `id` int(8) NOT NULL,
+  `roll` int(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `wallpaper_roll`
@@ -719,12 +701,11 @@ INSERT INTO `wallpaper_roll` (`id`, `roll`) VALUES
 -- Структура таблицы `wallpaper_subcategory`
 --
 
-CREATE TABLE IF NOT EXISTS `wallpaper_subcategory` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `wallpaper_subcategory` (
+  `id` int(10) NOT NULL,
   `category` varchar(200) NOT NULL,
-  `subcategory` varchar(200) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=386 DEFAULT CHARSET=utf8;
+  `subcategory` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `wallpaper_subcategory`
@@ -767,8 +748,8 @@ INSERT INTO `wallpaper_subcategory` (`id`, `category`, `subcategory`) VALUES
 -- Структура таблицы `wallpaper_texture`
 --
 
-CREATE TABLE IF NOT EXISTS `wallpaper_texture` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `wallpaper_texture` (
+  `id` int(10) NOT NULL,
   `texture` varchar(250) NOT NULL,
   `title` varchar(256) NOT NULL,
   `size` varchar(256) NOT NULL,
@@ -777,9 +758,8 @@ CREATE TABLE IF NOT EXISTS `wallpaper_texture` (
   `density` varchar(256) NOT NULL,
   `color_rendering` varchar(256) NOT NULL,
   `base` varchar(256) NOT NULL,
-  `video` varchar(1024) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+  `video` varchar(1024) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `wallpaper_texture`
@@ -806,17 +786,16 @@ INSERT INTO `wallpaper_texture` (`id`, `texture`, `title`, `size`, `width`, `len
 -- Структура таблицы `wallpaper_wallpaper`
 --
 
-CREATE TABLE IF NOT EXISTS `wallpaper_wallpaper` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `wallpaper_wallpaper` (
+  `id` int(10) NOT NULL,
   `article` varchar(200) NOT NULL,
   `wallpaper` varchar(200) NOT NULL,
   `category` varchar(200) NOT NULL,
   `subcategory` varchar(200) NOT NULL,
   `interior` varchar(200) NOT NULL,
   `discount` int(3) NOT NULL,
-  `number` int(10) NOT NULL DEFAULT '99',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=145 DEFAULT CHARSET=utf8;
+  `number` int(10) NOT NULL DEFAULT '99'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `wallpaper_wallpaper`
@@ -848,6 +827,214 @@ INSERT INTO `wallpaper_wallpaper` (`id`, `article`, `wallpaper`, `category`, `su
 (142, '1496262356.jpg', '', '3 D Арт', '3 D', 'interior-image_3.png', 0, 0),
 (143, '1392043274.jpg', '', '3 D Арт', '3 D', 'interior-image_2.png', 5, 1),
 (144, '1380225119.jpg', '', '3 D Арт', '3 D', 'interior-image_3.png', 0, 0);
+
+--
+-- Индексы сохранённых таблиц
+--
+
+--
+-- Индексы таблицы `constractor_templates`
+--
+ALTER TABLE `constractor_templates`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `constructor_category`
+--
+ALTER TABLE `constructor_category`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Индексы таблицы `constructor_galеry`
+--
+ALTER TABLE `constructor_galеry`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`),
+  ADD UNIQUE KEY `id_2` (`id`);
+
+--
+-- Индексы таблицы `constructor_interiors`
+--
+ALTER TABLE `constructor_interiors`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Индексы таблицы `constructor_mat`
+--
+ALTER TABLE `constructor_mat`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `constructor_post`
+--
+ALTER TABLE `constructor_post`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Индексы таблицы `constructor_size`
+--
+ALTER TABLE `constructor_size`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Индексы таблицы `constructor_subcategory`
+--
+ALTER TABLE `constructor_subcategory`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Индексы таблицы `wallpaper_category`
+--
+ALTER TABLE `wallpaper_category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `wallpaper_interior`
+--
+ALTER TABLE `wallpaper_interior`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `wallpaper_post`
+--
+ALTER TABLE `wallpaper_post`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `wallpaper_price`
+--
+ALTER TABLE `wallpaper_price`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `wallpaper_roll`
+--
+ALTER TABLE `wallpaper_roll`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `wallpaper_subcategory`
+--
+ALTER TABLE `wallpaper_subcategory`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `wallpaper_texture`
+--
+ALTER TABLE `wallpaper_texture`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `wallpaper_wallpaper`
+--
+ALTER TABLE `wallpaper_wallpaper`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT для сохранённых таблиц
+--
+
+--
+-- AUTO_INCREMENT для таблицы `constractor_templates`
+--
+ALTER TABLE `constractor_templates`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
+
+--
+-- AUTO_INCREMENT для таблицы `constructor_category`
+--
+ALTER TABLE `constructor_category`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+
+--
+-- AUTO_INCREMENT для таблицы `constructor_galеry`
+--
+ALTER TABLE `constructor_galеry`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=609;
+
+--
+-- AUTO_INCREMENT для таблицы `constructor_interiors`
+--
+ALTER TABLE `constructor_interiors`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT для таблицы `constructor_mat`
+--
+ALTER TABLE `constructor_mat`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT для таблицы `constructor_post`
+--
+ALTER TABLE `constructor_post`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT для таблицы `constructor_size`
+--
+ALTER TABLE `constructor_size`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+
+--
+-- AUTO_INCREMENT для таблицы `constructor_subcategory`
+--
+ALTER TABLE `constructor_subcategory`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+
+--
+-- AUTO_INCREMENT для таблицы `wallpaper_category`
+--
+ALTER TABLE `wallpaper_category`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
+--
+-- AUTO_INCREMENT для таблицы `wallpaper_interior`
+--
+ALTER TABLE `wallpaper_interior`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT для таблицы `wallpaper_post`
+--
+ALTER TABLE `wallpaper_post`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT для таблицы `wallpaper_price`
+--
+ALTER TABLE `wallpaper_price`
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT для таблицы `wallpaper_roll`
+--
+ALTER TABLE `wallpaper_roll`
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT для таблицы `wallpaper_subcategory`
+--
+ALTER TABLE `wallpaper_subcategory`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=386;
+
+--
+-- AUTO_INCREMENT для таблицы `wallpaper_texture`
+--
+ALTER TABLE `wallpaper_texture`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT для таблицы `wallpaper_wallpaper`
+--
+ALTER TABLE `wallpaper_wallpaper`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=145;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
