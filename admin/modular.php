@@ -9,8 +9,9 @@ if (isset($_GET['page']) and $_GET['page'] == 'modular_image_upload') {
   include_once 'includes/modular_image_upload.php';
 } elseif (isset($_GET['page']) and $_GET['page'] == 'modular_image_edit') {
   include_once 'includes/modular_image_edit.php';
+} elseif(isset($_GET['page']) and $_GET['page'] == 'modular_image_delete') {
+  include_once 'includes/modular_image_delete.php';
 } else {
   include_once 'includes/modular_galery.php';
 }
 ?>
-

@@ -1,7 +1,6 @@
 <?php 
 if ($_POST['modular_image_upload']) {
-	echo '<meta http-equiv="refresh" content="0; url=?page_N='
-	.$_GET['page_N'].'" />';
+	echo '<meta http-equiv="refresh" content="0; url=?page_N='.$_GET['page_N'].'" />';
 }
 ?>
 <form action="" method="post" enctype="multipart/form-data">
@@ -14,7 +13,7 @@ if ($_POST['modular_image_upload']) {
 					</div>
 					<div class="row w-100">
 						<div class="col-12">
-							<input type="file" name="image_file" class="form-control" id="image_file">
+							<input type="file" name="image_file" class="form-control w-100" id="image_file">
 							Шаблон:
 							<select name="template" class="form-select">
 								<?php foreach ($modular_admin->templates_arr as $sub_key => $sub_value): ?>

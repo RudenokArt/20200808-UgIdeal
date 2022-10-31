@@ -1,15 +1,16 @@
 <div class="container">
   <div class="row w-100">
     <div class="col p-2">
-      <a href="?page=modular_image_upload" class="btn btn-outline-info">
+      <a href="?page=modular_image_upload&page_N=<?php echo $_GET['page_N'];?>" class="btn btn-outline-info">
         <i class="fa fa-cloud-upload" aria-hidden="true"></i>
         Загрузить изображение
       </a>
     </div>
   </div>
-  <div class="row">
+  <div class="row w-100">
     <?php foreach ($modular_admin->galery_arr['page'] as $key => $value): ?>
-      <div class="col-12 col-sm-12 col-md-6 col-lg-4 border">
+      <?php if ($value): ?>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-4 border">
 
         <?php include 'modular_galery-item_image.php';?>
 
@@ -29,9 +30,10 @@
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
             </a>
             <br>
-            <button title="Удалить" class="btn btn-outline-danger m-1">
+            <a href="?page=modular_image_delete&id=<?php echo $value['id'];?>&page_N=<?php echo $_GET['page_N'];?>" 
+              title="Удалить" class="btn btn-outline-danger m-1">
               <i class="fa fa-trash-o" aria-hidden="true"></i>
-            </button>
+            </a>
             <br>
             <a href="#" title="Позиционирование" class="btn btn-outline-primary m-1">
               <i class="fa fa-arrows" aria-hidden="true"></i>
@@ -39,6 +41,8 @@
           </div>
         </div>
       </div>
+      <?php endif ?>
+      
     <?php endforeach ?>
   </div> 
   <div class="row p-5">
