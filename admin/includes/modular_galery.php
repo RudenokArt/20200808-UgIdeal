@@ -19,7 +19,7 @@
             Изображение: <?php echo $value['image']; ?><br>
             Категория: <?php echo $value['category']; ?><br>
             Подкатегория: <?php echo $value['subcategory']; ?><br>
-            Шаблон: <?php echo $value['template']; ?><br>
+            Шаблон: <?php echo $value['template'];?><br>
             Скидка: <?php echo $value['discount']; ?><br>
             Сортировка: <?php echo $value['40x70']; ?><br>
           </div>
@@ -35,7 +35,7 @@
               <i class="fa fa-trash-o" aria-hidden="true"></i>
             </a>
             <br>
-            <a href="#" title="Позиционирование" class="btn btn-outline-primary m-1">
+            <a href="modular_image_position.php?template=<?php echo $value['template'];?>&image_id=<?php echo $value['id'];?>&page_N=<?php echo $_GET['page_N'];?>" title="Позиционирование" class="btn btn-outline-primary m-1">
               <i class="fa fa-arrows" aria-hidden="true"></i>
             </a>
           </div>
