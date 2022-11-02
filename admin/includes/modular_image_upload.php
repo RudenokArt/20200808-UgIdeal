@@ -1,5 +1,22 @@
 <?php 
 if ($_POST['modular_image_upload']) {
+  move_uploaded_file($_FILES['image_file']['tmp_name'],
+       '../modular/galery/'.$_FILES['image_file']['name']);
+     if (!$_POST['discount']) {
+      $_POST['discount'] = 0;
+    }
+    if (!$_POST['40x70']) {
+      $_POST['40x70'] = 0;
+    }
+    $sql = $modular_admin->dbQuery('INSERT INTO `constructor_galеry`
+     (`image`, `category`, `subcategory`, `discount`, `template`,
+       `40x70`,`46x80`,`51x90`, `57x100`, `63x110`, `68x120`, `74x130`, `80x140`)
+     VALUES ("'.$_FILES['image_file']['name'].'",
+       "'.$_POST['category'].'",
+       "'.$_POST['subcategory'].'",
+       '.$_POST['discount'].',
+       "'.$_POST['template'].'",
+       '.$_POST['40x70'].',0,0,0,0,0,0,0)');
 	echo '<meta http-equiv="refresh" content="0; url=?page_N='.$_GET['page_N'].'" />';
 }
 ?>
@@ -14,23 +31,8 @@ if ($_POST['modular_image_upload']) {
 					<div class="row w-100">
 						<div class="col-12">
 							<input type="file" name="image_file" class="form-control w-100" id="image_file">
-							Шаблон:
-							<select name="template" class="form-select">
-								<?php foreach ($modular_admin->templates_arr as $sub_key => $sub_value): ?>
-									<option>
-										<?php echo $sub_value['template']; ?>
-									</option>
-								<?php endforeach ?>
-							</select>
-							Категория:
-							<select name="category" class="form-select" id="categorySelect">
-								<?php foreach ($modular_admin->categories_arr as $sub_key => $sub_value): ?>
-									<option value="<?php echo $sub_value['category']; ?>">
-										<?php echo $sub_value['category']; ?>										
-									</option>
-								<?php endforeach ?>
-							</select>
-							<?php include_once 'modular_galery-subcategory_selector.php';?>
+							<?php include_once 'modular_galery-template_selector.php';?>
+							<?php include_once 'modular_galery-category_selector.php';?>
 							Скидка (%):
 							<input name="discount" type="number" class="form-control">
 							Сортировка (номер п/п):

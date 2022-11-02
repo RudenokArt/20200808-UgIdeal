@@ -1,13 +1,26 @@
 <div class="container">
   <div class="row w-100">
-    <div class="col p-2">
+    <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+      <form action="" method="get">
+      <?php include_once 'modular_galery-category_selector.php';?>
+        <button class="btn btn-outline-info mt-3">
+          <i class="fa fa-filter" aria-hidden="true"></i>
+          Фильтр
+        </button>
+        <a href="?" class="btn btn-outline-warning mt-3">
+          <i class="fa fa-times" aria-hidden="true"></i>
+          Сброс
+        </a>
+      </form>
+    </div>
+    <div class="col-12 col-sm-12 col-md-6 col-lg-4 pt-4">
       <a href="?page=modular_image_upload&page_N=<?php echo $_GET['page_N'];?>" class="btn btn-outline-info">
         <i class="fa fa-cloud-upload" aria-hidden="true"></i>
         Загрузить изображение
       </a>
     </div>
   </div>
-  <div class="row w-100">
+  <div class="row w-100 pt-5">
     <?php foreach ($modular_admin->galery_arr['page'] as $key => $value): ?>
       <?php if ($value): ?>
         <div class="col-12 col-sm-12 col-md-6 col-lg-4 border">

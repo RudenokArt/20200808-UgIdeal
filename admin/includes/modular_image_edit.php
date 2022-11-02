@@ -1,6 +1,14 @@
 <?php 
 if ($_POST['modular_image_edit']) {
-	echo '<meta http-equiv="refresh" content="0; url=?page_N='.$_GET['page_N'].'" />';
+  $modular_admin->dbQuery('UPDATE `constructor_galеry`
+    SET 
+    `template`="'.$_POST['template'].'",
+    `category`="'.$_POST['category'].'",
+    `subcategory`="'.$_POST['subcategory'].'",
+    `discount`='.$_POST['discount'].',
+    `40x70`='.$_POST['40x70'].'
+    WHERE `id`='.$_POST['id']);
+  echo '<meta http-equiv="refresh" content="0; url=?page_N='.$_GET['page_N'].'" />';
 }
 ?>
 <form action="" method="post">
@@ -19,28 +27,8 @@ if ($_POST['modular_image_edit']) {
 							</div>
 							<div class="col-12">
 								<p class="text-center"><b>Изображение: <?php echo $value['image'];?></b></p>
-								Шаблон:
-								<select name="template" class="form-select">
-									<?php foreach ($modular_admin->templates_arr as $sub_key => $sub_value): ?>
-										<option <?php if ($sub_value['template'] == $value['template']): ?>
-											selected
-										<?php endif ?> value="<?php echo $sub_value['template']; ?>">
-											<?php echo $sub_value['template']; ?>
-										</option>
-									<?php endforeach ?>
-								</select>
-								Категория:
-								<select name="category" class="form-select" id="categorySelect">
-									<?php foreach ($modular_admin->categories_arr as $sub_key => $sub_value): ?>
-										<option <?php if ($sub_value['category'] == $value['category']): ?>
-											selected
-										<?php endif ?>
-										value="<?php echo $sub_value['category']; ?>">
-										<?php echo $sub_value['category']; ?>										
-										</option>
-									<?php endforeach ?>
-								</select>
-								<?php include_once 'modular_galery-subcategory_selector.php';?>
+								<?php include_once 'modular_galery-template_selector.php';?>
+								<?php include_once 'modular_galery-category_selector.php';?>
 								Скидка (%):
 								<input value="<?php echo $value['discount'] ?>"
 								name="discount" type="text" class="form-control">
@@ -54,19 +42,19 @@ if ($_POST['modular_image_edit']) {
 						<div class="col text-center">
 							<button name="modular_image_edit" value="Y"
 							class="btn btn-outline-success" title="Сохранить">
-								<i class="fa fa-floppy-o" aria-hidden="true"></i>
-								Сохранить
-							</button>
-							<a href="?page_N=<?php echo $_GET['page_N'];?>"
-								class="btn btn-outline-danger" title="Отмена">
-								<i class="fa fa-times" aria-hidden="true"></i>
-								Отмена
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+              <i class="fa fa-floppy-o" aria-hidden="true"></i>
+              Сохранить
+            </button>
+            <a href="?page_N=<?php echo $_GET['page_N'];?>"
+              class="btn btn-outline-danger" title="Отмена">
+              <i class="fa fa-times" aria-hidden="true"></i>
+              Отмена
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </form>
 
