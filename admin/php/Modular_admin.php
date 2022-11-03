@@ -7,6 +7,10 @@ $modular_admin = new Modular_admin();
 class Modular_admin {
 	
 	function __construct() {
+    if ($_POST['count_on_page']) {
+      file_put_contents('../modular/pagination.txt', $_POST['count_on_page']);
+      echo '<meta http-equiv="refresh" content="0; url=?page_N='.$_GET['page_N'].'" />';
+    }
 		$this->categories_arr = $this->dbQuerySelect('SELECT * FROM constructor_category ORDER BY `category`');
 		$this->sub_categories_arr = $this->dbQuerySelect('SELECT * FROM `constructor_subcategory`');
 		$this->templates_arr = $this->dbQuerySelect('SELECT * FROM `constractor_templates` ORDER BY `price`');
@@ -21,28 +25,30 @@ class Modular_admin {
         $this->filter = 'WHERE `category`="'.$_GET['category'].'"';
       } elseif ($_GET['category'] and $_GET['subcategory']) {
         $this->filter = 'WHERE `category`="'.$_GET['category'].'" AND `subcategory`="'.$_GET['subcategory'].'"';
-     }
-     $this->galery_arr = $this->dbQuerySelect('SELECT * FROM `constructor_galеry` '.$this->filter.' ORDER BY `id`');
-     $this->galery_arr = $this->pagination($this->galery_arr, $this->galery_count_on_page);
+      } elseif ($_GET['article_search']) {
+        $this->filter = 'WHERE `image` LIKE "%'.$_GET['article_search'].'%"';
+      }
+      $this->galery_arr = $this->dbQuerySelect('SELECT * FROM `constructor_galеry` '.$this->filter.' ORDER BY `id`');
+      $this->galery_arr = $this->pagination($this->galery_arr, $this->galery_count_on_page);
+    }
+  }
+
+  function dbQuery ($sql) {
+    global $mysqli;
+    $mysqli->query($sql);
+  }
+
+  function dbQuerySelect ($sql){
+    global $mysqli;
+    $arr=[];
+    $src=$mysqli->query($sql);
+    while ($result = mysqli_fetch_assoc($src)){
+     array_push($arr, $result);
    }
+   return($arr);
  }
 
- function dbQuery ($sql) {
-  global $mysqli;
-  $mysqli->query($sql);
-}
-
-function dbQuerySelect ($sql){
-  global $mysqli;
-  $arr=[];
-  $src=$mysqli->query($sql);
-  while ($result = mysqli_fetch_assoc($src)){
-   array_push($arr, $result);
- }
- return($arr);
-}
-
-function pagination ($arr, $page_size) {
+ function pagination ($arr, $page_size) {
   $current_page = 1;
   if ($_GET['page_N']) {
    $current_page = $_GET['page_N'];
