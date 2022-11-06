@@ -4,14 +4,12 @@
     SET 
     `price`='.$_POST['modular_template_sort'].'
     WHERE `id`='.$_POST['id']);
-  // echo '<meta http-equiv="refresh" content="0; url=?tab=modular_templates" />';
+  echo '<meta http-equiv="refresh" content="0; url=?tab=modular_templates" />';
 } ?>
-
-<pre><?php print_r($_POST) ?></pre>
 
 <div class="container">
   <div class="row pt-5">
-    <a href="#" class="btn btn-outline-primary">
+    <a href="?page=modular_tempates_upload" class="btn btn-outline-primary">
       <i class="fa fa-cloud-upload" aria-hidden="true"></i>
       Загрузить шаблон
     </a>
@@ -45,7 +43,7 @@
             </div>
           </form>
           <div class="row border-top pt-2 pb-1">
-           <a href="#" class="btn btn-outline-danger">
+           <a href="?page=modular_tempates_delete&id=<?php echo $value['id'] ?>" class="btn btn-outline-danger">
              <i class="fa fa-trash-o" aria-hidden="true"></i>
              Удалить
            </a>

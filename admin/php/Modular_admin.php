@@ -14,6 +14,9 @@ class Modular_admin {
 		$this->categories_arr = $this->dbQuerySelect('SELECT * FROM constructor_category ORDER BY `category`');
 		$this->sub_categories_arr = $this->dbQuerySelect('SELECT * FROM `constructor_subcategory`');
 		$this->templates_arr = $this->dbQuerySelect('SELECT * FROM `constractor_templates` ORDER BY `price`');
+    if ($_GET['page'] == 'modular_tempates_delete') {
+      $this->templates_arr = $this->dbQuerySelect('SELECT * FROM `constractor_templates` WHERE `id`='.$_GET['id']);
+    }
 
 		if ($_GET['page'] == 'modular_image_edit') { // редактирование элемента галереи
 			$this->modular_image_edit = $this->dbQuerySelect('SELECT * FROM `constructor_galеry` WHERE `id`='.$_GET['id']);
