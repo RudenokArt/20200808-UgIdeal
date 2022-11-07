@@ -17,6 +17,7 @@ if ($_POST['modular_tempates_delete']) {
 							<img src="../modular/templates/<?php echo $value['template'];?>"
 							class="modular_tempates_delete-image"
 							alt="<?php echo $value['template'] ?>">
+							<p><?php echo $value['template'] ?></p>
 						</div>
 					</div>
 					<div class="row w-100">

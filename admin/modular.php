@@ -1,5 +1,5 @@
 
-<?php include_once 'php/Modular_admin.php' ?><!DOCTYPE html>
+<?php include_once 'php/Modular_admin.php';?><!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -63,13 +63,21 @@ if (isset($_GET['page']) and $_GET['page'] == 'modular_image_upload') {
   include_once 'includes/modular_image_edit.php';
 } elseif(isset($_GET['page']) and $_GET['page'] == 'modular_image_delete') {
   include_once 'includes/modular_image_delete.php';
-} elseif(isset($_GET['page']) and $_GET['page'] == 'modular_tempates_upload') {
-  include_once 'includes/modular_tempates_upload.php';
-} elseif(isset($_GET['page']) and $_GET['page'] == 'modular_tempates_delete') {
-  include_once 'includes/modular_tempates_delete.php';
+} elseif(isset($_GET['page']) and $_GET['page'] == 'modular_templates_upload') {
+  include_once 'includes/modular_templates_upload.php';
+} elseif(isset($_GET['page']) and $_GET['page'] == 'modular_templates_delete') {
+  include_once 'includes/modular_templates_delete.php';
+} elseif(isset($_GET['page']) and $_GET['page'] == 'modular_posts_edit') {
+  include_once 'includes/modular_posts_edit.php';
+} elseif(isset($_GET['page']) and $_GET['page'] == 'modular_posts_upload') {
+  include_once 'includes/modular_posts_upload.php';
+} elseif(isset($_GET['page']) and $_GET['page'] == 'modular_posts_delete') {
+  include_once 'includes/modular_posts_delete.php';
 } else {
   if ($_GET['tab'] and $_GET['tab'] == 'modular_templates') {
     include_once 'includes/modular_templates.php';
+  } elseif ($_GET['tab'] and $_GET['tab'] == 'modular_posts') {
+    include_once 'includes/modular_posts.php';
   } else {
     include_once 'includes/modular_galery.php';
   }

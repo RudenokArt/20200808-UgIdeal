@@ -13,9 +13,16 @@ class Modular_admin {
     }
 		$this->categories_arr = $this->dbQuerySelect('SELECT * FROM constructor_category ORDER BY `category`');
 		$this->sub_categories_arr = $this->dbQuerySelect('SELECT * FROM `constructor_subcategory`');
-		$this->templates_arr = $this->dbQuerySelect('SELECT * FROM `constractor_templates` ORDER BY `price`');
-    if ($_GET['page'] == 'modular_tempates_delete') {
+    if ($_GET['page'] == 'modular_templates_delete') {
       $this->templates_arr = $this->dbQuerySelect('SELECT * FROM `constractor_templates` WHERE `id`='.$_GET['id']);
+    } elseif ($_GET['tab'] == 'modular_templates') {
+      $this->templates_arr = $this->dbQuerySelect('SELECT * FROM `constractor_templates` ORDER BY `price`');
+    }
+
+    if ($_GET['tab'] == 'modular_posts') {
+      $this->posts_arr = $this->dbQuerySelect('SELECT * FROM `constructor_post`');
+    } elseif ($_GET['page'] == 'modular_posts_edit' or $_GET['page'] == 'modular_posts_delete') {
+      $this->posts_arr = $this->dbQuerySelect('SELECT * FROM `constructor_post` WHERE `id`='.$_GET['id']);
     }
 
 		if ($_GET['page'] == 'modular_image_edit') { // редактирование элемента галереи
@@ -66,7 +73,7 @@ class Modular_admin {
  for ($i=0; $i < count($arr)/$page_size; $i++) { 
    $n = $i+1;
    $page_nuber = $n;
-   $page_link = '?'.$_SERVER['QUERY_STRING'].'&page_N='.$n;
+   $page_link = '?tab=modular_galery&page_N='.$n;
    if ($page_nuber == $current_page) {
     $is_current_page = true;
   } else {

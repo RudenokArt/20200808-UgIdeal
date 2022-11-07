@@ -9,7 +9,7 @@
 
 <div class="container">
   <div class="row pt-5">
-    <a href="?page=modular_tempates_upload" class="btn btn-outline-primary">
+    <a href="?page=modular_templates_upload" class="btn btn-outline-primary">
       <i class="fa fa-cloud-upload" aria-hidden="true"></i>
       Загрузить шаблон
     </a>
@@ -43,7 +43,7 @@
             </div>
           </form>
           <div class="row border-top pt-2 pb-1">
-           <a href="?page=modular_tempates_delete&id=<?php echo $value['id'] ?>" class="btn btn-outline-danger">
+           <a href="?page=modular_templates_delete&id=<?php echo $value['id'] ?>" class="btn btn-outline-danger">
              <i class="fa fa-trash-o" aria-hidden="true"></i>
              Удалить
            </a>
