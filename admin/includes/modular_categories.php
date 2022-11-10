@@ -1,9 +1,14 @@
+<?php if ($_POST['modular_category_add']) {
+  echo $_POST['category'];
+  $modular_admin->dbQuery('INSERT INTO `constructor_category`(`category`) VALUES ("'.$_POST['category'].'")');
+  echo '<meta http-equiv="refresh" content="0; url=?tab=modular_categories" />';
+} ?>
 <div class="container pt-5">
 	<div class="row">
 		<div class="col-lg-6 col-md-6 col-sm-12">
 			<form action="" method="post" class="row">
 				<div class="col">
-					<input type="text" name="category" class="form-control">
+					<input type="text" name="category" class="form-control" required>
 				</div>
 				<div class="col">
 					<button name="modular_category_add" value="Y" class="btn btn-outline-primary">
