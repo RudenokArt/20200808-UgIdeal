@@ -47,12 +47,12 @@
                 </div><?}
                 ?></div><? } ?>
                 <?php $postArr=indexSelect('SELECT * FROM `constructor_post`');?>
-                <div class="wallpaper-posts">
+                <div class="modular-posts">
                   <?php for ($i=0; $i < sizeof($postArr); $i++) { 
-                  ?><div class="wallpaper-posts_item">
+                  ?><div class="modular-posts_item">
                     <img src="post-image/<?php echo $postArr[$i]['image_name'] ?>" 
-                    class="wallpaper-posts_image" alt=" ">
-                    <div class="wallpaper-posts_text">
+                    class="modular-posts_image" alt=" ">
+                    <div class="modular-posts_text">
                       <?php echo $postArr[$i]['post_text'] ?>
                     </div>
                     </div><?

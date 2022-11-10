@@ -433,6 +433,11 @@ span{
   margin:0;
   padding: 5px;
 }
+
+.modular-posts_image {
+  width: 250px;
+}
+
 @keyframes show {
   from { 
     transform:rotate(0deg);

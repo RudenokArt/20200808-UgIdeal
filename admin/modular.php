@@ -76,6 +76,8 @@ if (isset($_GET['page']) and $_GET['page'] == 'modular_image_upload') {
 } else {
   if ($_GET['tab'] and $_GET['tab'] == 'modular_templates') {
     include_once 'includes/modular_templates.php';
+  } elseif ($_GET['tab'] and $_GET['tab'] == 'modular_categories') {
+    include_once 'includes/modular_categories.php';
   } elseif ($_GET['tab'] and $_GET['tab'] == 'modular_posts') {
     include_once 'includes/modular_posts.php';
   } else {

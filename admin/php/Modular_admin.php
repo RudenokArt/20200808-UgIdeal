@@ -17,13 +17,15 @@ class Modular_admin {
       $this->templates_arr = $this->dbQuerySelect('SELECT * FROM `constractor_templates` WHERE `id`='.$_GET['id']);
     } elseif ($_GET['tab'] == 'modular_templates') {
       $this->templates_arr = $this->dbQuerySelect('SELECT * FROM `constractor_templates` ORDER BY `price`');
+    } elseif ($_GET['tab'] == 'modular_categories') {
+      $this->categories_arr = $this->dbQuerySelect('SELECT * FROM `constructor_category` ORDER BY `category`');
     }
 
     if ($_GET['tab'] == 'modular_posts') {
       $this->posts_arr = $this->dbQuerySelect('SELECT * FROM `constructor_post`');
     } elseif ($_GET['page'] == 'modular_posts_edit' or $_GET['page'] == 'modular_posts_delete') {
       $this->posts_arr = $this->dbQuerySelect('SELECT * FROM `constructor_post` WHERE `id`='.$_GET['id']);
-    }
+    } 
 
 		if ($_GET['page'] == 'modular_image_edit') { // редактирование элемента галереи
 			$this->modular_image_edit = $this->dbQuerySelect('SELECT * FROM `constructor_galеry` WHERE `id`='.$_GET['id']);
