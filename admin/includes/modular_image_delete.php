@@ -1,4 +1,6 @@
 <?php 
+$modular_admin->modular_image_delete = $modular_admin->
+dbQuerySelect('SELECT * FROM `constructor_galеry` WHERE `id`='.$_GET['id']);
 if ($_POST['modular_image_delete']) {
   var_dump(unlink('../modular/galery/'.$_POST['image']));
   $modular_admin->dbQuery('DELETE FROM `constructor_galеry` WHERE `id`='.$_POST['id']);

@@ -1,3 +1,6 @@
+<?php 
+$modular_admin->posts_arr = $modular_admin->dbQuerySelect('SELECT * FROM `constructor_post`');
+?>
 <div class="container pt-5">
 	<div class="row">
 			<div class="col">

@@ -1,4 +1,8 @@
 <?php 
+$modular_admin->modular_image_edit = $modular_admin->
+dbQuerySelect('SELECT * FROM `constructor_galеry` WHERE `id`='.$_GET['id']);
+$modular_admin->sub_categories_arr = $modular_admin->dbQuerySelect('SELECT * FROM `constructor_subcategory`');
+$modular_admin->categories_arr = $modular_admin->dbQuerySelect('SELECT * FROM constructor_category ORDER BY `category`');
 if ($_POST['modular_image_edit']) {
   $modular_admin->dbQuery('UPDATE `constructor_galеry`
     SET 

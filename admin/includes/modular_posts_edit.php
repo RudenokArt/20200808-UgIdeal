@@ -1,5 +1,5 @@
 <?php 
-
+$modular_admin->posts_arr = $modular_admin->dbQuerySelect('SELECT * FROM `constructor_post` WHERE `id`='.$_GET['id']);
 if ($_POST['modular_posts_edit']) {
 	$modular_admin->dbQuery('UPDATE `constructor_post` 
 		SET `post_text`="'.$_POST['post_text'].'" WHERE `id`='.$_POST['id']);

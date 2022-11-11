@@ -7,50 +7,7 @@ $modular_admin = new Modular_admin();
 class Modular_admin {
 	
 	function __construct() {
-    if ($_POST['count_on_page']) {
-      file_put_contents('../modular/pagination.txt', $_POST['count_on_page']);
-      echo '<meta http-equiv="refresh" content="0; url=?page_N='.$_GET['page_N'].'" />';
-    }
-
-    if ($_GET['page'] == 'modular_category_delete') {
-      $this->categories_arr = $this->dbQuerySelect('SELECT * FROM `constructor_category` WHERE `id`='.$_GET['id']);
-      $this->sub_categories_arr = $this->dbQuerySelect('SELECT * FROM `constructor_subcategory` 
-        WHERE `category`="'.$this->categories_arr[0]['category'].'"');
-      $this->galery_arr = $this->dbQuerySelect('SELECT * FROM `constructor_galеry` 
-        WHERE `category`="'.$this->categories_arr[0]['category'].'"');
-    } else {
-      $this->categories_arr = $this->dbQuerySelect('SELECT * FROM constructor_category ORDER BY `category`');
-      $this->sub_categories_arr = $this->dbQuerySelect('SELECT * FROM `constructor_subcategory`');
-    }
-		
-    if ($_GET['page'] == 'modular_templates_delete') {
-      $this->templates_arr = $this->dbQuerySelect('SELECT * FROM `constractor_templates` WHERE `id`='.$_GET['id']);
-    } elseif ($_GET['tab'] == 'modular_templates') {
-      $this->templates_arr = $this->dbQuerySelect('SELECT * FROM `constractor_templates` ORDER BY `price`');
-    } 
-
-    if ($_GET['tab'] == 'modular_posts') {
-      $this->posts_arr = $this->dbQuerySelect('SELECT * FROM `constructor_post`');
-    } elseif ($_GET['page'] == 'modular_posts_edit' or $_GET['page'] == 'modular_posts_delete') {
-      $this->posts_arr = $this->dbQuerySelect('SELECT * FROM `constructor_post` WHERE `id`='.$_GET['id']);
-    } 
-
-		if ($_GET['page'] == 'modular_image_edit') { // редактирование элемента галереи
-			$this->modular_image_edit = $this->dbQuerySelect('SELECT * FROM `constructor_galеry` WHERE `id`='.$_GET['id']);
-		} elseif ($_GET['page'] == 'modular_image_delete') { // удалить элемент галереи
-      $this->modular_image_delete = $this->dbQuerySelect('SELECT * FROM `constructor_galеry` WHERE `id`='.$_GET['id']);
-    } elseif ($_GET['tab'] == 'modular_galery') { // Вывод галереи
-      $this->galery_count_on_page = file_get_contents('../modular/pagination.txt');
-      if ($_GET['category']) {
-        $this->filter = 'WHERE `category`="'.$_GET['category'].'"';
-      } elseif ($_GET['category'] and $_GET['subcategory']) {
-        $this->filter = 'WHERE `category`="'.$_GET['category'].'" AND `subcategory`="'.$_GET['subcategory'].'"';
-      } elseif ($_GET['article_search']) {
-        $this->filter = 'WHERE `image` LIKE "%'.$_GET['article_search'].'%"';
-      }
-      $this->galery_arr = $this->dbQuerySelect('SELECT * FROM `constructor_galеry` '.$this->filter.' ORDER BY `id`');
-      $this->galery_arr = $this->pagination($this->galery_arr, $this->galery_count_on_page);
-    }
+    
   }
 
   function dbQuery ($sql) {

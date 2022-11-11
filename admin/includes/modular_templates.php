@@ -1,11 +1,14 @@
 
-<?php if ($_POST['modular_template_sort']) {
+<?php 
+$modular_admin->templates_arr = $modular_admin->dbQuerySelect('SELECT * FROM `constractor_templates` ORDER BY `price`');
+if ($_POST['modular_template_sort']) {
   $modular_admin->dbQuery('UPDATE `constractor_templates`
     SET 
     `price`='.$_POST['modular_template_sort'].'
     WHERE `id`='.$_POST['id']);
   echo '<meta http-equiv="refresh" content="0; url=?tab=modular_templates" />';
-} ?>
+}
+?>
 
 <div class="container">
   <div class="row pt-5">

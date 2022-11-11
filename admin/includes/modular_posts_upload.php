@@ -1,4 +1,5 @@
 <?php 
+
 if ($_POST['modular_posts_upload']) {
 	move_uploaded_file($_FILES['post_image']['tmp_name'],
 		'../modular/post-image/'.$_FILES['post_image']['name']);
@@ -36,5 +37,3 @@ if ($_POST['modular_posts_upload']) {
 </div>
 </div>
 </form>
-
-Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolor velit saepe distinctio veritatis alias incidunt vitae molestiae labore consectetur sit! Sequi, molestiae adipisci nisi consequuntur sit, ab id nemo accusamus?

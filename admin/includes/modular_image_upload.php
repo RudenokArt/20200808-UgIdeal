@@ -1,4 +1,7 @@
 <?php 
+$modular_admin->templates_arr = $modular_admin->dbQuerySelect('SELECT * FROM `constractor_templates` ORDER BY `price`');
+$modular_admin->sub_categories_arr = $modular_admin->dbQuerySelect('SELECT * FROM `constructor_subcategory`');
+$modular_admin->categories_arr = $modular_admin->dbQuerySelect('SELECT * FROM constructor_category ORDER BY `category`');
 if ($_POST['modular_image_upload']) {
   move_uploaded_file($_FILES['image_file']['tmp_name'],
        '../modular/galery/'.$_FILES['image_file']['name']);

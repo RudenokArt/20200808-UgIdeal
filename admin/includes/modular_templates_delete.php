@@ -1,5 +1,7 @@
 
 <?php 
+$modular_admin->templates_arr = $modular_admin->
+dbQuerySelect('SELECT * FROM `constractor_templates` WHERE `id`='.$_GET['id']);
 if ($_POST['modular_tempates_delete']) {
   $modular_admin->dbQuery('DELETE FROM `constractor_templates` WHERE `id`='.$_POST['id']);
   var_dump(unlink('../modular/templates/'.$_POST['template']));

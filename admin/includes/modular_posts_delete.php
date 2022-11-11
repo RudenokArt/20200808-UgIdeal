@@ -1,4 +1,5 @@
 <?php 
+$modular_admin->posts_arr = $modular_admin->dbQuerySelect('SELECT * FROM `constructor_post` WHERE `id`='.$_GET['id']);
 if ($_POST['modular_posts_delete']) {
 	$modular_admin->dbQuery('DELETE FROM `constructor_post` WHERE `id`='.$_POST['id']);
 	var_dump(unlink('../modular/post-image/'.$_POST['image_name']));
