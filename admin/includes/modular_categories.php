@@ -1,7 +1,7 @@
 <?php if ($_POST['modular_category_add']) {
-  echo $_POST['category'];
-  $modular_admin->dbQuery('INSERT INTO `constructor_category`(`category`) VALUES ("'.$_POST['category'].'")');
-  echo '<meta http-equiv="refresh" content="0; url=?tab=modular_categories" />';
+	echo $_POST['category'];
+	$modular_admin->dbQuery('INSERT INTO `constructor_category`(`category`) VALUES ("'.$_POST['category'].'")');
+	echo '<meta http-equiv="refresh" content="0; url=?tab=modular_categories" />';
 } ?>
 <div class="container pt-5">
 	<div class="row">
@@ -24,10 +24,9 @@
 					</div>
 					<div class="col">
 						<form action="" method="post" class="m-0">
-							<button class="btn btn-outline-danger">
+							<a href="?page=modular_category_delete&id=<?php echo $value['id'];?>" class="btn btn-outline-danger">
 								<i class="fa fa-trash-o" aria-hidden="true"></i>
-								<?php echo $value['id']; ?>
-							</button>
+							</a>
 						</form>
 					</div>
 				</div><hr class="m-2">
@@ -35,5 +34,3 @@
 		</div>
 	</div>
 </div>
-
-<pre><?php print_r($modular_admin->categories_arr); ?></pre>
