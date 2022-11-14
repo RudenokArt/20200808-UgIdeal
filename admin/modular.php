@@ -52,6 +52,13 @@
           Посты
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link <?php if ($_GET['tab'] == 'modular_size'): ?>
+          active
+        <?php endif ?>" href="?tab=modular_size">
+          Размеры и цены
+        </a>
+      </li>
     </ul>
   </div>
 </div>
@@ -75,6 +82,8 @@ if (isset($_GET['page']) and $_GET['page'] == 'modular_image_upload') {
   include_once 'includes/modular_posts_delete.php';
 } elseif(isset($_GET['page']) and $_GET['page'] == 'modular_category_delete') {
   include_once 'includes/modular_category_delete.php';
+} elseif(isset($_GET['page']) and $_GET['page'] == 'modular_subcategory_delete') {
+  include_once 'includes/modular_subcategory_delete.php';
 } else {
   if ($_GET['tab'] and $_GET['tab'] == 'modular_templates') {
     include_once 'includes/modular_templates.php';
@@ -82,6 +91,8 @@ if (isset($_GET['page']) and $_GET['page'] == 'modular_image_upload') {
     include_once 'includes/modular_categories.php';
   } elseif ($_GET['tab'] and $_GET['tab'] == 'modular_posts') {
     include_once 'includes/modular_posts.php';
+  } elseif ($_GET['tab'] and $_GET['tab'] == 'modular_size') {
+    include_once 'includes/modular_size.php';
   } else {
     include_once 'includes/modular_galery.php';
   }
