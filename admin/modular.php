@@ -59,6 +59,13 @@
           Размеры и цены
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link <?php if ($_GET['tab'] == 'modular_mat'): ?>
+          active
+        <?php endif ?>" href="?tab=modular_mat">
+          Материалы
+        </a>
+      </li>
     </ul>
   </div>
 </div>
@@ -95,6 +102,8 @@ if (isset($_GET['page']) and $_GET['page'] == 'modular_image_upload') {
     include_once 'includes/modular_posts.php';
   } elseif ($_GET['tab'] and $_GET['tab'] == 'modular_size') {
     include_once 'includes/modular_size.php';
+  } elseif ($_GET['tab'] and $_GET['tab'] == 'modular_mat') {
+    include_once 'includes/modular_mat.php';
   } else {
     include_once 'includes/modular_galery.php';
   }
