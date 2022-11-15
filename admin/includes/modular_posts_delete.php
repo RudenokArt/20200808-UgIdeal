@@ -25,8 +25,8 @@ if ($_POST['modular_posts_delete']) {
 					<input value="<?php echo $value['image_name'];?>" type="hidden" name="image_name">
 					<input value="<?php echo $value['id'] ?>" type="hidden" name="id">
 					<button name="modular_posts_delete" value="Y" 
-					class="btn btn-outline-danger" title="Сохранить">
-					<i class="fa fa-floppy-o" aria-hidden="true"></i>
+					class="btn btn-outline-danger" title="Удалить">
+					<i class="fa fa-trash-o" aria-hidden="true"></i>
 					Удалить
 				</button>
 				<a href="?tab=modular_posts"
