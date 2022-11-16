@@ -16,7 +16,7 @@ if ($_POST['modular_image_edit']) {
 }
 ?>
 <form action="" method="post">
-	<div class="container">
+	<div class="container pt-5">
 		<div class="row w-100 justify-content-center">
 			<div class="col-lg-6 col-md-8 col-sm-12 border pt-5 pb-5">
 				<div class="container">

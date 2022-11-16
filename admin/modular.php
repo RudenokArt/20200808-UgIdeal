@@ -25,7 +25,7 @@
     <ul class="nav nav-tabs">
       <li class="nav-item">
         <a class="nav-link 
-        <?php if ($_GET['tab'] == 'modular_galery' or !$_GET['tab']): ?>
+        <?php if ($_GET['tab'] == 'modular_galery' or (!$_GET['tab'] and !$_GET['page'])): ?>
           active
         <?php endif ?>" href="?tab=modular_galery">
           Изображения
@@ -93,6 +93,8 @@ if (isset($_GET['page']) and $_GET['page'] == 'modular_image_upload') {
   include_once 'includes/modular_subcategory_delete.php';
 } elseif(isset($_GET['page']) and $_GET['page'] == 'modular_size_delete') {
   include_once 'includes/modular_size_delete.php';
+} elseif(isset($_GET['page']) and $_GET['page'] == 'modular_mat_delete') {
+  include_once 'includes/modular_mat_delete.php';
 } else {
   if ($_GET['tab'] and $_GET['tab'] == 'modular_templates') {
     include_once 'includes/modular_templates.php';

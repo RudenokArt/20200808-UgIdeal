@@ -12,7 +12,7 @@ class Modular_admin {
 
   function dbQuery ($sql) {
     global $mysqli;
-    $mysqli->query($sql);
+    return $mysqli->query($sql);
   }
 
   function dbQuerySelect ($sql){

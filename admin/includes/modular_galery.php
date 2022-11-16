@@ -3,7 +3,9 @@ if ($_POST['count_on_page']) {
   file_put_contents('../modular/pagination.txt', $_POST['count_on_page']);
   echo '<meta http-equiv="refresh" content="0; url=?page_N='.$_GET['page_N'].'" />';
 }
+
 $modular_admin->galery_count_on_page = file_get_contents('../modular/pagination.txt');
+
 if ($_GET['category'] and !$_GET['subcategory']) {
   $modular_admin->filter = 'WHERE `category`="'.$_GET['category'].'"';
 } elseif ($_GET['category'] and $_GET['subcategory']) {
@@ -11,13 +13,21 @@ if ($_GET['category'] and !$_GET['subcategory']) {
 } elseif ($_GET['article_search']) {
   $modular_admin->filter = 'WHERE `image` LIKE "%'.$_GET['article_search'].'%"';
 }
-$modular_admin->sub_categories_arr = $modular_admin->dbQuerySelect('SELECT * FROM `constructor_subcategory`');
-$modular_admin->categories_arr = $modular_admin->dbQuerySelect('SELECT * FROM constructor_category ORDER BY `category`');
-$modular_admin->galery_arr = $modular_admin->dbQuerySelect('SELECT * FROM `constructor_galеry` '.$modular_admin->filter.' ORDER BY `id`');
-$modular_admin->galery_arr = $modular_admin->pagination($modular_admin->galery_arr, $modular_admin->galery_count_on_page);
+
+$modular_admin->sub_categories_arr = $modular_admin
+->dbQuerySelect('SELECT * FROM `constructor_subcategory`');
+
+$modular_admin->categories_arr = $modular_admin
+->dbQuerySelect('SELECT * FROM constructor_category ORDER BY `category`');
+
+$modular_admin->galery_arr = $modular_admin
+->dbQuerySelect('SELECT * FROM `constructor_galеry` '.$modular_admin->filter.' ORDER BY `40x70`');
+
+$modular_admin->galery_arr = $modular_admin
+->pagination($modular_admin->galery_arr, $modular_admin->galery_count_on_page);
 ?>
 
-<div class="container">
+<div class="container pt-5">
   <div class="row w-100">
     <div class="col-12 col-sm-12 col-md-6 col-lg-4">
       <form action="" method="get"><br>
