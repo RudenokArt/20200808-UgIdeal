@@ -73,7 +73,7 @@ if ($_POST['modular_image_upload']) {
 							<i class="fa fa-floppy-o" aria-hidden="true"></i>
 							Сохранить
 						</button>
-						<a href="?page_N=<?php echo $_GET['page_N'];?>"
+						<a href="?page_N=<?php echo $_GET['page_N']; echo $modular_admin->pagination_filter?>"
 							class="btn btn-outline-danger" title="Отмена">
 							<i class="fa fa-times" aria-hidden="true"></i>
 							Отмена

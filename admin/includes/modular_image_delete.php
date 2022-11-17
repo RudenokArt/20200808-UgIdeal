@@ -4,7 +4,7 @@ dbQuerySelect('SELECT * FROM `constructor_galеry` WHERE `id`='.$_GET['id']);
 if ($_POST['modular_image_delete']) {
   var_dump(unlink('../modular/galery/'.$_POST['image']));
   $modular_admin->dbQuery('DELETE FROM `constructor_galеry` WHERE `id`='.$_POST['id']);
-  echo '<meta http-equiv="refresh" content="0; url=?page_N='.$_GET['page_N'].'" />';
+  echo '<meta http-equiv="refresh" content="0; url=?page_N='.$_GET['page_N'].$modular_admin->pagination_filter.'" />';
 }
 ?>
 <form action="" method="post">
@@ -33,7 +33,7 @@ if ($_POST['modular_image_delete']) {
               <i class="fa fa-floppy-o" aria-hidden="true"></i>
               Удалить
             </button>
-            <a href="?page_N=<?php echo $_GET['page_N'];?>"
+            <a href="?page_N=<?php echo $_GET['page_N']; echo $modular_admin->pagination_filter;?>"
               class="btn btn-outline-warning" title="Отмена">
               <i class="fa fa-times" aria-hidden="true"></i>
               Отмена

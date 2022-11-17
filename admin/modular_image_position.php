@@ -148,7 +148,7 @@
                   <i class="fa fa-floppy-o" aria-hidden="true"></i>
                   Сохранить
                 </button>
-                <a href="modular.php?page_N=<?php echo $_GET['page_N'];?>" class="btn btn-outline-danger">
+                <a href="modular.php?page_N=<?php echo $_GET['page_N']; echo $gallery_image_position->pagination_filter?>" class="btn btn-outline-danger">
                   <i class="fa fa-times" aria-hidden="true"></i>
                   Отмена
                 </a>
@@ -255,7 +255,7 @@
           } else {
           }
           $('#imagePositionPopUp-preloader_wrapper').css({'display':'none'});
-          document.location.href = "modular.php?page_N=<?php echo $_GET['page_N'];?>";
+          document.location.href = "modular.php?page_N=<?php echo $_GET['page_N']; echo $gallery_image_position->pagination_filter?>";
         });
       },
     },
@@ -284,6 +284,7 @@ class GalleryImagePosition {
     if (!$this->gallery_image['image_size']) {
       $this->gallery_image['image_size'] = 50;
     }
+    $this->pagination_filter = $this->paginationFilter();
   }
 
   function saveOptions () {
@@ -309,6 +310,20 @@ class GalleryImagePosition {
     $sql = $mysqli->query('SELECT * FROM `constructor_galеry` WHERE `id`='.$this->arr_data['image_id']);
     return mysqli_fetch_array($sql);
   }
+
+  function paginationFilter () {
+  $filter = '';
+  if ($_GET['category']) {
+    $filter = $filter.'&category='.$_GET['category'];
+  }
+  if ($_GET['subcategory']) {
+    $filter = $filter.'&subcategory='.$_GET['subcategory'];
+  }
+  if ($_GET['article_search']) {
+    $filter = $filter.'&article_search='.$_GET['article_search'];
+  }
+  return $filter;
+ }
   
 }
 

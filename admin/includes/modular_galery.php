@@ -72,7 +72,8 @@ $modular_admin->galery_arr = $modular_admin
         </div>
       </form>
       <div class="pt-4">
-        <a href="?page=modular_image_upload&page_N=<?php echo $_GET['page_N'];?>" class="btn btn-outline-info">
+        <a href="?page=modular_image_upload&page_N=<?php echo $_GET['page_N']; echo $modular_admin->pagination_filter?>"
+          class="btn btn-outline-info">
           <i class="fa fa-cloud-upload" aria-hidden="true"></i>
           Загрузить изображение
         </a>
@@ -96,18 +97,18 @@ $modular_admin->galery_arr = $modular_admin
               Сортировка: <?php echo $value['40x70']; ?><br>
             </div>
             <div>
-              <a href="?page=modular_image_edit&id=<?php echo $value['id'];?>&page_N=<?php echo $_GET['page_N'];?>"
+              <a href="?page=modular_image_edit<?php echo $modular_admin->pagination_filter;?>&id=<?php echo $value['id'];?>&page_N=<?php echo $_GET['page_N'];?>"
                 title="Редактировать"
                 class="btn btn-outline-success m-1">
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
               </a>
               <br>
-              <a href="?page=modular_image_delete&id=<?php echo $value['id'];?>&page_N=<?php echo $_GET['page_N'];?>" 
+              <a href="?page=modular_image_delete<?php echo $modular_admin->pagination_filter;?>&id=<?php echo $value['id'];?>&page_N=<?php echo $_GET['page_N'];?>" 
                 title="Удалить" class="btn btn-outline-danger m-1">
                 <i class="fa fa-trash-o" aria-hidden="true"></i>
               </a>
               <br>
-              <a href="modular_image_position.php?template=<?php echo $value['template'];?>&image_id=<?php echo $value['id'];?>&page_N=<?php echo $_GET['page_N'];?>" title="Позиционирование" class="btn btn-outline-primary m-1">
+              <a href="modular_image_position.php?template=<?php echo $value['template'];?>&image_id=<?php echo $value['id'];?>&page_N=<?php echo $_GET['page_N']; echo $modular_admin->pagination_filter?>" title="Позиционирование" class="btn btn-outline-primary m-1">
                 <i class="fa fa-arrows" aria-hidden="true"></i>
               </a>
             </div>

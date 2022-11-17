@@ -1,4 +1,5 @@
 <?php 
+$modular_admin->templates_arr = $modular_admin->dbQuerySelect('SELECT * FROM `constractor_templates` ORDER BY `price`');
 $modular_admin->modular_image_edit = $modular_admin->
 dbQuerySelect('SELECT * FROM `constructor_galеry` WHERE `id`='.$_GET['id']);
 $modular_admin->sub_categories_arr = $modular_admin->dbQuerySelect('SELECT * FROM `constructor_subcategory`');
@@ -12,7 +13,18 @@ if ($_POST['modular_image_edit']) {
     `discount`='.$_POST['discount'].',
     `40x70`='.$_POST['40x70'].'
     WHERE `id`='.$_POST['id']);
-  echo '<meta http-equiv="refresh" content="0; url=?page_N='.$_GET['page_N'].'" />';
+
+$modular_admin->galery_id_arr = $modular_admin
+  ->dbQuerySelect('SELECT `id` FROM `constructor_galеry` ORDER BY `40x70`');
+  $modular_admin->galery_count_on_page = file_get_contents('../modular/pagination.txt');
+  foreach ($modular_admin->galery_id_arr as $key => $value) {
+    if ($value['id'] == $_POST['id']) {
+      $modular_admin->current_page = round($key / $modular_admin->galery_count_on_page);
+    }
+  }
+
+  echo '<meta http-equiv="refresh" content="0; url=?page_N='.$modular_admin->current_page.'" />';
+  // echo '<meta http-equiv="refresh" content="0; url=?page_N='.$_GET['page_N'].'" />';
 }
 ?>
 <form action="" method="post">
@@ -49,7 +61,7 @@ if ($_POST['modular_image_edit']) {
               <i class="fa fa-floppy-o" aria-hidden="true"></i>
               Сохранить
             </button>
-            <a href="?page_N=<?php echo $_GET['page_N'];?>"
+            <a href="?page_N=<?php echo $_GET['page_N']; echo $modular_admin->pagination_filter;?>"
               class="btn btn-outline-danger" title="Отмена">
               <i class="fa fa-times" aria-hidden="true"></i>
               Отмена

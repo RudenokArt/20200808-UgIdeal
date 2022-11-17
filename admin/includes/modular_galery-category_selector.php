@@ -1,5 +1,13 @@
+
+<?php if ($_GET['page'] == 'modular_image_upload') {
+  $filter_current_values = false;
+} else {
+  $filter_current_values = true;
+} ?>
 Категория:
-<span class="text-primary"><?php echo $_GET['category'] ?></span>
+<?php if ($filter_current_values): ?>
+  <span class="text-primary"><?php echo $_GET['category'] ?></span>
+<?php endif ?>
 <select name="category" class="form-select" id="categorySelect">
   <?php foreach ($modular_admin->categories_arr as $sub_key => $sub_value): ?>
     <option <?php if ($sub_value['category'] == $value['category']): ?>
@@ -11,7 +19,9 @@
 <?php endforeach ?>
 </select>
 Подкатегория:
-<span class="text-primary"><?php echo $_GET['subcategory'] ?></span>
+<?php if ($filter_current_values): ?>
+  <span class="text-primary"><?php echo $_GET['subcategory'] ?></span>
+<?php endif ?>
 <select name="subcategory" class="form-select" id="subCategorySelect">
   <?php foreach ($modular_admin->sub_categories_arr as $sub_key => $sub_value): ?>
    <option value="<?php echo $sub_value['subcategory']; ?>" 
