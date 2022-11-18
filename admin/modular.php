@@ -24,6 +24,12 @@
    <div class="row">
     <ul class="nav nav-tabs">
       <li class="nav-item">
+        <a href="index.php" class="nav-link">
+          <i class="fa fa-home" aria-hidden="true"></i>
+          На главную
+        </a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link 
         <?php if ($_GET['tab'] == 'modular_galery' or (!$_GET['tab'] and !$_GET['page'])): ?>
           active

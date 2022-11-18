@@ -161,7 +161,7 @@
                       ">
                     </div>
                     <div class="modular-galery_item-template"
-                      style="background-image: url(mini-templates/<?php echo $galeryArr[$i]['template']?>);"></div>
+                      style="background-image: url(templates/<?php echo $galeryArr[$i]['template']?>);"></div>
                     </div>
                   </div>
                   <div class="modular-galery_item-info">

@@ -9,6 +9,11 @@
     </a>
   </div>
   <div class="section">
+    <a href="modular.php">
+      <button>Модульные картины (новая версия)</button>
+    </a>
+  </div>
+  <div class="section">
     <a href="wallpaper.php">
       <button>Фотообои</button>
     </a>

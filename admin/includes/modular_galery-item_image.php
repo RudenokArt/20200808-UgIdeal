@@ -25,5 +25,5 @@
 	<?php echo $value['image_rotate'] ?>;
 	background-image:url(../modular/galery/<?php echo $value['image'] ?>);"
 	class="modular_galery-image"></div>
-	<div style="background-image:url(../modular/mini-templates/<?php echo $value['template'] ?>);" class="modular_galery-image_template"></div>
+	<div style="background-image:url(../modular/templates/<?php echo $value['template'] ?>);" class="modular_galery-image_template"></div>
 </div>
