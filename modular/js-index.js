@@ -6,7 +6,7 @@ var navigation={
 var modular={};
 var page={};
 var buscket={};
-localStorage.setItem('modular', '{}');
+// localStorage.setItem('modular', '{}');
 buscket=JSON.parse(localStorage.modular);
 
 // ===== LISTENERS & ACTIONS =====

@@ -1,8 +1,9 @@
 var customer={};
 var buscket={};
-localStorage.setItem('modular', '');
-localStorage.setItem('modular', '{}');
+// localStorage.setItem('modular', '');
+// localStorage.setItem('modular', '{}');
 buscket=JSON.parse(localStorage.modular);
+console.log(localStorage.modular);
 
 
 function addFavorite () {
