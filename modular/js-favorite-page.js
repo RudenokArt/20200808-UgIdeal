@@ -158,7 +158,7 @@ function selectedItems () {
 }
 function editItem () {
 	localStorage.setItem('editItem', this.name);
-	document.location.href='constructor.html';
+	document.location.href='constructor.php';
 }
 function deleteItem () {
 	$('.favorite-table').html('table');

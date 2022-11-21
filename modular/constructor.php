@@ -281,12 +281,12 @@
 </div>
 </div>
 </body>
-<script src="js-constructor.js?2021-31"></script>
-  <script src="js-calculator.js"></script>
-  <script src="js-favorite.js"></script>
-  <script src="js-interior.js"></script>
-  <script src="js-mail.js"></script>
-<script src="js-vidgets.js?2021-31"></script>
+<script src="js-constructor.js?v=<?php echo time();?>"></script>
+  <script src="js-calculator.js?v=<?php echo time();?>"></script>
+  <script src="js-favorite.js?v=<?php echo time();?>"></script>
+  <script src="js-interior.js?v=<?php echo time();?>"></script>
+  <script src="js-mail.js?v=<?php echo time();?>"></script>
+<script src="js-vidgets.js?v=<?php echo time();?>"></script>
 <script>
 	mouseOn();
 	ajaxTemplates();

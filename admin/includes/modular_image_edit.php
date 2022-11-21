@@ -49,8 +49,15 @@ $modular_admin->galery_id_arr = $modular_admin
 								<input value="<?php echo $value['discount'] ?>"
 								name="discount" type="text" class="form-control">
 								Сортировка (номер п/п):
-								<input value="<?php echo $value['40x70'] ?>"
-								name="40x70" type="text" class="form-control">
+                <select name="40x70" class="form-select">
+                  <?php for ($i=0; $i < 500; $i++):?>
+                    <option value="<?php echo $i;?>" <?php if ($value['40x70'] == $i): ?>
+                      selected
+                    <?php endif ?>>
+                      <?php echo $i;?>
+                    </option>
+                <?php endfor; ?>
+                </select>
 							</div>
 						</div>
 					<?php endforeach ?>

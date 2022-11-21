@@ -11,5 +11,5 @@ echo 'файл загружен';
 <script>
 	document.cookie="imageName=customer-image.<?php echo $arr[1] ?>";
 	document.cookie='discount=0';
-	document.location.href = "constructor.html";
+	document.location.href = "constructor.php";
 </script>

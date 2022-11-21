@@ -384,7 +384,7 @@ function selectArrowReset (argument) {
 function constructorTransition (imageName,discount) {
 	document.cookie='imageName='+imageName;
 	document.cookie='discount='+discount;
-	document.location.href='constructor.html';
+	document.location.href='constructor.php';
 	console.log(document.cookie);
 	localStorage.removeItem('editItem');
 }

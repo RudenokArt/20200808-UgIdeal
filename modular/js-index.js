@@ -6,8 +6,11 @@ var navigation={
 var modular={};
 var page={};
 var buscket={};
-// localStorage.setItem('modular', '{}');
+if (!localStorage.modular) {
+  localStorage.setItem('modular', '{}');
+}
 buscket=JSON.parse(localStorage.modular);
+
 
 // ===== LISTENERS & ACTIONS =====
 $('.modular-sidebar_category').click(categoryExpander);
@@ -211,7 +214,7 @@ function constructorTransfer () {
   var arr=this.id.split('|');
   document.cookie='imageName='+arr[0];
   document.cookie='discount='+arr[4];
-  document.location.href='constructor.html';
+  document.location.href='constructor.php';
   console.log(document.cookie);
   localStorage.removeItem('editItem');
 }

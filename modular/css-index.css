@@ -198,7 +198,7 @@
 }
 .modular-galery_item-category{
   padding:0;
-  margin-left: 20px;
+/*  margin-left: 20px;*/
 }
 .modular-galery_item-name{
   margin:auto;
@@ -208,7 +208,7 @@
 .modular-galery_item-button{
   cursor: pointer;
   padding:10px;
-  margin:auto;
+/*  margin:auto;*/
   font-weight: bold;
   border-radius: 5px;
 }

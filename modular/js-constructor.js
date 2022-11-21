@@ -130,20 +130,22 @@ function displayTemplates () {
 		tape=tape+
 		'<div class="template-tape-item" id="'+key+'"'+
 		' onclick="setTemplate(\''+key+'\',\''+templateTape[key]+'\')">'+
-		'<img class="template-tape-item-image" src="mini-templates/'+key+'">'+
+		'<img class="template-tape-item-image" src="templates/'+key+'">'+
     '</div>';
     templateArr.push(key);
   }
-  document.getElementById('template-tape').innerHTML=tape;
+  document.getElementById('template-tape').innerHTML=tape+tape;
   slickSlider();
 }
 function slickSlider () {
   $(document).ready(function(){
-    $('.template-tape').slick({ 
-      dots: true,
-      infinite: true,
+    $('.template-tape').slick({
+       lazyLoad: 'ondemand',
+      dots: false,
+      // infinite: true,
       speed: 300,
-      slidesToShow: 1,
+      // slidesToShow: 10,
+      slidesToScroll: 1,
       variableWidth: true
     });
   });

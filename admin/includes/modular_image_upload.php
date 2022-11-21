@@ -31,11 +31,11 @@ if ($_POST['modular_image_upload']) {
   $modular_admin->galery_id_arr = $modular_admin
   ->dbQuerySelect('SELECT `id` FROM `constructor_galеry` ORDER BY `40x70`');
   $modular_admin->uploaded_item = $modular_admin
-  ->dbQuerySelect('SELECT `id` FROM `constructor_galеry` ORDER BY `id`');
+  ->dbQuerySelect('SELECT `id` FROM `constructor_galеry` ORDER BY `id` DESC');
   $modular_admin->galery_count_on_page = file_get_contents('../modular/pagination.txt');
   foreach ($modular_admin->galery_id_arr as $key => $value) {
     if ($value['id'] == $modular_admin->uploaded_item[0]['id']) {
-      $modular_admin->current_page = round($key / $modular_admin->galery_count_on_page);
+      $modular_admin->current_page = round($key / $modular_admin->galery_count_on_page)+1;
     }
   }
 
@@ -63,7 +63,13 @@ if ($_POST['modular_image_upload']) {
 							Скидка (%):
 							<input name="discount" type="number" class="form-control">
 							Сортировка (номер п/п):
-							<input name="40x70" type="number" class="form-control">
+							<select name="40x70" class="form-select">
+                  <?php for ($i=0; $i < 500; $i++):?>
+                    <option value="<?php echo $i;?>">
+                      <?php echo $i;?>
+                    </option>
+                <?php endfor; ?>
+                </select>
 						</div>
 					</div>
 					<div class="row w-100 pt-5">

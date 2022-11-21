@@ -22,7 +22,9 @@ if ($_POST['modular_template_sort']) {
     <div class="col-lg-4 col-md-6 col-sm-12 border">
       <div class="row">
         <div class="col-6">
-          <img class="modular_templates-template" src="../modular/templates/<?php echo $value['template'] ?>" alt="<?php echo $value['template'] ?>">
+          <img class="modular_templates-template" 
+          src="../modular/templates/<?php echo $value['template'];?>?v=<?php echo time();?>" 
+          alt="<?php echo $value['template'] ?>">
         </div>
         <div class="col-6">
           <div class="row pb-2">

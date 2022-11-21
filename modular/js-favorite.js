@@ -229,7 +229,7 @@ function orderSend () {
 }
 function cleanStorage() {
 	localStorage.removeItem('mail');
-	document.location='constructor.html';
+	document.location='constructor.php';
 }
 function customerMail () {
 	let mail = document.getElementById('customer-mail').value;

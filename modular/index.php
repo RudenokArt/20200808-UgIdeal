@@ -3,8 +3,8 @@
 
 <style>
   html {
-  scroll-behavior: smooth;
-}
+    scroll-behavior: smooth;
+  }
 </style>
 
 <div class="modular-container">
@@ -149,25 +149,27 @@
                       <div class="modular-galery_item-interior"
                       style="background-image: url(../wallpaper/img/interior/<?php echo $imageInterior ?>);">
                       <div class="modular-galery_item-image-wrapper">
-                      <div class="modular-galery_item-image"
-                      style="
-                      background-size: <?php echo $galeryArr[$i]['image_size'];?>%;
-                      background-position: <?php echo $galeryArr[$i]['horizontal_position'];?>% <?php echo $galeryArr[$i]['vertical_position'];?>%;
-                      transform: scale(
-                        <?php echo $galeryArr[$i]['scale_x'];?>,
-                        <?php echo $galeryArr[$i]['scale_y'];?>
+                        <div class="modular-galery_item-image"
+                        style="
+                        background-size: <?php echo $galeryArr[$i]['image_size'];?>%;
+                        background-position: <?php echo $galeryArr[$i]['horizontal_position'];?>% <?php echo $galeryArr[$i]['vertical_position'];?>%;
+                        transform: scale(
+                          <?php echo $galeryArr[$i]['scale_x'];?>,
+                          <?php echo $galeryArr[$i]['scale_y'];?>
                         ) <?php echo $galeryArr[$i]['image_rotate'];?>;
-                      background-image: url(galery/<?php echo $galeryArr[$i]['image']?>);
-                      ">
-                    </div>
-                    <div class="modular-galery_item-template"
+                        background-image: url(galery/<?php echo $galeryArr[$i]['image']?>);
+                        ">
+                      </div>
+                      <div class="modular-galery_item-template"
                       style="background-image: url(templates/<?php echo $galeryArr[$i]['template']?>);"></div>
                     </div>
                   </div>
                   <div class="modular-galery_item-info">
-                    <div class="modular-galery_item-discount">
-                      - <b><?php echo $galeryArr[$i]['discount'] ?></b> %
-                    </div>
+                    <?php if ($galeryArr[$i]['discount']): ?>
+                      <div class="modular-galery_item-discount">
+                        - <b><?php echo $galeryArr[$i]['discount'] ?></b> %
+                      </div>
+                    <?php endif ?>                    
                     <div class="flex-wrapper">
                       <div class="modular-galery_item-article">
                         АРТИКУЛ:
@@ -188,17 +190,14 @@
 
                     </div>
                     <div class="flex-wrapper">
-                      <div class="modular-galery_item-name">
-                        <?php echo $galeryArr[$i]['46x80'] ?>
-                      </div>
                       <div class="modular-galery_item-button">
                         <i class="fa fa-eye" aria-hidden="true"></i>
                         Подробнее
                       </div>
-                    </div>
-                    <div class="modular-galery_item-category">
+                      <div class="modular-galery_item-category">
                       <?php echo $galeryArr[$i]['category']?> / 
                       <?php echo $galeryArr[$i]['subcategory'] ?>
+                    </div>
                     </div>
                   </div>
                 </div>
