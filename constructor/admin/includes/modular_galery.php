@@ -31,7 +31,9 @@ $modular_admin->galery_arr = $modular_admin
   <div class="row w-100">
     <div class="col-12 col-sm-12 col-md-6 col-lg-4">
       <form action="" method="get"><br>
-        <input  name="article_search" type="text" class="form-control" placeholder="Поиск по артикулу">
+        <input <?php if ($_GET['article_search']): ?>
+          value="<?php echo $_GET['article_search']; ?>"
+        <?php endif ?> name="article_search" type="text" class="form-control" placeholder="Поиск по артикулу">
         <button class="btn btn-outline-info w-100 mt-4">
           <i class="fa fa-search" aria-hidden="true"></i>
           Поиск

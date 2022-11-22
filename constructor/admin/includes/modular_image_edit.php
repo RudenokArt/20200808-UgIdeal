@@ -19,7 +19,7 @@ $modular_admin->galery_id_arr = $modular_admin
   $modular_admin->galery_count_on_page = file_get_contents('../modular/pagination.txt');
   foreach ($modular_admin->galery_id_arr as $key => $value) {
     if ($value['id'] == $_POST['id']) {
-      $modular_admin->current_page = round($key / $modular_admin->galery_count_on_page);
+      $modular_admin->current_page = ceil(($key+1) / $modular_admin->galery_count_on_page);
     }
   }
 

@@ -39,11 +39,6 @@ function setImage (arr) {
 		}
 		if (subArr[0]=='discount'){
 			let discount=subArr[1];
-			if (discount!=0){
-				document.getElementById('discount').innerHTML=
-				'<div class="discount">cкидка <br> '+discount+'%</div>';
-			}
-			calculator.discount=discount;
 		}
 	}
 }
@@ -117,9 +112,13 @@ function materialTab(arr){
 	document.getElementById('material').innerHTML=node;
 }
 function getValue (value,property) {
-	calculator[property]=value;
-	calculation();
-	//console.log(calculator)
+  if (property == 'material'){
+    document.getElementById('discount').innerHTML=
+    '<div class="discount">cкидка <br> '+value+'%</div>';
+  calculator.discount=value;
+  }
+  calculator[property]=value;
+  calculation();
 }
 function calculation(){
 	if(calculator.price==undefined)

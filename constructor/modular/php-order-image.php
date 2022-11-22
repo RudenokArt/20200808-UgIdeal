@@ -70,15 +70,11 @@ imagecopyresized($image,$image2,50, 0, 0, 0,500, 500,$inf2[0],$inf2[1]);
 $imageOrder=imagecreatetruecolor(600, 300);
 imagefill($imageOrder, 0, 0, $white); 
 //=============Отрисовка текста
-$path='D:\OpenServer\domains\localhost\20200808-constructor\modular/fonts/arial-narrow.ttf';
-$path2='D:\OpenServer\domains\localhost\20200808-constructor\modular/fonts/times-bold.ttf';
-$path='/home/c/cx57370/wordpress/public_html/constructor/modular/fonts/arial-narrow.ttf';
- $path2='/home/c/cx57370/wordpress/public_html/constructor/modular/fonts/times-bold.ttf';
-$path='fonts/arial-narrow.ttf';
-$path2='fonts/times-bold.ttf';
+$path = $_SERVER['DOCUMENT_ROOT'].'/constructor/modular/fonts/arial-narrow.ttf';
+$path2 = $_SERVER['DOCUMENT_ROOT'].'/constructor/modular/fonts/times-bold.ttf';
 
 imageFtText($imageOrder, 15, 0, 20, 20, $black, $path,'ЗАКАЗ ОТ: ');
-imageFtText($imageOrder, 15, 0, 150, 20, $black, $path,date('Y:m:d'));
+imageFtText($imageOrder, 15, 0, 150, 20, $black, $path,date('d:m:Y'));
 imageFtText($imageOrder, 15, 0, 20, 40, $black, $path,'АРТИКУЛ: ');
 imageFtText($imageOrder, 15, 0, 150, 40, $black, $path,mb_strtoupper(explode('.', $arr[0])[0]));
 imageFtText($imageOrder, 15, 0, 20, 60, $black, $path,'ШАБЛОН: ');

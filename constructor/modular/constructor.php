@@ -223,6 +223,9 @@
    Загрузить свой интерьер
  </div>
 </div>
+
+<div id="interior-foreground"></div>
+
 <div id="interior-background">
   <div class="wrapper-interior-field">
    <div id="interior-field">
@@ -231,7 +234,8 @@
   </div>
 </div>	
 </div>
-<div id="interior-foreground"></div>
+
+
 <div class="interior-tape_wrapper">
   <div id="interior-tape"></div>  
 </div>

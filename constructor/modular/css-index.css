@@ -193,8 +193,11 @@
 .modular-galery_item-article{
   line-height: 1em;
   padding:10px;
-  color: grey;
-  font-size:12px;
+  color: rgba(0, 0, 0, 0.6);
+  font-size:14px;
+}
+.modular-galery_item-article{
+  font-weight: 600;
 }
 .modular-galery_item-category{
   padding:0;

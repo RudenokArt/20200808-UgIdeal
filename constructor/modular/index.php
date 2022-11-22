@@ -195,8 +195,10 @@
                         Подробнее
                       </div>
                       <div class="modular-galery_item-category">
-                      <?php echo $galeryArr[$i]['category']?> / 
-                      <?php echo $galeryArr[$i]['subcategory'] ?>
+                      <?php echo $galeryArr[$i]['category']?>
+                      <?php if ($galeryArr[$i]['subcategory']): ?>
+                         /<?php echo $galeryArr[$i]['subcategory'] ?>
+                       <?php endif ?>  
                     </div>
                     </div>
                   </div>

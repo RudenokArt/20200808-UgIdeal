@@ -1,4 +1,3 @@
-
 <?php include_once 'php/Modular_admin.php';?><!DOCTYPE html>
 <html lang="en">
 <head>
