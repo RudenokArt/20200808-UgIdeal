@@ -16,7 +16,7 @@
   <!-- ========== HEADER ========== -->
   <div class="header-top">
     <div class="company-name">
-      <a href="index.html">
+      <a href="index.php">
         <h1 class="siteName"></h1>
       </a>
     </div>
@@ -48,7 +48,7 @@
 <div class="flex-wrapper">
   <div class="flex-wrapper_half">
     <div class="logotip-wrapper">
-      <a href="index.html" class="logotip-link">
+      <a href="index.php" class="logotip-link">
         <img src="images/logotip.png" class="logotip" alt="">
       </a>
     </div>

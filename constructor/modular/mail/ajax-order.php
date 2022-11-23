@@ -10,13 +10,7 @@
 include_once('km_smtp_class.php');
 
 // Конфигурационный массив
-$SenderConfig = array(
-    "SMTP_server"   =>  "smtp.yandex.ru",
-    "SMTP_port"     =>  "465",
-   "SMTP_email"    =>  "zakazugideal@yandex.ru",
-    "SMTP_pass"     =>  "Patvakanlala197307",
-    "SMTP_type"     =>  "ssl"
-);
+include_once 'admin_mail_login.php';
 
 // Email получателя/Получателей
 $Receiver = file_get_contents('../profile/admin-mail.txt');

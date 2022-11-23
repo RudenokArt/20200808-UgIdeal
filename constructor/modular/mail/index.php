@@ -10,13 +10,7 @@
 include_once('km_smtp_class.php');
 
 // Конфигурационный массив
-$SenderConfig = array(
-    "SMTP_server"   =>  "smtp.yandex.ru",
-    "SMTP_port"     =>  "465",
-    "SMTP_email"    =>  "zakazugideal@yandex.ru",
-    "SMTP_pass"     =>  "Patvakanlala197306",
-    "SMTP_type"     =>  "ssl"
-);
+include_once 'admin_mail_login.php';
 
 // Email получателя/Получателей
 $Receiver = $_POST['recipient'];
@@ -68,6 +62,6 @@ if($mail->isLogin) {
     echo "Возникла ошибка во время подключения к SMTP-серверу<br />";
  }
 echo "<p>Сообщение отправлено";
-    echo '<meta http-equiv="refresh" content="5;URL=../index.html">'; // Воврат на домашнюю страницу
+    echo '<meta http-equiv="refresh" content="5;URL=../index.php">'; // Воврат на домашнюю страницу
 
 ?>
