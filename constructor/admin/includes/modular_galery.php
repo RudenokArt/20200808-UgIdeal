@@ -23,8 +23,24 @@ $modular_admin->categories_arr = $modular_admin
 $modular_admin->galery_arr = $modular_admin
 ->dbQuerySelect('SELECT * FROM `constructor_galеry` '.$modular_admin->filter.' ORDER BY `40x70`');
 
+if ($_GET['upload']) {
+  $unpaging_gallery_arr = $modular_admin->galery_arr;
+  foreach ($unpaging_gallery_arr as $key => $value) {
+    if ($value['id']==$_GET['upload']) {
+      $page_number = ($key+1)/$modular_admin->galery_count_on_page;
+    }
+  }
+  echo '<meta http-equiv="refresh" content="0; url=?page_N='.ceil($page_number).'" />';
+  exit();
+}
+
+
 $modular_admin->galery_arr = $modular_admin
 ->pagination($modular_admin->galery_arr, $modular_admin->galery_count_on_page);
+
+
+
+
 ?>
 
 <div class="container pt-5">
@@ -32,7 +48,7 @@ $modular_admin->galery_arr = $modular_admin
     <div class="col-12 col-sm-12 col-md-6 col-lg-4">
       <form action="" method="get"><br>
         <input <?php if ($_GET['article_search']): ?>
-          value="<?php echo $_GET['article_search']; ?>"
+        value="<?php echo $_GET['article_search']; ?>"
         <?php endif ?> name="article_search" type="text" class="form-control" placeholder="Поиск по артикулу">
         <button class="btn btn-outline-info w-100 mt-4">
           <i class="fa fa-search" aria-hidden="true"></i>

@@ -28,20 +28,10 @@ if ($_POST['modular_image_upload']) {
      '.$_POST['40x70'].',0,0,0,0,0,0,0)';
   $modular_admin->dbQuery($sql);
 
-  $modular_admin->galery_id_arr = $modular_admin
-  ->dbQuerySelect('SELECT `id` FROM `constructor_galеry` ORDER BY `40x70`');
   $modular_admin->uploaded_item = $modular_admin
   ->dbQuerySelect('SELECT `id` FROM `constructor_galеry` ORDER BY `id` DESC');
-  $modular_admin->galery_count_on_page = file_get_contents('../modular/pagination.txt');
-  foreach ($modular_admin->galery_id_arr as $key => $value) {
-    if ($value['id'] == $modular_admin->uploaded_item[0]['id']) {
-      $modular_admin->current_page = ceil(($key+1) / ($modular_admin->galery_count_on_page));
-    }
-  }
-
-
-  echo '<meta http-equiv="refresh" content="0; url=?page_N='.$modular_admin->current_page.'" />';
-  // echo '<meta http-equiv="refresh" content="0; url=?page_N='.$_GET['page_N'].'" />';
+  
+  echo '<meta http-equiv="refresh" content="0; url=?upload='.$modular_admin->uploaded_item[0]['id'].'" />';
 }
 
 ?>

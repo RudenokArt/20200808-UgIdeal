@@ -14,17 +14,7 @@ if ($_POST['modular_image_edit']) {
     `40x70`='.$_POST['40x70'].'
     WHERE `id`='.$_POST['id']);
 
-$modular_admin->galery_id_arr = $modular_admin
-  ->dbQuerySelect('SELECT `id` FROM `constructor_galеry` ORDER BY `40x70`');
-  $modular_admin->galery_count_on_page = file_get_contents('../modular/pagination.txt');
-  foreach ($modular_admin->galery_id_arr as $key => $value) {
-    if ($value['id'] == $_POST['id']) {
-      $modular_admin->current_page = ceil(($key+1) / $modular_admin->galery_count_on_page);
-    }
-  }
-
-  echo '<meta http-equiv="refresh" content="0; url=?page_N='.$modular_admin->current_page.'" />';
-  // echo '<meta http-equiv="refresh" content="0; url=?page_N='.$_GET['page_N'].'" />';
+  echo '<meta http-equiv="refresh" content="0; url=?upload='.$_POST['id'].'" />';
 }
 ?>
 <form action="" method="post">
