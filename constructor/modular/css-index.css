@@ -121,6 +121,7 @@
   height: 450px;
   width: 450px;
   display: flex;
+  text-decoration: none;
 }
 .modular-galery_item{
   /*border:1px solid yellow;*/
