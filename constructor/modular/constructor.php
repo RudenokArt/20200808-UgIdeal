@@ -1,11 +1,15 @@
 <?php include_once 'header.php';
 include_once 'php-index-select.php';
 $templates_arr = indexSelect('SELECT * FROM `constractor_templates` ORDER BY `price`');
-$image_rotate_arr = ['90'=>90, '180'=>180, '360/0'=>0,];
-$image_scale_arr = [
-  'NO' => '0', 
-  'Y' => '1',
-  'X' => '2',
+$materials_arr = indexSelect('SELECT * FROM `constructor_mat`');
+$materials_arr_json = json_encode($materials_arr, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+$size_arr = indexSelect('SELECT * FROM `constructor_size`');
+$size_arr_json = json_encode($size_arr, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+$image_rotate_arr = ['360/0'=>0, '90'=>90, '180'=>180,];
+$image_reflection_arr = [
+  'нет' => 0, 
+  'верт.' => 1,
+  'гор.' => 2,
 ];
 ?>
 <link rel="stylesheet" href="css-new_constructor.css?v=<?php echo time() ?>">
@@ -78,24 +82,50 @@ href="http://kenwheeler.github.io/slick/slick/slick-theme.css">
       <div class="col-lg-3 col-md-3 col-sm-6 col-6 pt-3">
         Отражение:
       </div>
-     <?php foreach ($image_scale_arr as $key => $value): ?>
+     <?php foreach ($image_reflection_arr as $key => $value): ?>
       <div class="col-lg-3 col-md-3 col-sm-6 col-6 pt-3">
-        <input v-model="image_scale" v-bind:value="<?php echo $value ?>"
-        type="radio" name="image_scale">
-       <?php echo $value; ?>
-      <?php echo $key; ?>
+        <label>
+        <input v-model="image_reflection" v-bind:value="<?php echo $value ?>"
+        class="form-check-input" type="radio" name="image_reflection">
+          <?php echo $key; ?>
+        </label> 
       </div>
      <?php endforeach ?>
+   </div>
+   <div class="row h6">
+     <div class="col-lg-6 col-md-6 col-sm-12 col-12 pt-3">
+       Материал:
+     </div>
+     <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+       <select v-model="image_material_index" class="form-select">
+         <option v-for="(item, index) in materials_arr" v-bind:value="index">
+           {{item.material}}
+         </option>
+       </select>
+     </div>
+   </div>
+
+   <div class="row h6">
+     <div class="col-lg-6 col-md-6 col-sm-12 col-12 pt-3">
+       Размер:
+     </div>
+     <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+       <select v-model="template_size_index" class="form-select">
+         <option v-for="(item, index) in template_size_arr" v-bind:value="index">
+           {{item.size}}
+         </option>
+       </select>
+     </div>
    </div>
 
 
 
  </div>
 </div>
-<p>{{image_scale}}</p>
-<p>image_position: {{image_position}}</p>
+<p>template_size: {{template_size}}</p>
 <p>cookie_data: {{cookie_data}}</p>  
 </div>
+<pre><?php print_r($size_arr_json); ?></pre>
 <pre><?php print_r($templates_arr); ?></pre>
 
 <script>
@@ -109,24 +139,65 @@ href="http://kenwheeler.github.io/slick/slick/slick-theme.css">
       vertical_position: 0,
       image_size: 100,
       image_rotate: 0,
-      image_scale: '0',
+      image_reflection: 0,
+      materials_arr_json: '<?php echo $materials_arr_json; ?>',
+      image_material_index: 0,
+      template_size_arr_json: '<?php echo $size_arr_json; ?>',
+      template_size_index: 0,
     },
 
     methods: {
       currentTemplateSet: function (template) {
-        this.current_template = 'templates/'+template;
+        this.current_template = template;
         console.log(this.current_template);
       }
     },
 
     computed: {
 
+      template_size_arr: function () {
+        var arr = JSON.parse(this.template_size_arr_json);
+        var size_arr = [];
+        for (var i = 0; i < arr.length; i++) {
+          if (arr[i].template == this.current_template) {
+            size_arr.push(arr[i]);
+          }
+          // size_arr.push(arr[i]);
+        }
+        return size_arr;
+      },
+
+      template_size: function () {
+        return this.template_size_arr[this.template_size_index];
+      },
+
+      materials_arr: function () {
+        return JSON.parse(this.materials_arr_json);
+      },
+
+      image_material: function () {
+        return this.materials_arr[this.image_material_index];
+      },
+
+
+      image_scale: function () {
+        if (this.image_reflection == 0) {
+          return 'scale(1);';
+        }
+        if (this.image_reflection == 1) {
+          return 'scale(1, -1);';
+        }
+        if (this.image_reflection == 2) {
+          return 'scale(-1, 1);';
+        }
+      },
+
       image_position: function () {
-        return 'left: '+this.horizontal_position+'%; top: '+this.vertical_position+'%; height: '+this.image_size+'%; width: '+this.image_size+'%; background-image: url("galery/'+this.cookie_data.imageName+'"); transform: rotate('+this.image_rotate+'deg);';
+        return 'left: '+this.horizontal_position+'%; top: '+this.vertical_position+'%; height: '+this.image_size+'%; width: '+this.image_size+'%; background-image: url("galery/'+this.cookie_data.imageName+'"); transform: rotate('+this.image_rotate+'deg) '+this.image_scale;
       },
 
       current_template_css: function () {
-        return 'background-image: url("'+this.current_template+'")';
+        return 'background-image: url("templates/'+this.current_template+'")';
       },
 
       cookie_data: function () {
