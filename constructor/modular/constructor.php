@@ -82,17 +82,17 @@ href="http://kenwheeler.github.io/slick/slick/slick-theme.css">
       <div class="col-lg-3 col-md-3 col-sm-6 col-6 pt-3">
         Отражение:
       </div>
-     <?php foreach ($image_reflection_arr as $key => $value): ?>
-      <div class="col-lg-3 col-md-3 col-sm-6 col-6 pt-3">
-        <label>
-        <input v-model="image_reflection" v-bind:value="<?php echo $value ?>"
-        class="form-check-input" type="radio" name="image_reflection">
-          <?php echo $key; ?>
-        </label> 
-      </div>
-     <?php endforeach ?>
-   </div>
-   <div class="row h6">
+      <?php foreach ($image_reflection_arr as $key => $value): ?>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-6 pt-3">
+          <label>
+            <input v-model="image_reflection" v-bind:value="<?php echo $value ?>"
+            class="form-check-input" type="radio" name="image_reflection">
+            <?php echo $key; ?>
+          </label> 
+        </div>
+      <?php endforeach ?>
+    </div>
+    <div class="row h6">
      <div class="col-lg-6 col-md-6 col-sm-12 col-12 pt-3">
        Материал:
      </div>
@@ -118,22 +118,37 @@ href="http://kenwheeler.github.io/slick/slick/slick-theme.css">
      </div>
    </div>
 
+   <div class="row h6 border p-2">
+     <div class="col-lg-6 col-md-6 col-sm-12 col-12 p-2">
+       Стоимость: {{amount}}
+     </div>
+     <div class="col-lg-6 col-md-6 col-sm-12 col-12 p-2">
+       <span v-if="discount_visible">Скидка: {{discount}} %</span>
+     </div>
+     <div class="col-lg-12 col-md-12 col-sm-12 col-12 p-2">
+       Стоимость с учетом скидки: {{total}}
+     </div>
+   </div>
+
 
 
  </div>
 </div>
+<p>image_material: {{image_material}}</p>
 <p>template_size: {{template_size}}</p>
-<p>cookie_data: {{cookie_data}}</p>  
+<p>imageName: {{imageName}}</p>
+<p>discount: {{discount}}</p>
 </div>
-<pre><?php print_r($size_arr_json); ?></pre>
-<pre><?php print_r($templates_arr); ?></pre>
+
+
 
 <script>
   new Vue({
     el: '#constructor_modular',
 
     data: {
-      cookie_str: document.cookie,
+      imageName: '',
+      discount: '',
       current_template: '',
       horizontal_position: 0,
       vertical_position: 0,
@@ -149,11 +164,23 @@ href="http://kenwheeler.github.io/slick/slick/slick-theme.css">
     methods: {
       currentTemplateSet: function (template) {
         this.current_template = template;
-        console.log(this.current_template);
+      },
+
+      getUrlData: function () {
+        var searchFilter = new URLSearchParams(document.location.search);
+        this.imageName = searchFilter.get('imageName');
+        this.discount = searchFilter.get('discount');
       }
     },
 
     computed: {
+
+      discount_visible: function () {
+        if (this.discount > 0) {
+          return true;
+        }
+        return false;
+      },
 
       template_size_arr: function () {
         var arr = JSON.parse(this.template_size_arr_json);
@@ -162,13 +189,31 @@ href="http://kenwheeler.github.io/slick/slick/slick-theme.css">
           if (arr[i].template == this.current_template) {
             size_arr.push(arr[i]);
           }
-          // size_arr.push(arr[i]);
         }
         return size_arr;
       },
 
       template_size: function () {
         return this.template_size_arr[this.template_size_index];
+      },
+
+      amount: function () {
+        var result = 0;
+        if (this.template_size) {
+          result = this.template_size.kof;
+          if (this.image_material.kof) {
+            result = Math.round(result * (this.image_material.kof/100+1));
+          }
+        } 
+        return result;
+      },
+
+      total: function () {
+        var result = this.amount;
+        if (this.discount > 0) {
+          result = result * ((100 - this.discount)/100);
+        }
+        return Math.round(result);
       },
 
       materials_arr: function () {
@@ -193,28 +238,20 @@ href="http://kenwheeler.github.io/slick/slick/slick-theme.css">
       },
 
       image_position: function () {
-        return 'left: '+this.horizontal_position+'%; top: '+this.vertical_position+'%; height: '+this.image_size+'%; width: '+this.image_size+'%; background-image: url("galery/'+this.cookie_data.imageName+'"); transform: rotate('+this.image_rotate+'deg) '+this.image_scale;
+        return 'left: '+this.horizontal_position+'%; top: '+this.vertical_position+'%; height: '+this.image_size+'%; width: '+this.image_size+'%; background-image: url("galery/'+this.imageName+'"); transform: rotate('+this.image_rotate+'deg) '+this.image_scale;
       },
 
       current_template_css: function () {
         return 'background-image: url("templates/'+this.current_template+'")';
       },
 
-      cookie_data: function () {
-        var data = {};
-        var arr = this.cookie_str.split(';');
-        for (var i = 0; i < arr.length; i++) {
-          arr[i] = arr[i].trim();
-          var subArr = arr[i].split('=');
-          data[subArr[0]] = subArr[1];
-        }
-        return data;
-      },
     },
 
     mounted: function () {
+      this.getUrlData();
       var templates_arr = document.getElementsByClassName('constructor_modular-template_tape-item');
       templates_arr[0].click();
+
     },
   });
 

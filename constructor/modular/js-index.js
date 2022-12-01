@@ -214,7 +214,7 @@ function constructorTransfer () {
   var arr=this.id.split('|');
   document.cookie='imageName='+arr[0];
   document.cookie='discount='+arr[4];
-  document.location.href='constructor.php';
+  document.location.href='constructor.php?imageName='+arr[0]+'&discount='+arr[4];
   console.log(document.cookie);
   localStorage.removeItem('editItem');
 }
