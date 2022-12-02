@@ -18,7 +18,7 @@ $image_reflection_arr = [
 <link rel="stylesheet" 
 href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
 <link rel="stylesheet" 
-href="http://kenwheeler.github.io/slick/slick/slick-theme.css">
+href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
 <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <!-- ================Bootstrap======================== -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
@@ -130,14 +130,57 @@ href="http://kenwheeler.github.io/slick/slick/slick-theme.css">
      </div>
    </div>
 
+   <div class="row">
+    <hr>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-6 p-1">
+      <a href="index.php" class="btn btn-outline-info w-100">
+        <i class="fa fa-step-backward" aria-hidden="true"></i>
+        Назад
+      </a>       
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-6 p-1">
+      <a href="favorite.php" class="btn btn-outline-info w-100">
+        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+        Корзина
+      </a>      
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-6 p-1">
+      <button class="btn btn-outline-info w-100">
+        <i class="fa fa-cloud-download" aria-hidden="true"></i>
+        Скачать
+      </button>       
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-12 p-1">
+      <button class="btn btn-outline-info w-100">
+        <i class="fa fa-envelope-o" aria-hidden="true"></i>
+        Получить на почту
+      </button>       
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-12 p-1">
+      <button class="btn btn-outline-info w-100">
+        <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+        Загрузить свое изображение
+      </button>       
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-12 p-1">
+      <button class="btn btn-outline-info w-100">
+        <i class="fa fa-handshake-o" aria-hidden="true"></i>
+        Оформить заказ
+      </button>       
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-12 p-1">
+      <button class="btn btn-outline-info w-100">
+        <i class="fa fa-camera" aria-hidden="true"></i>
+        Просмотреть в интерьере
+      </button>       
+    </div>
+
+  </div>
 
 
- </div>
+
 </div>
-<p>image_material: {{image_material}}</p>
-<p>template_size: {{template_size}}</p>
-<p>imageName: {{imageName}}</p>
-<p>discount: {{discount}}</p>
+</div>
 </div>
 
 
@@ -162,6 +205,7 @@ href="http://kenwheeler.github.io/slick/slick/slick-theme.css">
     },
 
     methods: {
+
       currentTemplateSet: function (template) {
         this.current_template = template;
       },
