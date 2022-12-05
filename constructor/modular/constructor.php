@@ -145,7 +145,7 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
       </a>      
     </div>
     <div class="col-lg-3 col-md-3 col-sm-6 col-6 p-1">
-      <button class="btn btn-outline-info w-100">
+      <button v-on:click="OrderData" class="btn btn-outline-info w-100">
         <i class="fa fa-cloud-download" aria-hidden="true"></i>
         Скачать
       </button>       
@@ -206,98 +206,110 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
 
     methods: {
 
-      currentTemplateSet: function (template) {
-        this.current_template = template;
+      OrderData: async function () {
+        var result = await this.OrderForm();
+        console.log(result);
       },
 
-      getUrlData: function () {
-        var searchFilter = new URLSearchParams(document.location.search);
-        this.imageName = searchFilter.get('imageName');
-        this.discount = searchFilter.get('discount');
+      OrderForm: function () {
+        var url = 'OrderForm.php?imageName='+this.imageName+'&template='+this.current_template;
+       return fetch(url).then(function (response){
+        return response.text();
+      });
+     },
+
+     currentTemplateSet: function (template) {
+      this.current_template = template;
+    },
+
+    getUrlData: function () {
+      var searchFilter = new URLSearchParams(document.location.search);
+      this.imageName = searchFilter.get('imageName');
+      this.discount = searchFilter.get('discount');
+    }
+  },
+
+  computed: {
+
+    discount_visible: function () {
+      if (this.discount > 0) {
+        return true;
+      }
+      return false;
+    },
+
+    template_size_arr: function () {
+      var arr = JSON.parse(this.template_size_arr_json);
+      var size_arr = [];
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i].template == this.current_template) {
+          size_arr.push(arr[i]);
+        }
+      }
+      return size_arr;
+    },
+
+    template_size: function () {
+      return this.template_size_arr[this.template_size_index];
+    },
+
+    amount: function () {
+      var result = 0;
+      if (this.template_size) {
+        result = this.template_size.kof;
+        if (this.image_material.kof) {
+          result = Math.round(result * (this.image_material.kof/100+1));
+        }
+      } 
+      return result;
+    },
+
+    total: function () {
+      var result = this.amount;
+      if (this.discount > 0) {
+        result = result * ((100 - this.discount)/100);
+      }
+      return Math.round(result);
+    },
+
+    materials_arr: function () {
+      return JSON.parse(this.materials_arr_json);
+    },
+
+    image_material: function () {
+      return this.materials_arr[this.image_material_index];
+    },
+
+
+    image_scale: function () {
+      if (this.image_reflection == 0) {
+        return 'scale(1);';
+      }
+      if (this.image_reflection == 1) {
+        return 'scale(1, -1);';
+      }
+      if (this.image_reflection == 2) {
+        return 'scale(-1, 1);';
       }
     },
 
-    computed: {
-
-      discount_visible: function () {
-        if (this.discount > 0) {
-          return true;
-        }
-        return false;
-      },
-
-      template_size_arr: function () {
-        var arr = JSON.parse(this.template_size_arr_json);
-        var size_arr = [];
-        for (var i = 0; i < arr.length; i++) {
-          if (arr[i].template == this.current_template) {
-            size_arr.push(arr[i]);
-          }
-        }
-        return size_arr;
-      },
-
-      template_size: function () {
-        return this.template_size_arr[this.template_size_index];
-      },
-
-      amount: function () {
-        var result = 0;
-        if (this.template_size) {
-          result = this.template_size.kof;
-          if (this.image_material.kof) {
-            result = Math.round(result * (this.image_material.kof/100+1));
-          }
-        } 
-        return result;
-      },
-
-      total: function () {
-        var result = this.amount;
-        if (this.discount > 0) {
-          result = result * ((100 - this.discount)/100);
-        }
-        return Math.round(result);
-      },
-
-      materials_arr: function () {
-        return JSON.parse(this.materials_arr_json);
-      },
-
-      image_material: function () {
-        return this.materials_arr[this.image_material_index];
-      },
-
-
-      image_scale: function () {
-        if (this.image_reflection == 0) {
-          return 'scale(1);';
-        }
-        if (this.image_reflection == 1) {
-          return 'scale(1, -1);';
-        }
-        if (this.image_reflection == 2) {
-          return 'scale(-1, 1);';
-        }
-      },
-
-      image_position: function () {
-        return 'left: '+this.horizontal_position+'%; top: '+this.vertical_position+'%; height: '+this.image_size+'%; width: '+this.image_size+'%; background-image: url("galery/'+this.imageName+'"); transform: rotate('+this.image_rotate+'deg) '+this.image_scale;
-      },
-
-      current_template_css: function () {
-        return 'background-image: url("templates/'+this.current_template+'")';
-      },
-
+    image_position: function () {
+      return 'left: '+this.horizontal_position+'%; top: '+this.vertical_position+'%; height: '+this.image_size+'%; width: '+this.image_size+'%; background-image: url("galery/'+this.imageName+'"); transform: rotate('+this.image_rotate+'deg) '+this.image_scale;
     },
 
-    mounted: function () {
-      this.getUrlData();
-      var templates_arr = document.getElementsByClassName('constructor_modular-template_tape-item');
-      templates_arr[0].click();
-
+    current_template_css: function () {
+      return 'background-image: url("templates/'+this.current_template+'")';
     },
-  });
+
+  },
+
+  mounted: function () {
+    this.getUrlData();
+    var templates_arr = document.getElementsByClassName('constructor_modular-template_tape-item');
+    templates_arr[0].click();
+
+  },
+});
 
 
   $('.constructor_modular-template_tape').slick({

@@ -1,1 +1,1 @@
-["57034834.jpg","шик.png",null,50,170,500,500,0,119,null,null,null,null,null,null,"0","1"]
+["223225957.jpg","хит-1.png",null,50,170,500,500,0,119,null,null,null,null,null,null,"0","1"]
