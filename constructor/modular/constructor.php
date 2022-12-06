@@ -176,9 +176,6 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
     </div>
 
   </div>
-
-
-
 </div>
 </div>
 </div>
@@ -212,7 +209,12 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
       },
 
       OrderForm: function () {
-        var url = 'OrderForm.php?imageName='+this.imageName+'&template='+this.current_template;
+        var url = 'OrderForm.php?imageName=' + this.imageName +
+        '&template='+this.current_template +
+        '&image_rotate=' + this.image_rotate +
+        '&image_size=' + this.image_size +
+        '&horizontal_position=' + this.horizontal_position +
+        '&vertical_position=' + this.vertical_position;
        return fetch(url).then(function (response){
         return response.text();
       });
