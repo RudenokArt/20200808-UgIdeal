@@ -5,7 +5,7 @@ $materials_arr = indexSelect('SELECT * FROM `constructor_mat`');
 $materials_arr_json = json_encode($materials_arr, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 $size_arr = indexSelect('SELECT * FROM `constructor_size`');
 $size_arr_json = json_encode($size_arr, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-$image_rotate_arr = ['360/0'=>0, '90'=>90, '180'=>180,];
+$image_rotate_arr = ['360/0'=>0, '90'=>90, '180'=>180, '270'=>270];
 $image_reflection_arr = [
   'нет' => 0, 
   'верт.' => 1,
@@ -40,7 +40,7 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
         <div v-bind:style="current_template_css" class="constructor_modular-galery_image-template"></div>
       </div>      
     </div>
-    <div class="col-lg-6 col-md-12 col-sm-12 h5 text-secondary">
+    <div class="col-lg-6 col-md-12 col-sm-12 text-secondary">
       <div class="row">
         <div class="col-1">
           <i class="fa fa-arrows-h" aria-hidden="true"></i>
@@ -66,11 +66,14 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-3 col-md-3 col-sm-6 col-6 pt-3">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12 pt-3">
           <i class="fa fa-repeat" aria-hidden="true"></i>
+          Поворот:
         </div>
+      </div>
+      <div class="row">
         <?php foreach ($image_rotate_arr as $key => $value): ?>
-         <label class="col-lg-3 col-md-3 col-sm-6 col-6 pt-3 h6">
+         <label class="col-lg-3 col-md-3 col-sm-6 col-6 pt-3">
           <input v-model="image_rotate" v-bind:value="<?php echo $value ?>" 
           class="form-check-input" type="radio" name="image_rotate">
           <?php echo $key; ?>
@@ -78,7 +81,7 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
         </label>
       <?php endforeach ?>
     </div>
-    <div class="row h6">
+    <div class="row">
       <div class="col-lg-3 col-md-3 col-sm-6 col-6 pt-3">
         Отражение:
       </div>
@@ -92,8 +95,8 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
         </div>
       <?php endforeach ?>
     </div>
-    <div class="row h6">
-     <div class="col-lg-6 col-md-6 col-sm-12 col-12 pt-3">
+    <div class="row pt-2">
+     <div class="col-lg-6 col-md-6 col-sm-12 col-12 pt-2">
        Материал:
      </div>
      <div class="col-lg-6 col-md-6 col-sm-12 col-12">
@@ -105,8 +108,8 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
      </div>
    </div>
 
-   <div class="row h6">
-     <div class="col-lg-6 col-md-6 col-sm-12 col-12 pt-3">
+   <div class="row pt-2">
+     <div class="col-lg-6 col-md-6 col-sm-12 col-12 pt-2">
        Размер:
      </div>
      <div class="col-lg-6 col-md-6 col-sm-12 col-12">
@@ -118,7 +121,7 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
      </div>
    </div>
 
-   <div class="row h6 border p-2">
+   <div class="row border mt-2">
      <div class="col-lg-6 col-md-6 col-sm-12 col-12 p-2">
        Стоимость: {{amount}}
      </div>
@@ -174,12 +177,17 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
         Просмотреть в интерьере
       </button>       
     </div>
-
   </div>
 </div>
 </div>
+<hr>
+<div v-if="preloader_visible" class="constructor_modular-preloader-wrapper">
+  <div class="constructor_modular-preloader">
+    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+  </div>
 </div>
-
+<a href="order-image.jpg" id="order_download_link" download="download">order_download_link</a>
+</div>
 
 
 <script>
@@ -187,6 +195,7 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
     el: '#constructor_modular',
 
     data: {
+      preloader_visible: false,
       imageName: '',
       discount: '',
       current_template: '',
@@ -204,114 +213,126 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
     methods: {
 
       OrderData: async function () {
-        var result = await this.OrderForm();
+        this.preloader_visible = true;
+        var result = await this.OrderImage();
+        var pdf = await this.OrderForm();
+        this.preloader_visible = false; 
         console.log(result);
+        console.log(pdf);
+        // document.getElementById('order_download_link').click();
       },
 
       OrderForm: function () {
-        var url = 'OrderForm.php?imageName=' + this.imageName +
+        var url = 'dompdf/index.php';
+        return fetch(url).then(function (response){
+          return response.text();
+        });
+      },
+
+      OrderImage: function () {
+        var url = 'OrderImage.php?imageName=' + this.imageName +
         '&template='+this.current_template +
         '&image_rotate=' + this.image_rotate +
         '&image_size=' + this.image_size +
         '&horizontal_position=' + this.horizontal_position +
         '&vertical_position=' + this.vertical_position;
-       return fetch(url).then(function (response){
-        return response.text();
-      });
-     },
+        return fetch(url).then(function (response){
+          return response.text();
+        });
+      },
 
-     currentTemplateSet: function (template) {
-      this.current_template = template;
-    },
+      currentTemplateSet: function (template) {
+        this.current_template = template;
+      },
 
-    getUrlData: function () {
-      var searchFilter = new URLSearchParams(document.location.search);
-      this.imageName = searchFilter.get('imageName');
-      this.discount = searchFilter.get('discount');
-    }
-  },
-
-  computed: {
-
-    discount_visible: function () {
-      if (this.discount > 0) {
-        return true;
+      getUrlData: function () {
+        var searchFilter = new URLSearchParams(document.location.search);
+        this.imageName = searchFilter.get('imageName');
+        this.discount = searchFilter.get('discount');
       }
-      return false;
     },
 
-    template_size_arr: function () {
-      var arr = JSON.parse(this.template_size_arr_json);
-      var size_arr = [];
-      for (var i = 0; i < arr.length; i++) {
-        if (arr[i].template == this.current_template) {
-          size_arr.push(arr[i]);
+    computed: {
+
+      discount_visible: function () {
+        if (this.discount > 0) {
+          return true;
         }
-      }
-      return size_arr;
-    },
+        return false;
+      },
 
-    template_size: function () {
-      return this.template_size_arr[this.template_size_index];
-    },
-
-    amount: function () {
-      var result = 0;
-      if (this.template_size) {
-        result = this.template_size.kof;
-        if (this.image_material.kof) {
-          result = Math.round(result * (this.image_material.kof/100+1));
+      template_size_arr: function () {
+        var arr = JSON.parse(this.template_size_arr_json);
+        var size_arr = [];
+        for (var i = 0; i < arr.length; i++) {
+          if (arr[i].template == this.current_template) {
+            size_arr.push(arr[i]);
+          }
         }
-      } 
-      return result;
+        return size_arr;
+      },
+
+      template_size: function () {
+        return this.template_size_arr[this.template_size_index];
+      },
+
+      amount: function () {
+        var result = 0;
+        if (this.template_size) {
+          result = this.template_size.kof;
+          if (this.image_material.kof) {
+            result = Math.round(result * (this.image_material.kof/100+1));
+          }
+        } 
+        return result;
+      },
+
+      total: function () {
+        var result = this.amount;
+        if (this.discount > 0) {
+          result = result * ((100 - this.discount)/100);
+        }
+        return Math.round(result);
+      },
+
+      materials_arr: function () {
+        return JSON.parse(this.materials_arr_json);
+      },
+
+      image_material: function () {
+        return this.materials_arr[this.image_material_index];
+      },
+
+
+      image_scale: function () {
+        if (this.image_reflection == 0) {
+          return 'scale(1);';
+        }
+        if (this.image_reflection == 1) {
+          return 'scale(1, -1);';
+        }
+        if (this.image_reflection == 2) {
+          return 'scale(-1, 1);';
+        }
+      },
+
+      image_position: function () {
+        return 'left: '+this.horizontal_position+'%; top: '+this.vertical_position+'%; height: '+this.image_size+'%; width: '+this.image_size+'%; background-image: url("galery/'+this.imageName+'"); transform: rotate('+this.image_rotate+'deg) '+this.image_scale;
+      },
+
+      current_template_css: function () {
+        return 'background-image: url("templates/'+this.current_template+'")';
+      },
+
     },
 
-    total: function () {
-      var result = this.amount;
-      if (this.discount > 0) {
-        result = result * ((100 - this.discount)/100);
-      }
-      return Math.round(result);
+    mounted: function () {
+      this.getUrlData();
+      var templates_arr = document.getElementsByClassName('constructor_modular-template_tape-item');
+      templates_arr[0].click();
+
     },
-
-    materials_arr: function () {
-      return JSON.parse(this.materials_arr_json);
-    },
-
-    image_material: function () {
-      return this.materials_arr[this.image_material_index];
-    },
-
-
-    image_scale: function () {
-      if (this.image_reflection == 0) {
-        return 'scale(1);';
-      }
-      if (this.image_reflection == 1) {
-        return 'scale(1, -1);';
-      }
-      if (this.image_reflection == 2) {
-        return 'scale(-1, 1);';
-      }
-    },
-
-    image_position: function () {
-      return 'left: '+this.horizontal_position+'%; top: '+this.vertical_position+'%; height: '+this.image_size+'%; width: '+this.image_size+'%; background-image: url("galery/'+this.imageName+'"); transform: rotate('+this.image_rotate+'deg) '+this.image_scale;
-    },
-
-    current_template_css: function () {
-      return 'background-image: url("templates/'+this.current_template+'")';
-    },
-
-  },
-
-  mounted: function () {
-    this.getUrlData();
-    var templates_arr = document.getElementsByClassName('constructor_modular-template_tape-item');
-    templates_arr[0].click();
-
-  },
-});
+  });
 
 
   $('.constructor_modular-template_tape').slick({

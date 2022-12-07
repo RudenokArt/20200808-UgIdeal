@@ -1,11 +1,11 @@
 <?php 
 
-print_r((new OrderForm)->image_rotate);
+var_dump((new OrderImage)->imageName);
 
 /**
  * 
  */
-class OrderForm {
+class OrderImage {
 
   function __construct()  {
     $this->imageName = $_GET['imageName'];
@@ -25,74 +25,86 @@ class OrderForm {
     $this->OrderImage();
   }
 
-  function orderImageSize () {
-    if ($this->src_image_size['width'] > $this->src_image_size['height']) {
-      $height = round(($this->src_image_size['height'] / $this->src_image_size['width']) * 500);
-      return [
-        'width' => 500 * $this->image_size_kof,
-        'height' => $height * $this->image_size_kof,
-      ];
-    } else {
-      $width = round(($this->src_image_size['width'] / $this->src_image_size['height']) * 500);
-      return [
-        'height' => 500 * $this->image_size_kof,
-        'width' => $width * $this->image_size_kof,
-      ];
-    }
-  }
-
-  function orderImagePosition () {
-    if ($this->src_image_size['width'] > $this->src_image_size['height']) {
-      $top = (500  * $this->image_size_kof - $this->order_image_size['height']) / 2;
-      return [
-        'top' => $top + $this->vertical_position,
-        'left' => $this->horizontal_position,
-      ];
-    } else {
-      $left = (500  * $this->image_size_kof - $this->order_image_size['width']) / 2;
-      return [
-        'top' => $this->vertical_position,
-        'left' => $left + $this->horizontal_position,
-      ];
-    }
-    
-  }
-
-  function srcTemplateSize () {
-    $src = getImageSize($this->template_path);
+ function orderImageSize () {
+  if ($this->src_image_size['width'] > $this->src_image_size['height']) {
+    $height = round(($this->src_image_size['height'] / $this->src_image_size['width']) * 500);
     return [
-      'width' => $src[0],
-      'height' => $src[1],
+      'width' => 500 * $this->image_size_kof,
+      'height' => $height * $this->image_size_kof,
+    ];
+  } else {
+    $width = round(($this->src_image_size['width'] / $this->src_image_size['height']) * 500);
+    return [
+      'height' => 500 * $this->image_size_kof,
+      'width' => $width * $this->image_size_kof,
+    ];
+  }
+}
+
+function orderImagePosition () {
+  if ($this->src_image_size['width'] > $this->src_image_size['height']) {
+    $top = (500  * $this->image_size_kof - $this->order_image_size['height']) / 2;
+    return [
+      'top' => $top + $this->vertical_position,
+      'left' => $this->horizontal_position,
+    ];
+  } else {
+    $left = (500  * $this->image_size_kof - $this->order_image_size['width']) / 2;
+    return [
+      'top' => $this->vertical_position,
+      'left' => $left + $this->horizontal_position,
     ];
   }
 
-  function srcImageSize () {
-    $src = getImageSize($this->image_path);
+}
+
+function srcTemplateSize () {
+  $src = getImageSize($this->template_path);
+  return [
+    'width' => $src[0],
+    'height' => $src[1],
+  ];
+}
+
+function imageFileType () {
+  $info = new SplFileInfo($this->image_path);
+  return $info->getExtension();
+}
+
+function srcImageSize () {
+  $src = getImageSize($this->image_path);
+  if ($this->image_rotate == 90 or $this->image_rotate == 270) {
     return [
-      'width' => $src[0],
-      'height' => $src[1],
+      'width' => $src[1],
+      'height' => $src[0],
     ];
   }
+  return [
+    'width' => $src[0],
+    'height' => $src[1],
+  ];
+}
 
-  function imageFileType () {
-    $info = new SplFileInfo($this->image_path);
-    return $info->getExtension();
+function srcImage () {
+  if ($this->image_file_type == 'jpg') {
+    $image = imageCreateFromJpeg($this->image_path);
   }
-
-  function srcImage () {
-    if ($this->image_file_type == 'jpg') {
-      $image = imageCreateFromJpeg($this->image_path);
-    }
-    if ($this->image_file_type == 'png') {
-      $image = imageCreateFromPng($this->image_path);
-    }
-    if ($this->image_file_type == 'webp') {
-      $image = imageCreateFromWebp($this->image_path);
-    }
-    return $image;
+  if ($this->image_file_type == 'png') {
+    $image = imageCreateFromPng($this->image_path);
   }
+  if ($this->image_file_type == 'webp') {
+    $image = imageCreateFromWebp($this->image_path);
+  }
+  if ($this->image_rotate == 90) {
+    $image = imagerotate($image, 270, $bgd_color);
+  }
+  if ($this->image_rotate == 270) {
+    $image = imagerotate($image, 90, $bgd_color);
+  }
+  return $image;
+}
 
-  function OrderImage () {
+function OrderImage () {
 
     $orderImage = imagecreatetruecolor(500, 500); // фон
     $white = imagecolorallocate($orderImage, 255, 255, 255); // цвет фона
