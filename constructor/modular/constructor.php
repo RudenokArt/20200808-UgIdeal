@@ -143,18 +143,18 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
     </div>
     <div class="col-lg-3 col-md-3 col-sm-6 col-6 p-1">
       <a href="favorite.php" class="btn btn-outline-info w-100">
-        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-        Корзина
+        <i class="fa fa-heart-o" aria-hidden="true"></i>
+        Избранное
       </a>      
     </div>
     <div class="col-lg-3 col-md-3 col-sm-6 col-6 p-1">
-      <button v-on:click="OrderData" class="btn btn-outline-info w-100">
+      <button v-on:click="OrderDownload" class="btn btn-outline-info w-100">
         <i class="fa fa-cloud-download" aria-hidden="true"></i>
         Скачать
       </button>       
     </div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-12 p-1">
-      <button class="btn btn-outline-info w-100">
+      <button v-on:click="OrderMail" class="btn btn-outline-info w-100">
         <i class="fa fa-envelope-o" aria-hidden="true"></i>
         Получить на почту
       </button>       
@@ -186,7 +186,8 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
   </div>
 </div>
-<a href="order-image.jpg" id="order_download_link" download="download">order_download_link</a>
+<a href="order.pdf" id="order_download_link" download="download"></a>
+
 </div>
 
 
@@ -212,18 +213,43 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
 
     methods: {
 
+      serverRequest: function (url) {
+        return fetch(url).then(function (response){
+          return response.text();
+        });
+      },
+
+      OrderMail: async function () {
+        var url = '../php-mail/index.php?Receiver=rudenokart@yandex.ru&Subject=Subject&Text=Text';
+        var result = await this.serverRequest(url);
+        console.log(result);
+      },
+
+      OrderDownload: async function () {
+        result = await this.OrderData();
+        document.getElementById('order_download_link').click();
+      },
+
       OrderData: async function () {
         this.preloader_visible = true;
         var result = await this.OrderImage();
         var pdf = await this.OrderForm();
         this.preloader_visible = false; 
-        console.log(result);
-        console.log(pdf);
-        // document.getElementById('order_download_link').click();
       },
 
       OrderForm: function () {
-        var url = 'dompdf/index.php';
+        var size;
+        if (this.template_size) {
+          size = this.template_size.size;
+        } else {
+          size = '';
+        }
+        var url = '../dompdf/modular_order.php?imageName='+this.imageName +
+        '&amount='+this.amount +
+        '&discount='+this.discount +
+        '&total='+this.total +
+        '&material='+this.image_material.material +
+        '&size='+ size;
         return fetch(url).then(function (response){
           return response.text();
         });
@@ -335,43 +361,43 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
   });
 
 
-  $('.constructor_modular-template_tape').slick({
-    lazyLoad: 'ondemand',
-    dots: true,
-    infinite: false,
-    speed: 300,
-    slidesToShow: 12,
-    slidesToScroll: 1,
-    responsive: [
-    {
-      breakpoint: 992,
-      settings: {
-        slidesToShow: 8,
-        slidesToScroll: 1,
-        infinite: true,
-        dots: true
-      }
-    },
-    {
-      breakpoint: 768,
-      settings: {
-        slidesToShow: 6,
-        slidesToScroll: 1
-      }
-    },
-    {
-      breakpoint: 576,
-      settings: {
-        dots:false,
-        slidesToShow: 4,
-        slidesToScroll: 1
-      }
+$('.constructor_modular-template_tape').slick({
+  lazyLoad: 'ondemand',
+  dots: true,
+  infinite: false,
+  speed: 300,
+  slidesToShow: 12,
+  slidesToScroll: 1,
+  responsive: [
+  {
+    breakpoint: 992,
+    settings: {
+      slidesToShow: 8,
+      slidesToScroll: 1,
+      infinite: true,
+      dots: true
     }
+  },
+  {
+    breakpoint: 768,
+    settings: {
+      slidesToShow: 6,
+      slidesToScroll: 1
+    }
+  },
+  {
+    breakpoint: 576,
+    settings: {
+      dots:false,
+      slidesToShow: 4,
+      slidesToScroll: 1
+    }
+  }
     // You can unslick at a given breakpoint now by adding:
     // settings: "unslick"
     // instead of a settings object
-    ]
-  });
+  ]
+});
 
 </script>
 <?php include_once 'footer.php'; ?>

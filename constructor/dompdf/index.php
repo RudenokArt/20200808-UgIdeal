@@ -5,8 +5,6 @@ include_once 'autoload.inc.php';
 use Dompdf\Dompdf;
 //создаемэкземпляр класса
 $d=new Dompdf();
-//создаем переменную
-$html = file_get_contents('order-template.php');
 
 //обрабатываем данные с помощью библиотеки DOMPDF
 $d->loadHtml($html);
@@ -16,7 +14,7 @@ $d->setPaper('A4','portrait');
 $d->render();
 //записываем PDF в файл
 // file_put_contents(getenv('DOCUMENT_ROOT')."/test.pdf", $d->output());
-file_put_contents('../order.pdf', $d->output());
+file_put_contents($file_path, $d->output());
 
 //можно отправить ответ после AJAX Запроса с ссылкой на файл
 //echo '<div onclick="window.open(\''."/pdf/{$name}".'\')"><i class="oi-cloud-download"></i> Скачать файл</div>';
