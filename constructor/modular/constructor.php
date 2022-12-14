@@ -195,7 +195,7 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
       <input v-model="customer_mail" type="email" required="required" class="form-control">
     </div>
     <div class="text-center">
-      <button v-on:click="popUpMailVisible" class="m-3 btn btn-outline-warning" title="Отмена">
+      <button type="button" v-on:click="popUpMailVisible" class="m-3 btn btn-outline-warning" title="Отмена">
         <i class="fa fa-times" aria-hidden="true"></i>
       </button>
       <button class="m-3 btn btn-outline-success" title="Отправить">
@@ -244,10 +244,18 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
 
       OrderMail: async function () {
         this.popup_mail_visible = true;
-        console.log(this.customer_mail);
-        var url = '../php-mail/index.php?Receiver=rudenokart@yandex.ru&Subject=Subject&Text=Text';
-        // var result = await this.serverRequest(url);
-        // console.log(result);
+        var url = '../php-mail/index.php?Receiver=rudenokart@yandex.ru' +
+        '&Receiver=' + this.customer_mail +
+        '&Subject=ЮгИдеал: ' + this.imageName + '; ' + this.current_template + 
+        '&Attachment=../modular/order.pdf' + 
+        '&Text=Изображение в приложенном файле';
+        this.popup_mail_visible = false;
+        await this.OrderData();
+        this.preloader_visible = true;
+        var result = await this.serverRequest(url);
+        this.preloader_visible = false;
+        alert('Изображение отправлено на указанную почту.');
+        console.log(result);
       },
 
       OrderDownload: async function () {
