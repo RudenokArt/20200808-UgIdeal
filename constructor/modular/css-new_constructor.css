@@ -36,6 +36,7 @@
   z-index: -1;
 }
 
+.constructor_modular-popup_mail-wrapper,
 .constructor_modular-preloader-wrapper {
   display: flex;
   position: fixed;
@@ -46,9 +47,15 @@
   background-color: rgba(0, 0, 0, 0.2);
 }
 
+.constructor_modular-popup_mail,
 .constructor_modular-preloader {
   margin: auto;
   color: grey;
+}
+
+.constructor_modular-popup_mail {
+  background-color: white;
+  width: 300px;
 }
 
 @media screen and (max-width: 576px){

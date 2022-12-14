@@ -154,7 +154,7 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
       </button>       
     </div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-12 p-1">
-      <button v-on:click="OrderMail" class="btn btn-outline-info w-100">
+      <button v-on:click="popUpMailVisible" class="btn btn-outline-info w-100">
         <i class="fa fa-envelope-o" aria-hidden="true"></i>
         Получить на почту
       </button>       
@@ -188,6 +188,23 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
 </div>
 <a href="order.pdf" id="order_download_link" download="download"></a>
 
+<div v-if="popup_mail_visible" class="constructor_modular-popup_mail-wrapper">
+  <form v-on:submit.prevent="OrderMail" class="constructor_modular-popup_mail p-3">
+    <div class="pt-3">
+      Ваш Email:
+      <input v-model="customer_mail" type="email" required="required" class="form-control">
+    </div>
+    <div class="text-center">
+      <button v-on:click="popUpMailVisible" class="m-3 btn btn-outline-warning" title="Отмена">
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </button>
+      <button class="m-3 btn btn-outline-success" title="Отправить">
+        <i class="fa fa-check" aria-hidden="true"></i>
+      </button>
+    </div>
+  </form>
+</div>
+
 </div>
 
 
@@ -196,6 +213,7 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
     el: '#constructor_modular',
 
     data: {
+      popup_mail_visible: false,
       preloader_visible: false,
       imageName: '',
       discount: '',
@@ -209,9 +227,14 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
       image_material_index: 0,
       template_size_arr_json: '<?php echo $size_arr_json; ?>',
       template_size_index: 0,
+      customer_mail: '',
     },
 
     methods: {
+
+      popUpMailVisible: function () {
+        this.popup_mail_visible = !this.popup_mail_visible;
+      },
 
       serverRequest: function (url) {
         return fetch(url).then(function (response){
@@ -220,9 +243,11 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
       },
 
       OrderMail: async function () {
+        this.popup_mail_visible = true;
+        console.log(this.customer_mail);
         var url = '../php-mail/index.php?Receiver=rudenokart@yandex.ru&Subject=Subject&Text=Text';
-        var result = await this.serverRequest(url);
-        console.log(result);
+        // var result = await this.serverRequest(url);
+        // console.log(result);
       },
 
       OrderDownload: async function () {
@@ -396,8 +421,8 @@ $('.constructor_modular-template_tape').slick({
     // You can unslick at a given breakpoint now by adding:
     // settings: "unslick"
     // instead of a settings object
-  ]
-});
+    ]
+  });
 
 </script>
 <?php include_once 'footer.php'; ?>
