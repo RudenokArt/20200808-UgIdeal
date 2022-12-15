@@ -36,6 +36,7 @@
   z-index: -1;
 }
 
+.constructor_modular-popup_order-wrapper,
 .constructor_modular-popup_file-wrapper,
 .constructor_modular-alert_wrapper,
 .constructor_modular-popup_mail-wrapper,
@@ -49,6 +50,7 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+.constructor_modular-popup_order,
 .constructor_modular-popup_file,
 .constructor_modular-alert,
 .constructor_modular-popup_mail,
@@ -57,6 +59,7 @@
   color: black;
 }
 
+.constructor_modular-popup_order,
 .constructor_modular-popup_file,
 .constructor_modular-popup_mail {
   background-color: white;

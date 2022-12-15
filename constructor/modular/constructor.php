@@ -13,8 +13,8 @@ $image_reflection_arr = [
 ];
 if ($_FILES) {
   $take = $_FILES['myfile']['tmp_name'];
-$name = $_FILES['myfile']['name'];
-move_uploaded_file($_FILES['customer_image']['tmp_name'], 'galery/customer_image.jpg');
+  $name = $_FILES['myfile']['name'];
+  move_uploaded_file($_FILES['customer_image']['tmp_name'], 'galery/customer_image.jpg');
 }
 
 ?>
@@ -149,7 +149,7 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
     </div>
     <div class="col-lg-3 col-md-3 col-sm-6 col-6 p-1">
       <a href="favorite.php" class="btn btn-outline-info w-100">
-        <i class="fa fa-heart-o" aria-hidden="true"></i>
+        <i class="fa fa-star-o" aria-hidden="true"></i>
         Избранное
       </a>      
     </div>
@@ -172,7 +172,7 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
       </button>       
     </div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-12 p-1">
-      <button class="btn btn-outline-info w-100">
+      <button v-on:click="popup_order_visible=true" class="btn btn-outline-info w-100">
         <i class="fa fa-handshake-o" aria-hidden="true"></i>
         Оформить заказ
       </button>       
@@ -192,7 +192,7 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
   </div>
 </div>
-<a href="order.pdf" id="order_download_link" download="download"></a>
+<a href="order.pdf" id="order_download_link" download="order"></a>
 
 <div v-if="popup_mail_visible" class="constructor_modular-popup_mail-wrapper">
   <form v-on:submit.prevent="OrderMail" class="constructor_modular-popup_mail p-3">
@@ -213,7 +213,7 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
 
 <div v-if="popup_file_visible" class="constructor_modular-popup_file-wrapper">
   <div class="constructor_modular-popup_file p-3">
-    <div class="h3">Загрузка изображения</div>
+    <div class="h4">Загрузка изображения</div>
     <form action="?imageName=customer_image.jpg&discount=0#" enctype="multipart/form-data" method="post">
       <input type="file" name="customer_image">
       <div class="text-center">
@@ -239,6 +239,34 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
   </div>
 </div>
 
+<div v-if="popup_order_visible" class="constructor_modular-popup_order-wrapper">
+  <form v-on:submit.prevent="OrderMail" class="constructor_modular-popup_order p-3">
+    <div class="h4">
+      Оформление заказа
+    </div>
+    <div class="pt-3">
+      ФИО:
+      <input v-model="customer_fio" type="text" class="form-control" required>
+    </div>
+    <div  class="pt-3">
+      Email:
+      <input v-model="customer_mail" type="email" class="form-control" required>
+    </div>
+    <div  class="pt-3">
+      тел:
+      <input v-model="customer_phone" type="text" class="form-control" required>
+    </div>
+    <div class="text-center">
+      <a href="#" v-on:click="popup_order_visible=false" class="btn btn-outline-warning m-3" title="Отмена">
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </a>
+      <button class="btn btn-outline-success m-3" title="Загрузить">
+        <i class="fa fa-check" aria-hidden="true"></i>
+      </button>
+    </div>
+  </form>
+</div>
+
 </div>
 
 
@@ -247,6 +275,7 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
     el: '#constructor_modular',
 
     data: {
+      popup_order_visible: false,
       popup_file_visible: false,
       alert_text: 'Изображение отправлено на указанную почту.',
       alert_visible: false,
@@ -265,6 +294,8 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
       template_size_arr_json: '<?php echo $size_arr_json; ?>',
       template_size_index: 0,
       customer_mail: '',
+      customer_fio: '',
+      customer_phone: '',
     },
 
     methods: {
@@ -277,8 +308,7 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
 
       OrderMail: async function () {
         this.preloader_visible = true;
-        var url = '../php-mail/index.php?Receiver=rudenokart@yandex.ru' +
-        '&Receiver=' + this.customer_mail +
+        var url = '../php-mail/index.php?Receiver=' + this.customer_mail +
         '&Subject=ЮгИдеал: ' + this.imageName + '; ' + this.current_template + 
         '&Attachment=../modular/order.pdf' + 
         '&Text=Изображение в приложенном файле';
@@ -313,7 +343,10 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
         '&discount='+this.discount +
         '&total='+this.total +
         '&material='+this.image_material.material +
-        '&size='+ size;
+        '&size='+ size + 
+        '&customer_mail='+ this.customer_mail + 
+        '&customer_fio='+ this.customer_fio + 
+        '&customer_phone='+ this.customer_phone;
         return fetch(url).then(function (response){
           return response.text();
         });

@@ -31,6 +31,21 @@
        тел +7(988) 762 22 69, +7(988) 765 50 66 info@ugideal.ru график: 9:00-18:00
      </td>
    </tr>
+   <tr>
+     <td><b>ЗАКАЗЧИК:</b></td>
+   </tr>
+   <tr>
+     <td>ФИО:</td>
+     <td>customer_fio</td>
+   </tr>
+   <tr>
+     <td>Email:</td>
+     <td>customer_mail</td>
+   </tr>
+   <tr>
+     <td>тел.:</td>
+     <td>customer_phone</td>
+   </tr>
  </table>
  <table>
    <tr>

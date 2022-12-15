@@ -32,6 +32,21 @@ function htmlVariablesInsert ($html) {
   } else {
     $html = str_replace('total', '', $html);
   }
+  if ($_GET['customer_mail']) {
+    $html = str_replace('customer_mail', $_GET['customer_mail'], $html);
+  } else {
+    $html = str_replace('customer_mail', '', $html);
+  }
+  if ($_GET['customer_fio']) {
+    $html = str_replace('customer_fio', $_GET['customer_fio'], $html);
+  } else {
+    $html = str_replace('customer_fio', '', $html);
+  }
+  if ($_GET['customer_phone']) {
+    $html = str_replace('customer_phone', $_GET['customer_phone'], $html);
+  } else {
+    $html = str_replace('customer_phone', '', $html);
+  }
   return $html;
 }
 
