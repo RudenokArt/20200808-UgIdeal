@@ -11,6 +11,12 @@ $image_reflection_arr = [
   'верт.' => 1,
   'гор.' => 2,
 ];
+if ($_FILES) {
+  $take = $_FILES['myfile']['tmp_name'];
+$name = $_FILES['myfile']['name'];
+move_uploaded_file($_FILES['customer_image']['tmp_name'], 'galery/customer_image.jpg');
+}
+
 ?>
 <link rel="stylesheet" href="css-new_constructor.css?v=<?php echo time() ?>">
 <script src="vue.js"></script>
@@ -154,13 +160,13 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
       </button>       
     </div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-12 p-1">
-      <button v-on:click="popUpMailVisible" class="btn btn-outline-info w-100">
+      <button v-on:click="popup_mail_visible=true" class="btn btn-outline-info w-100">
         <i class="fa fa-envelope-o" aria-hidden="true"></i>
         Получить на почту
       </button>       
     </div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-12 p-1">
-      <button class="btn btn-outline-info w-100">
+      <button class="btn btn-outline-info w-100" v-on:click="popup_file_visible=true">
         <i class="fa fa-cloud-upload" aria-hidden="true"></i>
         Загрузить свое изображение
       </button>       
@@ -195,7 +201,7 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
       <input v-model="customer_mail" type="email" required="required" class="form-control">
     </div>
     <div class="text-center">
-      <button type="button" v-on:click="popUpMailVisible" class="m-3 btn btn-outline-warning" title="Отмена">
+      <button type="button" v-on:click="popup_mail_visible=false" class="m-3 btn btn-outline-warning" title="Отмена">
         <i class="fa fa-times" aria-hidden="true"></i>
       </button>
       <button class="m-3 btn btn-outline-success" title="Отправить">
@@ -203,6 +209,34 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
       </button>
     </div>
   </form>
+</div>
+
+<div v-if="popup_file_visible" class="constructor_modular-popup_file-wrapper">
+  <div class="constructor_modular-popup_file p-3">
+    <div class="h3">Загрузка изображения</div>
+    <form action="?imageName=customer_image.jpg&discount=0#" enctype="multipart/form-data" method="post">
+      <input type="file" name="customer_image">
+      <div class="text-center">
+        <a href="#" v-on:click="popup_file_visible=false" class="btn btn-outline-warning m-3" title="Отмена">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </a>
+        <button class="btn btn-outline-success m-3" title="Загрузить">
+          <i class="fa fa-check" aria-hidden="true"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div v-if="alert_visible" class="constructor_modular-alert_wrapper">
+  <div class="constructor_modular-alert">
+    <div class="text-end text-danger h3">
+      <i v-on:click="alert_visible=false" class="fa fa-times alert_close_button" aria-hidden="true"></i>
+    </div>
+    <div class="alert alert-success" role="alert">
+      {{alert_text}}
+    </div>
+  </div>
 </div>
 
 </div>
@@ -213,6 +247,9 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
     el: '#constructor_modular',
 
     data: {
+      popup_file_visible: false,
+      alert_text: 'Изображение отправлено на указанную почту.',
+      alert_visible: false,
       popup_mail_visible: false,
       preloader_visible: false,
       imageName: '',
@@ -232,10 +269,6 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
 
     methods: {
 
-      popUpMailVisible: function () {
-        this.popup_mail_visible = !this.popup_mail_visible;
-      },
-
       serverRequest: function (url) {
         return fetch(url).then(function (response){
           return response.text();
@@ -243,7 +276,7 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
       },
 
       OrderMail: async function () {
-        this.popup_mail_visible = true;
+        this.preloader_visible = true;
         var url = '../php-mail/index.php?Receiver=rudenokart@yandex.ru' +
         '&Receiver=' + this.customer_mail +
         '&Subject=ЮгИдеал: ' + this.imageName + '; ' + this.current_template + 
@@ -251,11 +284,9 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
         '&Text=Изображение в приложенном файле';
         this.popup_mail_visible = false;
         await this.OrderData();
-        this.preloader_visible = true;
         var result = await this.serverRequest(url);
+        this.alert_visible = true;
         this.preloader_visible = false;
-        alert('Изображение отправлено на указанную почту.');
-        console.log(result);
       },
 
       OrderDownload: async function () {

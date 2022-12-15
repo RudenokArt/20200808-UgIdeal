@@ -36,6 +36,8 @@
   z-index: -1;
 }
 
+.constructor_modular-popup_file-wrapper,
+.constructor_modular-alert_wrapper,
 .constructor_modular-popup_mail-wrapper,
 .constructor_modular-preloader-wrapper {
   display: flex;
@@ -44,18 +46,25 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
+.constructor_modular-popup_file,
+.constructor_modular-alert,
 .constructor_modular-popup_mail,
 .constructor_modular-preloader {
   margin: auto;
-  color: grey;
+  color: black;
 }
 
+.constructor_modular-popup_file,
 .constructor_modular-popup_mail {
   background-color: white;
   width: 300px;
+}
+
+.alert_close_button {
+  cursor: pointer;
 }
 
 @media screen and (max-width: 576px){
