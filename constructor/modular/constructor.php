@@ -16,6 +16,7 @@ if ($_FILES) {
   $name = $_FILES['myfile']['name'];
   move_uploaded_file($_FILES['customer_image']['tmp_name'], 'galery/customer_image.jpg');
 }
+$admin_mail = file_get_contents('profile/admin-mail.txt');
 
 ?>
 <link rel="stylesheet" href="css-new_constructor.css?v=<?php echo time() ?>">
@@ -277,7 +278,7 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
     data: {
       popup_order_visible: false,
       popup_file_visible: false,
-      alert_text: 'Изображение отправлено на указанную почту.',
+      alert_text: '',
       alert_visible: false,
       popup_mail_visible: false,
       preloader_visible: false,
@@ -309,12 +310,14 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
       OrderMail: async function () {
         this.preloader_visible = true;
         var url = '../php-mail/index.php?Receiver=' + this.customer_mail +
-        '&Subject=ЮгИдеал: ' + this.imageName + '; ' + this.current_template + 
-        '&Attachment=../modular/order.pdf' + 
-        '&Text=Изображение в приложенном файле';
-        this.popup_mail_visible = false;
+        '&Subject=Заказ на сайте Юг Идеал: ' + 
+        '&Attachment=../modular/order.pdf' +
+        '&addRecipient=<?php echo $admin_mail;?>' + 
+        '&Text=Заказ в приложенном файле';
+        this.popup_order_visible = false;
         await this.OrderData();
         var result = await this.serverRequest(url);
+        this.alert_text = 'Спасибо. Ваш заказ принят. Наш менеджер свяжется с вами. Подтверждение заказа отправлено на указанную вами почту';
         this.alert_visible = true;
         this.preloader_visible = false;
       },
@@ -322,12 +325,13 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
       ImageMail: async function () {
         this.preloader_visible = true;
         var url = '../php-mail/index.php?Receiver=' + this.customer_mail +
-        '&Subject=ЮгИдеал: ' + this.imageName + '; ' + this.current_template + 
+        '&Subject=Изображение с сайта Юг Идеал: ' +
         '&Attachment=../modular/order.pdf' + 
         '&Text=Изображение в приложенном файле';
         this.popup_mail_visible = false;
         await this.OrderData();
         var result = await this.serverRequest(url);
+        this.alert_text = 'Изображение отправлено на указанную почту.';
         this.alert_visible = true;
         this.preloader_visible = false;
       },
