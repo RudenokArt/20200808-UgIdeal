@@ -195,7 +195,7 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
 <a href="order.pdf" id="order_download_link" download="order"></a>
 
 <div v-if="popup_mail_visible" class="constructor_modular-popup_mail-wrapper">
-  <form v-on:submit.prevent="OrderMail" class="constructor_modular-popup_mail p-3">
+  <form v-on:submit.prevent="ImageMail" class="constructor_modular-popup_mail p-3">
     <div class="pt-3">
       Ваш Email:
       <input v-model="customer_mail" type="email" required="required" class="form-control">
@@ -307,6 +307,19 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
       },
 
       OrderMail: async function () {
+        this.preloader_visible = true;
+        var url = '../php-mail/index.php?Receiver=' + this.customer_mail +
+        '&Subject=ЮгИдеал: ' + this.imageName + '; ' + this.current_template + 
+        '&Attachment=../modular/order.pdf' + 
+        '&Text=Изображение в приложенном файле';
+        this.popup_mail_visible = false;
+        await this.OrderData();
+        var result = await this.serverRequest(url);
+        this.alert_visible = true;
+        this.preloader_visible = false;
+      },
+
+      ImageMail: async function () {
         this.preloader_visible = true;
         var url = '../php-mail/index.php?Receiver=' + this.customer_mail +
         '&Subject=ЮгИдеал: ' + this.imageName + '; ' + this.current_template + 
