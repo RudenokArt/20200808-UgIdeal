@@ -1,5 +1,6 @@
 <?php include_once 'header.php';
 include_once 'php-index-select.php';
+$interiors_arr = indexSelect('SELECT * FROM `wallpaper_interior`');
 $templates_arr = indexSelect('SELECT * FROM `constractor_templates` ORDER BY `price`');
 $materials_arr = indexSelect('SELECT * FROM `constructor_mat`');
 $materials_arr_json = json_encode($materials_arr, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
@@ -268,6 +269,17 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
   </form>
 </div>
 
+<div class="constructor_modular-popup_interior-wrapper">
+  <div class="constructor_modular-popup_interior">
+    <div class="constructor_modular-popup_interior-slider">
+      <?php foreach ($interiors_arr as $key => $value): ?>
+      <img class="constructor_modular-popup_interior-slider_item" src="../wallpaper/img/interior/<?php echo $value['interior'];?>" alt="">
+    <?php endforeach ?>
+    </div>
+    <pre><?php print_r($interiors_arr) ?></pre>
+  </div>
+</div>
+
 </div>
 
 
@@ -507,9 +519,41 @@ $('.constructor_modular-template_tape').slick({
       slidesToScroll: 1
     }
   }
-    // You can unslick at a given breakpoint now by adding:
-    // settings: "unslick"
-    // instead of a settings object
+    ]
+  });
+
+$('.constructor_modular-popup_interior-slider').slick({
+  lazyLoad: 'ondemand',
+  dots: true,
+  infinite: false,
+  speed: 300,
+  slidesToShow: 5,
+  slidesToScroll: 1,
+  responsive: [
+  {
+    breakpoint: 992,
+    settings: {
+      slidesToShow: 5,
+      slidesToScroll: 1,
+      infinite: true,
+      dots: true
+    }
+  },
+  {
+    breakpoint: 768,
+    settings: {
+      slidesToShow: 3,
+      slidesToScroll: 1
+    }
+  },
+  {
+    breakpoint: 576,
+    settings: {
+      dots:false,
+      slidesToShow: 2,
+      slidesToScroll: 1
+    }
+  }
     ]
   });
 
