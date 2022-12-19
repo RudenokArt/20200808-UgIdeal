@@ -180,7 +180,7 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
       </button>       
     </div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-12 p-1">
-      <button class="btn btn-outline-info w-100">
+      <button v-on:click="popup_interior_visible=true" id="interior_view_button" class="btn btn-outline-info w-100">
         <i class="fa fa-camera" aria-hidden="true"></i>
         Просмотреть в интерьере
       </button>       
@@ -217,7 +217,7 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
   <div class="constructor_modular-popup_file p-3">
     <div class="h4">Загрузка изображения</div>
     <form action="?imageName=customer_image.jpg&discount=0#" enctype="multipart/form-data" method="post">
-      <input type="file" name="customer_image">
+      <input type="file" name="customer_image" required>
       <div class="text-center">
         <a href="#" v-on:click="popup_file_visible=false" class="btn btn-outline-warning m-3" title="Отмена">
           <i class="fa fa-times" aria-hidden="true"></i>
@@ -269,14 +269,27 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
   </form>
 </div>
 
-<div class="constructor_modular-popup_interior-wrapper">
+<div v-show="popup_interior_visible" class="constructor_modular-popup_interior-wrapper">
   <div class="constructor_modular-popup_interior">
-    <div class="constructor_modular-popup_interior-slider">
-      <?php foreach ($interiors_arr as $key => $value): ?>
-      <img class="constructor_modular-popup_interior-slider_item" src="../wallpaper/img/interior/<?php echo $value['interior'];?>" alt="">
-    <?php endforeach ?>
+    <div class="text-end text-danger h3 p-3">
+      <i v-on:click="popup_interior_visible=false" class="fa fa-times alert_close_button" aria-hidden="true"></i>
     </div>
-    <pre><?php print_r($interiors_arr) ?></pre>
+    <div class="constructor_modular-popup_interior-slider_nav">
+      <?php foreach ($interiors_arr as $key => $value): ?>
+        <img class="constructor_modular-popup_interior-slider_item" src="../wallpaper/img/interior/<?php echo $value['interior'];?>" alt="">
+      <?php endforeach ?>
+    </div>
+    <div class="">
+      <div class="constructor_modular-galery_image-wrapper">
+        <div v-bind:style="image_position" class="constructor_modular-galery_image"></div>
+        <div v-bind:style="current_template_css" class="constructor_modular-galery_image-template"></div>
+      </div> 
+      <div class="constructor_modular-popup_interior-slider_for">
+        <?php foreach ($interiors_arr as $key => $value): ?>
+          <img class="constructor_modular-popup_interior-slider_item" src="../wallpaper/img/interior/<?php echo $value['interior'];?>" alt="">
+        <?php endforeach ?>
+      </div>  
+    </div>
   </div>
 </div>
 
@@ -288,6 +301,7 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
     el: '#constructor_modular',
 
     data: {
+      popup_interior_visible: true,
       popup_order_visible: false,
       popup_file_visible: false,
       alert_text: '',
@@ -482,7 +496,7 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
       this.getUrlData();
       var templates_arr = document.getElementsByClassName('constructor_modular-template_tape-item');
       templates_arr[0].click();
-
+      this.popup_interior_visible = false;
     },
   });
 
@@ -519,16 +533,29 @@ $('.constructor_modular-template_tape').slick({
       slidesToScroll: 1
     }
   }
-    ]
-  });
+  ]
+});
 
-$('.constructor_modular-popup_interior-slider').slick({
+$('.constructor_modular-popup_interior-slider_for').slick({
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  arrows: false,
+  fade: true,
+  asNavFor: '.constructor_modular-popup_interior-slider_nav',
+});
+
+
+$('.constructor_modular-popup_interior-slider_nav').slick({
+  asNavFor: '.constructor_modular-popup_interior-slider_for',
+  focusOnSelect: true,
   lazyLoad: 'ondemand',
   dots: true,
   infinite: false,
   speed: 300,
   slidesToShow: 5,
   slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 1000,
   responsive: [
   {
     breakpoint: 992,
@@ -554,8 +581,8 @@ $('.constructor_modular-popup_interior-slider').slick({
       slidesToScroll: 1
     }
   }
-    ]
-  });
+  ]
+});
 
 </script>
 <?php include_once 'footer.php'; ?>
