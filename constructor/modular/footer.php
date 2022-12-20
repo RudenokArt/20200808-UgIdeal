@@ -67,5 +67,4 @@
 
 </body>
 <script src="theme/js/index-data.js?v=<?php echo time();?>"></script>
-<script src="js-index.js?v=<?php echo time();?>"></script>
 </html>

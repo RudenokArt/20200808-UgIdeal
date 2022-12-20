@@ -19,11 +19,17 @@ $('.modular-navigation span').click(navigationClick);
 $('.category-select').change(categorySelect);
 $('.subcategory-select').change(subcategorySelect);
 filterResset();
-$('.modulat-galery_item-cart input').click((e)=>e.stopPropagation());
-$('.modulat-galery_item-cart input').change(cartItemCheck);
-$('.modulat-galery_item-cart input').prop('checked',false);
-setCheckbokses();
-cartCounter();
+
+$('.modulat-galery_item-cart input').click(function (e) {
+  e.stopPropagation();
+  favoriteAnime(this);
+});
+getFavoriteItems();
+// $('.modulat-galery_item-cart input').change(cartItemCheck);
+// $('.modulat-galery_item-cart input').prop('checked',false);
+// setCheckbokses();
+// cartCounter();
+
 $('.modular-galery_item-wrapper').click(constructorTransfer);
 $('.button-search').click(searchImage);
 $('.number-page').click(setPageNumber);
@@ -150,66 +156,49 @@ function navigationSet () {
     }
   }
 }
-function cartItemCheck () {
-  var icons=$(this).siblings();
-  if(this.checked){
-    $(icons[0]).fadeOut();
-    $(icons[1]).fadeIn();
-    favoritAdd(this.value);
-    busketAnime();
-  }else{
-    $(icons[0]).fadeIn();
-    $(icons[1]).fadeOut();
-    favoriteRemove(this.value);
-  }
-  cartCounter();
-}
-function busketAnime () {
+
+function favoriteAnime (input) {
   node=$('.modular-cart_image');
-  setTimeout(()=>{node.prop('className','modular-cart_image-show');},100);
-  setTimeout(()=>{node.prop('className','modular-cart_image');},200);
+  if (input.checked) {
+    setTimeout(()=>{node.prop('className','modular-cart_image-show');},100);
+    setTimeout(()=>{node.prop('className','modular-cart_image');},200);
+  } 
+  favoriteIcons(); 
 }
-function favoriteRemove (imageValue) {
-  var arr=imageValue.split('|');
-  var image=arr[0];
-  var obj=JSON.parse(localStorage.modular);
-  delete obj[image];
-  var json=JSON.stringify(obj);
-  localStorage.setItem('modular', json);
-}
-function favoritAdd (imageValue) {
-  var arr=imageValue.split('|');
-  buscket[arr[0]]=[0,50,150,500,500,'',0,'','','','',arr[2],0,1];
-  var json=JSON.stringify(buscket);
-  localStorage.setItem('modular', json);
-  // localStorage.setItem(arr[0],
-  //   [0,50,150,500,500,'',0,'','','','',arr[2],0,1]);
-}
-function cartCounter () {
-  var obj=JSON.parse(localStorage.modular);
-  var arr=Object.keys(obj);
-  var counter=0;
+
+function favoriteIcons () {
+  var arr = $('.modulat-galery_item-cart input');
+  var favoriteArr = [];
   for (var i = 0; i < arr.length; i++) {
-    if (arr[i]!='editItem'&&arr[i]!='wallpaper') {
-      counter++;
-    }
-  }
-  $('.modular-cart_counter').html(counter);
-}
-function setCheckbokses () {
-  var obj=JSON.parse(localStorage.modular);
-  var imageArr=Object.keys(obj);
-  var checkboxArr=$('.modulat-galery_item-cart input');
-  for (var i = 0; i < checkboxArr.length; i++) {
-   for (var n=0; n<imageArr.length; n++) {
-     if(checkboxArr[i].value.split('|')[0]==imageArr[n]){
-      checkboxArr[i].checked=true;
-      var icons=$(checkboxArr[i]).siblings();
-      $(icons[0]).fadeOut();
+    var icons=$(arr[i]).siblings();
+    if (arr[i].checked) {
       $(icons[1]).fadeIn();
+      $(icons[0]).fadeOut();
+      favoriteArr.push(arr[i].value);
+    } else {
+      $(icons[0]).fadeIn();
+      $(icons[1]).fadeOut();
     }
   }
-}}
+  $('.modular-cart_counter').html(favoriteArr.length);
+  var json = JSON.stringify({favorite: favoriteArr});
+  localStorage.setItem('modular', json);
+}
+
+function getFavoriteItems () {
+  var favoriteArr = JSON.parse(localStorage.getItem('modular')).favorite;
+  var arr = $('.modulat-galery_item-cart input');
+  for (var i = 0; i < arr.length; i++) {
+    if (favoriteArr.includes(arr[i].value)) {
+      arr[i].checked = true;
+    } else {
+      arr[i].checked = false;
+    }
+  }
+  favoriteIcons();
+  console.log(favoriteArr);
+}
+
 function constructorTransfer () {
   var arr=this.id.split('|');
   document.cookie='imageName='+arr[0];
@@ -266,7 +255,7 @@ function pageNumeration () {
     if (pageNumber<=0||pageNumber>page.pages) {arr[i].style.display='none';}
     if (pageNumber==page.number) {arr[i].style.color='red';}
   }
-   window.scrollTo(pageYOffset, 0);
+  window.scrollTo(pageYOffset, 0);
 }
 
 function setPageNumber () {

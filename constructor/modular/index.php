@@ -106,8 +106,7 @@
                   </div>
                 </div>
 
-                <?php $galeryArr=indexSelect('
-                SELECT * FROM `constructor_galеry` ORDER BY `40x70`'); ?>
+                <?php $galeryArr=indexSelect('SELECT * FROM `constructor_galеry` ORDER BY `40x70`'); ?>
                 <div class="modular-galery">
                   <?php for ($i=0;$i<sizeof($galeryArr);$i++) { 
                     if (!$galeryArr[$i]['vertical_position']) {
@@ -178,14 +177,10 @@
                         echo $imageArticle[0] ?>
                       </div>
 
-                      <div class="modulat-galery_item-cart">
-                        <i class="fa fa-cart-plus" aria-hidden="true"></i>
-                        <i class="fa fa-times" aria-hidden="true" 
-                        style="display: none"></i>
-                        <input type="checkbox" 
-                        value="<?php echo $galeryArr[$i]['image'].
-                        '|'.$galeryArr[$i]['discount'].
-                        '|'.$galeryArr[$i]['template'] ?>">
+                      <div class="modulat-galery_item-cart" title="Добавить в избранное">
+                        <i class="fa fa-heart-o" aria-hidden="true"></i>
+                        <i class="fa fa-times" aria-hidden="true" style="display: none;"></i>
+                        <input value="<?php echo $galeryArr[$i]['id']; ?>" type="checkbox">
                       </div>
 
                     </div>
@@ -203,12 +198,12 @@
                     </div>
                   </div>
                 </div>
-                </div><?
-              } ?>
+                </div>
+              <? } ?>
 
-              <a href="favorite.html" class="modular-cart">
+              <a href="favorite.php" class="modular-cart" title="Избранное">
                 <div class="modular-cart_icon">
-                  <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                  <i class="fa fa-star-o" aria-hidden="true"></i>
                 </div>
                 <div class="modular-cart_counter">
                   0
@@ -244,5 +239,5 @@
 
           </div>
         </div>
-
+<script src="js-index.js?v=<?php echo time();?>"></script>
         <?php include_once 'footer.php' ?>
