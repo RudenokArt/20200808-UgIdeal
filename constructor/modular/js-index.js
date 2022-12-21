@@ -22,13 +22,11 @@ filterResset();
 
 $('.modulat-galery_item-cart input').click(function (e) {
   e.stopPropagation();
+});
+$('.modulat-galery_item-cart input').change(function () {
   favoriteAnime(this);
 });
 getFavoriteItems();
-// $('.modulat-galery_item-cart input').change(cartItemCheck);
-// $('.modulat-galery_item-cart input').prop('checked',false);
-// setCheckbokses();
-// cartCounter();
 
 $('.modular-galery_item-wrapper').click(constructorTransfer);
 $('.button-search').click(searchImage);
@@ -196,7 +194,6 @@ function getFavoriteItems () {
     }
   }
   favoriteIcons();
-  console.log(favoriteArr);
 }
 
 function constructorTransfer () {

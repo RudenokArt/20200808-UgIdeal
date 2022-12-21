@@ -9,6 +9,10 @@
 </div>
 <script>
   $(function () {
+    favoriteLoad();
+  });
+
+  function favoriteLoad () {
     var favoriteArr = JSON.parse(localStorage.getItem('modular')).favorite;
     var sql = 'SELECT * FROM `constructor_galеry` WHERE `id` IN (';
     for (var i = 0; i < favoriteArr.length; i++) {
@@ -21,7 +25,14 @@
     $.post('favorite-load.php', {data:sql}, function (data) {
       $('#favorite-container').html(data);
       $('.constructor_modular-preloader-wrapper').hide();
+      $('.modulat-galery_item-cart input').change(function () {
+        $('.constructor_modular-preloader-wrapper').show();
+        setTimeout(function () {
+          favoriteLoad (sql);
+        }, 1000);
+      });
     });
-  });
+  }
+
 </script>
 <?php include_once 'footer.php'; ?>
