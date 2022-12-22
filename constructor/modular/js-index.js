@@ -156,7 +156,7 @@ function navigationSet () {
 }
 
 function favoriteAnime (input) {
-  node=$('.modular-cart_image');
+  var node = $('.modular-cart_image');
   if (input.checked) {
     setTimeout(()=>{node.prop('className','modular-cart_image-show');},100);
     setTimeout(()=>{node.prop('className','modular-cart_image');},200);
@@ -185,15 +185,17 @@ function favoriteIcons () {
 
 function getFavoriteItems () {
   var favoriteArr = JSON.parse(localStorage.getItem('modular')).favorite;
-  var arr = $('.modulat-galery_item-cart input');
-  for (var i = 0; i < arr.length; i++) {
-    if (favoriteArr.includes(arr[i].value)) {
-      arr[i].checked = true;
-    } else {
-      arr[i].checked = false;
+  if (favoriteArr) {
+    var arr = $('.modulat-galery_item-cart input');
+    for (var i = 0; i < arr.length; i++) {
+      if (favoriteArr.includes(arr[i].value)) {
+        arr[i].checked = true;
+      } else {
+        arr[i].checked = false;
+      }
     }
-  }
-  favoriteIcons();
+    favoriteIcons();
+  }  
 }
 
 function constructorTransfer () {

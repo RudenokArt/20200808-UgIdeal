@@ -194,7 +194,7 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
   </div>
 </div>
-<a href="order.pdf" id="order_download_link" download="order"></a>
+<a href="" id="order_download_link" download="order.pdf">link</a>
 
 <div v-if="popup_mail_visible" class="constructor_modular-popup_mail-wrapper">
   <form v-on:submit.prevent="ImageMail" class="constructor_modular-popup_mail p-3">
@@ -364,7 +364,9 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
 
       OrderDownload: async function () {
         result = await this.OrderData();
-        document.getElementById('order_download_link').click();
+        var node = document.getElementById('order_download_link');
+        node.setAttribute('href', 'order.pdf?v='+Math.random());
+        node.click();
       },
 
       OrderData: async function () {
@@ -399,6 +401,7 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
         var url = 'OrderImage.php?imageName=' + this.imageName +
         '&template='+this.current_template +
         '&image_rotate=' + this.image_rotate +
+        '&image_reflection=' + this.image_reflection +
         '&image_size=' + this.image_size +
         '&horizontal_position=' + this.horizontal_position +
         '&vertical_position=' + this.vertical_position;

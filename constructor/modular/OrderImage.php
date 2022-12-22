@@ -1,6 +1,6 @@
 <?php 
 
-var_dump((new OrderImage)->imageName);
+var_dump((new OrderImage)->image_reflection);
 
 /**
  * 
@@ -12,6 +12,7 @@ class OrderImage {
     $this->template_path = 'templates/'.$_GET['template'];
     $this->image_size_kof = $_GET['image_size'] / 100;
     $this->image_rotate = $_GET['image_rotate'];
+    $this->image_reflection = $_GET['image_reflection'];
     $this->horizontal_position = $_GET['horizontal_position'] / 100 * 500;
     $this->vertical_position = $_GET['vertical_position'] / 100 * 500;
     $this->src_template = imageCreateFromPng($this->template_path);
@@ -25,86 +26,95 @@ class OrderImage {
     $this->OrderImage();
   }
 
- function orderImageSize () {
-  if ($this->src_image_size['width'] > $this->src_image_size['height']) {
-    $height = round(($this->src_image_size['height'] / $this->src_image_size['width']) * 500);
-    return [
-      'width' => 500 * $this->image_size_kof,
-      'height' => $height * $this->image_size_kof,
-    ];
-  } else {
-    $width = round(($this->src_image_size['width'] / $this->src_image_size['height']) * 500);
-    return [
-      'height' => 500 * $this->image_size_kof,
-      'width' => $width * $this->image_size_kof,
-    ];
-  }
-}
-
-function orderImagePosition () {
-  if ($this->src_image_size['width'] > $this->src_image_size['height']) {
-    $top = (500  * $this->image_size_kof - $this->order_image_size['height']) / 2;
-    return [
-      'top' => $top + $this->vertical_position,
-      'left' => $this->horizontal_position,
-    ];
-  } else {
-    $left = (500  * $this->image_size_kof - $this->order_image_size['width']) / 2;
-    return [
-      'top' => $this->vertical_position,
-      'left' => $left + $this->horizontal_position,
-    ];
+  function orderImageSize () {
+    if ($this->src_image_size['width'] > $this->src_image_size['height']) {
+      $height = round(($this->src_image_size['height'] / $this->src_image_size['width']) * 500);
+      return [
+        'width' => 500 * $this->image_size_kof,
+        'height' => $height * $this->image_size_kof,
+      ];
+    } else {
+      $width = round(($this->src_image_size['width'] / $this->src_image_size['height']) * 500);
+      return [
+        'height' => 500 * $this->image_size_kof,
+        'width' => $width * $this->image_size_kof,
+      ];
+    }
   }
 
-}
+  function orderImagePosition () {
+    if ($this->src_image_size['width'] > $this->src_image_size['height']) {
+      $top = (500  * $this->image_size_kof - $this->order_image_size['height']) / 2;
+      return [
+        'top' => $top + $this->vertical_position,
+        'left' => $this->horizontal_position,
+      ];
+    } else {
+      $left = (500  * $this->image_size_kof - $this->order_image_size['width']) / 2;
+      return [
+        'top' => $this->vertical_position,
+        'left' => $left + $this->horizontal_position,
+      ];
+    }
 
-function srcTemplateSize () {
-  $src = getImageSize($this->template_path);
-  return [
-    'width' => $src[0],
-    'height' => $src[1],
-  ];
-}
+  }
 
-function imageFileType () {
-  $info = new SplFileInfo($this->image_path);
-  return $info->getExtension();
-}
-
-function srcImageSize () {
-  $src = getImageSize($this->image_path);
-  if ($this->image_rotate == 90 or $this->image_rotate == 270) {
+  function srcTemplateSize () {
+    $src = getImageSize($this->template_path);
     return [
-      'width' => $src[1],
-      'height' => $src[0],
+      'width' => $src[0],
+      'height' => $src[1],
     ];
   }
-  return [
-    'width' => $src[0],
-    'height' => $src[1],
-  ];
-}
 
-function srcImage () {
-  if ($this->image_file_type == 'jpg') {
-    $image = imageCreateFromJpeg($this->image_path);
+  function imageFileType () {
+    $info = new SplFileInfo($this->image_path);
+    return $info->getExtension();
   }
-  if ($this->image_file_type == 'png') {
-    $image = imageCreateFromPng($this->image_path);
-  }
-  if ($this->image_file_type == 'webp') {
-    $image = imageCreateFromWebp($this->image_path);
-  }
-  if ($this->image_rotate == 90) {
-    $image = imagerotate($image, 270, $bgd_color);
-  }
-  if ($this->image_rotate == 270) {
-    $image = imagerotate($image, 90, $bgd_color);
-  }
-  return $image;
-}
 
-function OrderImage () {
+  function srcImageSize () {
+    $src = getImageSize($this->image_path);
+    if ($this->image_rotate == 90 or $this->image_rotate == 270) {
+      return [
+        'width' => $src[1],
+        'height' => $src[0],
+      ];
+    }
+    return [
+      'width' => $src[0],
+      'height' => $src[1],
+    ];
+  }
+
+  function srcImage () {
+    if ($this->image_file_type == 'jpg') {
+      $image = imageCreateFromJpeg($this->image_path);
+    }
+    if ($this->image_file_type == 'png') {
+      $image = imageCreateFromPng($this->image_path);
+    }
+    if ($this->image_file_type == 'webp') {
+      $image = imageCreateFromWebp($this->image_path);
+    }
+    if ($this->image_rotate == 90) {
+      $image = imagerotate($image, 270, $bgd_color);
+    }
+    if ($this->image_rotate == 270) {
+      $image = imagerotate($image, 90, $bgd_color);
+    }
+    if ($this->image_rotate == 180) {
+      $image = imagerotate($image, 180, $bgd_color);
+    }
+    if ($this->image_reflection == '2') { // зеркало по горизонтали
+      Imageflip($image, IMG_FLIP_HORIZONTAL);
+    }
+    if ($this->image_reflection == '1') { // зеркало по вертикали
+      Imageflip($image, IMG_FLIP_VERTICAL);
+    }
+    return $image;
+  }
+
+  function OrderImage () {
 
     $orderImage = imagecreatetruecolor(500, 500); // фон
     $white = imagecolorallocate($orderImage, 255, 255, 255); // цвет фона
