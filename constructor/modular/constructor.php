@@ -194,7 +194,7 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
   </div>
 </div>
-<a href="" id="order_download_link" download="order.pdf">link</a>
+<a href="order.pdf" id="order_download_link" download="order.pdf"></a>
 
 <div v-if="popup_mail_visible" class="constructor_modular-popup_mail-wrapper">
   <form v-on:submit.prevent="ImageMail" class="constructor_modular-popup_mail p-3">
@@ -274,22 +274,18 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
     <div class="text-end text-danger h3 p-3">
       <i v-on:click="popup_interior_visible=false" class="fa fa-times alert_close_button" aria-hidden="true"></i>
     </div>
-    <div class="constructor_modular-popup_interior-slider_nav">
+    <div class="constructor_modular-popup_interior-slider">
       <?php foreach ($interiors_arr as $key => $value): ?>
-        <img class="constructor_modular-popup_interior-slider_item" src="../wallpaper/img/interior/<?php echo $value['interior'];?>" alt="">
+        <img class="constructor_modular-popup_interior-slider_item" src="../wallpaper/img/interior/<?php echo $value['interior'];?>" v-on:click="currentInteriorSet" alt="">
       <?php endforeach ?>
     </div>
-    <div class="">
+    <div style="min-height: 50vh;">
       <div class="constructor_modular-galery_image-wrapper">
         <div v-bind:style="image_position" class="constructor_modular-galery_image"></div>
         <div v-bind:style="current_template_css" class="constructor_modular-galery_image-template"></div>
       </div> 
-      <div class="constructor_modular-popup_interior-slider_for">
-        <?php foreach ($interiors_arr as $key => $value): ?>
-          <img class="constructor_modular-popup_interior-slider_item" src="../wallpaper/img/interior/<?php echo $value['interior'];?>" alt="">
-        <?php endforeach ?>
-      </div>  
-    </div>
+      <img class="constructor_modular-popup_interior-interior" v-bind:src="current_interior" alt="">
+    </div>  
   </div>
 </div>
 
@@ -301,6 +297,7 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
     el: '#constructor_modular',
 
     data: {
+      current_interior: "../wallpaper/img/interior/<?php echo $interiors_arr[0]['interior'] ?>",
       popup_interior_visible: true,
       popup_order_visible: false,
       popup_file_visible: false,
@@ -326,6 +323,10 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
     },
 
     methods: {
+
+      currentInteriorSet: function (e) {
+        this.current_interior = e.target.src;
+      },
 
       serverRequest: function (url) {
         return fetch(url).then(function (response){
@@ -365,7 +366,6 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
       OrderDownload: async function () {
         result = await this.OrderData();
         var node = document.getElementById('order_download_link');
-        node.setAttribute('href', 'order.pdf?v='+Math.random());
         node.click();
       },
 
@@ -396,6 +396,7 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
           return response.text();
         });
       },
+
 
       OrderImage: function () {
         var url = 'OrderImage.php?imageName=' + this.imageName +
@@ -517,7 +518,6 @@ $('.constructor_modular-template_tape').slick({
     settings: {
       slidesToShow: 8,
       slidesToScroll: 1,
-      infinite: true,
       dots: true
     }
   },
@@ -539,18 +539,9 @@ $('.constructor_modular-template_tape').slick({
   ]
 });
 
-$('.constructor_modular-popup_interior-slider_for').slick({
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  arrows: false,
-  fade: true,
-  asNavFor: '.constructor_modular-popup_interior-slider_nav',
-});
 
 
-$('.constructor_modular-popup_interior-slider_nav').slick({
-  asNavFor: '.constructor_modular-popup_interior-slider_for',
-  focusOnSelect: true,
+$('.constructor_modular-popup_interior-slider').slick({
   lazyLoad: 'ondemand',
   dots: true,
   infinite: false,
@@ -558,14 +549,12 @@ $('.constructor_modular-popup_interior-slider_nav').slick({
   slidesToShow: 5,
   slidesToScroll: 1,
   autoplay: true,
-  autoplaySpeed: 1000,
   responsive: [
   {
     breakpoint: 992,
     settings: {
       slidesToShow: 5,
       slidesToScroll: 1,
-      infinite: true,
       dots: true
     }
   },

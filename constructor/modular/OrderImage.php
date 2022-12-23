@@ -1,6 +1,6 @@
 <?php 
 
-var_dump((new OrderImage)->image_reflection);
+var_dump((new OrderImage)->order_image);
 
 /**
  * 
@@ -23,7 +23,7 @@ class OrderImage {
     $this->src_image_size = $this->srcImageSize();
     $this->order_image_size = $this->orderImageSize();
     $this->order_image_position = $this->orderImagePosition();
-    $this->OrderImage();
+    $this->order_image = $this->OrderImage();
   }
 
   function orderImageSize () {
@@ -148,7 +148,7 @@ class OrderImage {
       $this->src_template_size['height'], // оригинальная высота
     );
 
-    imageJPEG($orderImage, "order-image.jpg", 100); // Сохранение рисунка
+    return imageJPEG($orderImage, "order-image.jpg", 100); // Сохранение рисунка
   }
 
 
