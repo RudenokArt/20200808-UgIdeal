@@ -241,6 +241,26 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
   </div>
 </div>
 
+<div v-show="popup_interior_visible" class="constructor_modular-popup_interior-wrapper">
+  <div class="constructor_modular-popup_interior">
+    <div class="text-end text-danger h3 p-3">
+      <i v-on:click="popup_interior_visible=false" class="fa fa-times alert_close_button" aria-hidden="true"></i>
+    </div>
+    <div class="constructor_modular-popup_interior-slider">
+      <?php foreach ($interiors_arr as $key => $value): ?>
+        <img class="constructor_modular-popup_interior-slider_item" src="../wallpaper/img/interior/<?php echo $value['interior'];?>" v-on:click="currentInteriorSet" alt="">
+      <?php endforeach ?>
+    </div>
+    <div style="min-height: 50vh;">
+      <div class="constructor_modular-galery_image-wrapper">
+        <div v-bind:style="image_position" class="constructor_modular-galery_image"></div>
+        <div v-bind:style="current_template_css" class="constructor_modular-galery_image-template"></div>
+      </div> 
+      <img class="constructor_modular-popup_interior-interior" v-bind:src="current_interior" alt="">
+    </div>  
+  </div>
+</div>
+
 <div v-if="popup_order_visible" class="constructor_modular-popup_order-wrapper">
   <form v-on:submit.prevent="OrderMail" class="constructor_modular-popup_order p-3">
     <div class="h4">
@@ -262,31 +282,11 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
       <a href="#" v-on:click="popup_order_visible=false" class="btn btn-outline-warning m-3" title="Отмена">
         <i class="fa fa-times" aria-hidden="true"></i>
       </a>
-      <button class="btn btn-outline-success m-3" title="Загрузить">
+      <button class="btn btn-outline-success m-3" title="Отправи">
         <i class="fa fa-check" aria-hidden="true"></i>
       </button>
     </div>
   </form>
-</div>
-
-<div v-show="popup_interior_visible" class="constructor_modular-popup_interior-wrapper">
-  <div class="constructor_modular-popup_interior">
-    <div class="text-end text-danger h3 p-3">
-      <i v-on:click="popup_interior_visible=false" class="fa fa-times alert_close_button" aria-hidden="true"></i>
-    </div>
-    <div class="constructor_modular-popup_interior-slider">
-      <?php foreach ($interiors_arr as $key => $value): ?>
-        <img class="constructor_modular-popup_interior-slider_item" src="../wallpaper/img/interior/<?php echo $value['interior'];?>" v-on:click="currentInteriorSet" alt="">
-      <?php endforeach ?>
-    </div>
-    <div style="min-height: 50vh;">
-      <div class="constructor_modular-galery_image-wrapper">
-        <div v-bind:style="image_position" class="constructor_modular-galery_image"></div>
-        <div v-bind:style="current_template_css" class="constructor_modular-galery_image-template"></div>
-      </div> 
-      <img class="constructor_modular-popup_interior-interior" v-bind:src="current_interior" alt="">
-    </div>  
-  </div>
 </div>
 
 </div>
@@ -297,14 +297,14 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
     el: '#constructor_modular',
 
     data: {
-      current_interior: "../wallpaper/img/interior/<?php echo $interiors_arr[0]['interior'] ?>",
-      popup_interior_visible: true,
+      preloader_visible: true,
+      popup_interior_visible: false,
       popup_order_visible: false,
+      current_interior: "../wallpaper/img/interior/<?php echo $interiors_arr[0]['interior'] ?>",
       popup_file_visible: false,
       alert_text: '',
       alert_visible: false,
       popup_mail_visible: false,
-      preloader_visible: false,
       imageName: '',
       discount: '',
       current_template: '',
@@ -422,6 +422,16 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
       }
     },
 
+    watch: {
+      customer_phone: function () {
+        var str = String(this.customer_phone);
+        this.customer_phone = str.replace(/[^0-9\-()+]/, '');
+      },
+      popup_interior_visible: function () {
+        $('.constructor_modular-popup_interior').find('.slick-prev').trigger('click');
+      }
+    },
+
     computed: {
 
       discount_visible: function () {
@@ -501,9 +511,9 @@ href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
       var templates_arr = document.getElementsByClassName('constructor_modular-template_tape-item');
       templates_arr[0].click();
       this.popup_interior_visible = false;
+      this.preloader_visible = false;
     },
   });
-
 
 $('.constructor_modular-template_tape').slick({
   lazyLoad: 'ondemand',
@@ -539,8 +549,6 @@ $('.constructor_modular-template_tape').slick({
   ]
 });
 
-
-
 $('.constructor_modular-popup_interior-slider').slick({
   lazyLoad: 'ondemand',
   dots: true,
@@ -548,7 +556,7 @@ $('.constructor_modular-popup_interior-slider').slick({
   speed: 300,
   slidesToShow: 5,
   slidesToScroll: 1,
-  autoplay: true,
+  // autoplay: true,
   responsive: [
   {
     breakpoint: 992,
